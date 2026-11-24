@@ -42,7 +42,7 @@
 
 <nav aria-label="{{ __('Parts of the chart') }}"><ul class="nav nav-tabs chart-tabs mb-3">
     @foreach ($tabs as $key)
-        <li class="nav-item"><a class="nav-link {{ $tab === $key ? 'active' : '' }}" @if ($tab === $key) aria-current="page" @endif href="{{ route('patients.show', ['id' => $patient->id, 'tab' => $key]) }}"><x-icon :name="$tabNames[$key][1]" /> <span>{{ __($tabNames[$key][0]) }}</span></a></li>
+        <li class="nav-item"><a class="nav-link {{ $tab === $key ? 'active' : '' }}" @if ($tab === $key) aria-current="page" @endif href="{{ route('patients.show', ['id' => $patient->id, 'tab' => $key]) }}" aria-label="{{ __($tabNames[$key][0]) }}" title="{{ __($tabNames[$key][0]) }}"><x-icon :name="$tabNames[$key][1]" /> <span>{{ __($tabNames[$key][0]) }}</span></a></li>
     @endforeach
 </ul></nav>
 
