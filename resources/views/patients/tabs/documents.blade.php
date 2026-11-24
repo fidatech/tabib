@@ -16,7 +16,7 @@
                 <div class="col-6 col-md-3"><label class="form-label small" for="d-file">{{ __('File') }} <span class="text-danger">*</span></label>
                     <input type="file" class="form-control form-control-sm @error('file') is-invalid @enderror" id="d-file" name="file" accept="application/pdf,image/png,image/jpeg,image/webp" required>
                     @error('file')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
-                <div class="col-12 col-md-1"><button type="submit" class="btn btn-sm btn-primary w-100"><x-icon name="file-arrow-up" /></button></div>
+                <div class="col-12 col-md-1"><button type="submit" class="btn btn-sm btn-primary w-100" aria-label="{{ __('Add a document') }}" title="{{ __('Add a document') }}"><x-icon name="file-arrow-up" /></button></div>
             </form>
             <p class="small text-muted mb-0 mt-2">{{ __('PDF or picture, up to 10 MB. Kept encrypted.') }}</p>
         </div>

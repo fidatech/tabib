@@ -40,11 +40,11 @@
 
 @include('patients.partials.allergy-banner')
 
-<ul class="nav nav-tabs chart-tabs mb-3" role="tablist">
+<nav aria-label="{{ __('Parts of the chart') }}"><ul class="nav nav-tabs chart-tabs mb-3">
     @foreach ($tabs as $key)
         <li class="nav-item"><a class="nav-link {{ $tab === $key ? 'active' : '' }}" @if ($tab === $key) aria-current="page" @endif href="{{ route('patients.show', ['id' => $patient->id, 'tab' => $key]) }}"><x-icon :name="$tabNames[$key][1]" /> <span>{{ __($tabNames[$key][0]) }}</span></a></li>
     @endforeach
-</ul>
+</ul></nav>
 
 @include('patients.tabs.'.$tab)
 @endsection

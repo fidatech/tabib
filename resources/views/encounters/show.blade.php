@@ -83,7 +83,7 @@
                         </div>
                         <div class="col-12 col-md-4 d-flex gap-2 align-items-center">
                             <div class="form-check small mb-0"><input class="form-check-input" type="checkbox" id="dx-problem" name="to_problems" value="1"><label class="form-check-label" for="dx-problem">{{ __('Long-standing: add to the problems') }}</label></div>
-                            <button type="submit" class="btn btn-sm btn-primary ms-auto"><x-icon name="plus" /></button>
+                            <button type="submit" class="btn btn-sm btn-primary ms-auto" aria-label="{{ __('Add the diagnosis') }}" title="{{ __('Add the diagnosis') }}"><x-icon name="plus" /></button>
                         </div>
                     </form>
                 </div>
