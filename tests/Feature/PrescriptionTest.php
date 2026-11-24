@@ -151,7 +151,7 @@ class PrescriptionTest extends TestCase
     public function test_the_qr_code_is_drawn(): void
     {
         $matrix = (new Qr)->make('https://acme.tabib.test/rx/'.str_repeat('a', 32));
-        $this->assertCount(41, $matrix);   // version 6 for 56 bytes at level M: 41 x 41
+        $this->assertCount(33, $matrix);   // 59 bytes fit version 4 at level M: 33 x 33
         $this->assertTrue($matrix[0][0] && $matrix[6][6] && ! $matrix[7][7]);
         $this->assertStringStartsWith('<svg', Qr::svg('hello'));
     }
