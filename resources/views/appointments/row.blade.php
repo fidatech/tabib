@@ -13,9 +13,6 @@
     }
     $myDoctor = request()->attributes->get('my_doctor');
     $canVisit = $myDoctor && in_array($a->status, ['arrived', 'with_doctor', 'completed'], true) && ($a->doctor_id === $myDoctor || $a->status !== 'completed');
-    // the front desk bills a patient who came; a bill already made shows whether it is paid
-    $canBill = auth()->user()->can('billing.manage') && in_array($a->status, ['arrived', 'with_doctor', 'completed'], true);
-    $bill = auth()->user()->can('billing.view') ? $a->invoice : null;
     $buttons = ['confirm' => 'btn-outline-soft', 'arrive' => 'btn-warning', 'start' => 'btn-primary', 'complete' => 'btn-success', 'no_show' => 'btn-outline-soft', 'cancel' => 'btn-outline-danger'];
 @endphp
 <div class="list-group-item appt-row d-flex flex-wrap gap-2 align-items-center">
@@ -36,12 +33,8 @@
         </span>
     </div>
     <span class="badge {{ $a->statusClass() }}">{{ $a->statusLabel() }}</span>
-    @if ($bill)
-        <a class="btn btn-sm {{ $bill->status === 'paid' ? 'btn-outline-success' : 'btn-outline-danger' }} no-print" href="{{ route('invoices.show', ['id' => $bill->id]) }}"><x-icon name="file-invoice-dollar" class="me-1" /> {{ $bill->statusLabel() }}</a>
-    @elseif ($canBill)
-        <form method="POST" action="{{ route('invoices.start') }}" class="no-print">@csrf<input type="hidden" name="appointment_id" value="{{ $a->id }}">
-            <button type="submit" class="btn btn-sm btn-outline-primary"><x-icon name="file-invoice-dollar" class="me-1" /> {{ __('Bill') }}</button></form>
-    @endif
+    {{-- the front desk bills a patient who came; a bill already made shows whether it is paid --}}
+    @include('appointments.bill')
     @if ($canVisit)
         <form method="POST" action="{{ route('encounters.start') }}" class="no-print">@csrf<input type="hidden" name="appointment_id" value="{{ $a->id }}">
             <button type="submit" class="btn btn-sm btn-gradient"><x-icon name="stethoscope" class="me-1" /> {{ $a->status === 'completed' ? __('The visit') : __('Open the visit') }}</button></form>

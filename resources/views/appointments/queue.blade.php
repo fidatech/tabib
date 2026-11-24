@@ -34,6 +34,7 @@
                                 <span class="queue-token" dir="ltr">#{{ $a->token }}</span>
                                 <a href="{{ route('patients.show', ['id' => $a->patient_id]) }}" class="fw-semibold">{{ $a->patient?->name }}</a>
                                 @if ($a->reason)<span class="d-block small text-muted">{{ $a->reason }}</span>@endif
+                                <div class="mt-1">@include('appointments.bill')</div>
                                 @if ($mine === $d->id)
                                     <form method="POST" action="{{ route('encounters.start') }}" class="mt-2">@csrf<input type="hidden" name="appointment_id" value="{{ $a->id }}">
                                         <button type="submit" class="btn btn-sm btn-primary"><x-icon name="stethoscope" class="me-1" /> {{ __('Open the visit') }}</button></form>
@@ -60,6 +61,7 @@
                                 <span class="queue-token" dir="ltr">#{{ $a->token }}</span>
                                 <span class="flex-grow-1 min-w-0"><a href="{{ route('patients.show', ['id' => $a->patient_id]) }}">{{ $a->patient?->name }}</a>
                                     <span class="d-block small text-muted">{{ $a->source === 'walk_in' ? __('Walk-in') : __('Booked for :time', ['time' => $a->starts_at->format('H:i')]) }} · {{ __('waiting since :time', ['time' => $a->arrived_at?->format('H:i')]) }}</span></span>
+                                @include('appointments.bill')
                             </li>
                         @empty
                             <li class="text-muted small">{{ __('Nobody is waiting.') }}</li>
