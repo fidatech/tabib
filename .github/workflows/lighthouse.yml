@@ -45,6 +45,7 @@ jobs:
           php artisan migrate --force
           php artisan app:create-admin --name="System Admin" --email=admin@example.test --password=lighthouse-pass-1
           php artisan tenants:create demo --name="Demo Clinic" --owner-name="Owner One" --owner-email=owner@example.test --owner-password=lighthouse-pass-1
+          php artisan tinker --execute="app(App\Tenancy\Tenancy::class)->initialize(App\Models\Central\Tenant::where('slug', 'demo')->sole()); \$u = App\Models\User::create(['name' => 'Dr. Demo', 'email' => 'doctor@example.test', 'password' => 'lighthouse-pass-1', 'branch_id' => 1]); \$u->assignRole('Doctor'); \$d = App\Models\Doctor::create(['user_id' => \$u->id, 'specialty' => 'General practitioner']); \$p = App\Models\Patient::create(['number' => 'P-000001', 'name' => 'Gul Ahmad', 'gender' => 'male']); App\Models\Appointment::create(['patient_id' => \$p->id, 'doctor_id' => \$d->id, 'branch_id' => 1, 'starts_at' => now()->setTime(10, 0), 'ends_at' => now()->setTime(10, 15), 'status' => 'arrived', 'token' => 1]);"
           php artisan config:cache && php artisan view:cache
           # several workers: the pages ask for their styles and scripts at once
           PHP_CLI_SERVER_WORKERS=6 nohup php artisan serve --host=0.0.0.0 --port=8003 > serve.log 2>&1 &
@@ -94,6 +95,10 @@ jobs:
           measure clinic-login http://demo.localhost:8004/login ""
           measure admin-panel http://localhost:8004/admin "$ADMIN"
           measure clinic-dashboard http://demo.localhost:8004/ "$OWNER"
+          measure clinic-calendar http://demo.localhost:8004/appointments "$OWNER"
+          measure clinic-queue http://demo.localhost:8004/queue "$OWNER"
+          measure clinic-patients http://demo.localhost:8004/patients "$OWNER"
+          measure clinic-booking http://demo.localhost:8004/appointments/create "$OWNER"
           cat > report.js <<'JS'
           const fs = require('fs');
           for (const file of fs.readdirSync('.').filter((f) => /^out-.*\.json$/.test(f)).sort()) {
