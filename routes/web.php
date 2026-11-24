@@ -303,6 +303,13 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
         Route::get('cash', [$i, 'daily'])->name('billing.daily');
         $crud('price-list', \App\Http\Controllers\PriceListController::class, 'services');
 
+        // reports, and the text messages to patients
+        Route::get('reports', [\App\Http\Controllers\ReportController::class, 'index'])->name('reports.index');
+        Route::get('reports/{report}', [\App\Http\Controllers\ReportController::class, 'show'])->name('reports.show')->where('report', '[a-z]+');
+        Route::get('settings/sms', [\App\Http\Controllers\SmsController::class, 'index'])->name('sms.index');
+        Route::put('settings/sms', [\App\Http\Controllers\SmsController::class, 'update'])->name('sms.update');
+        Route::post('settings/sms/test', [\App\Http\Controllers\SmsController::class, 'test'])->name('sms.test')->middleware('throttle:10,1');
+
         // administration
         $crud('branches', BranchController::class, 'branches');
         $crud('users', UserController::class, 'users');

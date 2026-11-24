@@ -97,6 +97,7 @@ class AppointmentController extends Controller
         }
 
         $a = Scheduling::book($patient, $doctor, $type, $this->start($data), $data['minutes'] ?? null, $data['reason'] ?? null);
+        \App\Services\Sms::booked($a, $request->user()->id);
 
         return redirect()->route('appointments.index', ['date' => $a->starts_at->toDateString()])
             ->with('success', __(':patient is booked with :doctor at :time.', ['patient' => $patient->name, 'doctor' => $doctor->name(), 'time' => $a->starts_at->format('H:i')]));
@@ -117,7 +118,12 @@ class AppointmentController extends Controller
         $appointment = Appointment::findOrFail($id);
         $data = $this->validated($request, false);
         $type = isset($data['appointment_type_id']) ? AppointmentType::find($data['appointment_type_id']) : null;
+        $before = $appointment->starts_at->copy();
         Scheduling::reschedule($appointment, Doctor::findOrFail($data['doctor_id']), $type, $this->start($data), $data['minutes'] ?? null, $data['reason'] ?? null);
+        if (! $appointment->fresh()->starts_at->equalTo($before)) {
+            // a moved appointment is reminded again, of its new time
+            Appointment::whereKey($appointment->id)->update(['reminded_at' => null]);
+        }
 
         return redirect()->route('appointments.index', ['date' => $appointment->starts_at->toDateString()])->with('success', __('The appointment was moved.'));
     }

@@ -57,6 +57,7 @@ class PatientController extends CrudController
                 'rules' => ['nullable', 'integer', 'min:0', 'max:130'], 'col' => 4, 'help' => 'When the date of birth is not known'],
             ['name' => 'phone', 'label' => 'Phone', 'rules' => ['nullable', 'string', 'max:40'], 'col' => 4],
             ['name' => 'phone2', 'label' => 'Second phone', 'rules' => ['nullable', 'string', 'max:40'], 'col' => 4],
+            ['name' => 'no_sms', 'label' => 'No text messages to this patient', 'type' => 'checkbox', 'col' => 4],
             ['name' => 'tazkira', 'label' => 'Tazkira number', 'rules' => ['nullable', 'string', 'max:40'], 'col' => 4],
             ['name' => 'blood_group', 'label' => 'Blood group', 'type' => 'select', 'options' => ['' => '—'] + array_combine(Patient::BLOOD_GROUPS, Patient::BLOOD_GROUPS),
                 'rules' => ['nullable', Rule::in(Patient::BLOOD_GROUPS)], 'col' => 4],

@@ -32,7 +32,7 @@ return [
         ['label' => 'Cash of the day', 'route' => 'billing.daily', 'can' => 'billing.view'],
     ]],
 
-    // reports are added here as they are built
+    ['label' => 'Reports', 'icon' => 'chart-column', 'route' => 'reports.index', 'active' => 'reports.*', 'can' => 'reports.view'],
 
     ['label' => 'Clinic Setup', 'icon' => 'house-medical', 'children' => [
         ['label' => 'Doctors', 'route' => 'doctors.index', 'active' => 'doctors.*', 'can' => 'users.view'],
@@ -51,7 +51,8 @@ return [
     ]],
 
     ['label' => 'Configurations', 'icon' => 'gear', 'children' => [
-        ['label' => 'Clinic Settings', 'route' => 'settings.index', 'active' => 'settings.*', 'can' => 'settings.view'],
+        ['label' => 'Clinic Settings', 'route' => 'settings.index', 'active' => 'settings.index', 'can' => 'settings.view'],
+        ['label' => 'Text messages', 'route' => 'sms.index', 'active' => 'sms.*', 'can' => 'settings.view'],
     ]],
 
     // support, subscription and invoices open from the menu of the profile in the navbar
