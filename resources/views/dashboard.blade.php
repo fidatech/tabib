@@ -2,11 +2,6 @@
 
 @php
     $done = collect($steps)->filter(fn (array $step) => $step[1])->count();
-    $tiles = [
-        ['Doctors', $doctors, 'user-doctor', 'primary'],
-        ['Staff who sign in', $staff, 'users', 'success'],
-        ['Branches', $branches->where('is_active', true)->count(), 'code-branch', 'info'],
-    ];
 @endphp
 
 @section('content')
@@ -14,12 +9,20 @@
 
 @include('partials.dashboard-hero')
 
-<div class="dc-stats is-three mb-3">
-    @foreach ($tiles as [$label, $count, $icon, $tone])
-        <div class="dc-stat">
-            <span class="icon-soft {{ $tone }}"><x-icon :name="$icon" /></span>
-            <div class="min-w-0"><div class="dc-stat-value">{{ number_format($count) }}</div><div class="dc-stat-label">{{ __($label) }}</div></div>
-        </div>
+<div class="dc-stats mb-3">
+    @foreach ($tiles as [$label, $count, $icon, $tone, $url])
+        @if ($url)
+            <a class="dc-stat is-link" href="{{ $url }}">
+                <span class="icon-soft {{ $tone }}"><x-icon :name="$icon" /></span>
+                <div class="min-w-0"><div class="dc-stat-value">{{ number_format($count) }}</div><div class="dc-stat-label">{{ __($label) }}</div></div>
+                <span class="dc-stat-go" aria-hidden="true"><x-icon name="arrow-right" class="flip-rtl" /></span>
+            </a>
+        @else
+            <div class="dc-stat">
+                <span class="icon-soft {{ $tone }}"><x-icon :name="$icon" /></span>
+                <div class="min-w-0"><div class="dc-stat-value">{{ number_format($count) }}</div><div class="dc-stat-label">{{ __($label) }}</div></div>
+            </div>
+        @endif
     @endforeach
 </div>
 

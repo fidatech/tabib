@@ -23,7 +23,16 @@
 return [
     ['label' => 'Dashboard', 'icon' => 'gauge-high', 'route' => 'dashboard'],
 
-    // the clinic modules (patients, appointments, visits, prescriptions, billing, reports) are added here as they are built
+    ['label' => 'Appointments', 'icon' => 'calendar-days', 'route' => 'appointments.index', 'active' => 'appointments.*', 'can' => 'appointments.view'],
+    ['label' => 'Queue', 'icon' => 'list-ol', 'route' => 'queue.index', 'can' => 'appointments.view'],
+    ['label' => 'Patients', 'icon' => 'hospital-user', 'route' => 'patients.index', 'active' => 'patients.*', 'can' => 'patients.view'],
+
+    // visits, prescriptions, billing and reports are added here as they are built
+
+    ['label' => 'Clinic Setup', 'icon' => 'house-medical', 'children' => [
+        ['label' => 'Doctors', 'route' => 'doctors.index', 'active' => 'doctors.*', 'can' => 'users.view'],
+        ['label' => 'Appointment types', 'route' => 'appointment-types.index', 'active' => 'appointment-types.*', 'can' => 'settings.view'],
+    ]],
 
     ['label' => 'Branches', 'icon' => 'code-branch', 'route' => 'branches.index', 'active' => 'branches.*', 'can' => 'branches.view'],
 

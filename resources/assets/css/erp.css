@@ -1010,3 +1010,54 @@ small, .small { font-size: max(.875em, 12px); }
 .ah-points span { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: rgba(255, 255, 255, .16); font-size: 17px; flex-shrink: 0; }
 .ac-clinic { display: flex; justify-content: center; margin-bottom: 14px; }
 .ac-clinic img { width: 64px; height: 64px; object-fit: contain; border-radius: 14px; background: var(--card); border: 1px solid var(--border); padding: 6px; }
+
+/* ------------------------------------------------------------ appointments: the calendar of the day */
+[dir="rtl"] .flip-rtl { transform: scaleX(-1); }
+.appt-teal { --appt: #0d7577; } .appt-blue { --appt: #2563eb; } .appt-violet { --appt: #7c3aed; }
+.appt-orange { --appt: #c2410c; } .appt-rose { --appt: #be123c; } .appt-green { --appt: #15803d; }
+.appt-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--appt, var(--primary)); margin-inline-end: 8px; flex-shrink: 0; }
+.appt-counts { display: flex; gap: 14px; color: var(--muted); font-size: 14px; }
+.appt-counts b { color: var(--heading); }
+.appt-grid-wrap { overflow-x: auto; }
+.appt-grid { width: 100%; min-width: calc(80px + var(--doctors, 1) * 190px); border-collapse: separate; border-spacing: 0; table-layout: fixed; }
+.appt-grid th, .appt-grid td { border-bottom: 1px solid var(--border); border-inline-start: 1px solid var(--border); padding: 4px 6px; vertical-align: top; }
+.appt-grid thead th { position: sticky; top: 0; z-index: 2; background: var(--card); font-weight: 700; color: var(--heading); padding: 12px 10px; text-align: start; }
+.appt-grid thead th small { display: block; font-weight: 500; color: var(--muted); padding-inline-start: 18px; }
+.appt-grid .appt-time { width: 80px; color: var(--muted); font-weight: 600; font-size: 13px; text-align: center; border-inline-start: 0; background: var(--card); }
+.appt-grid tr.is-hour td, .appt-grid tr.is-hour th { border-top: 1px solid var(--border-strong); }
+.appt-grid tr.is-now .appt-time { color: var(--primary); }
+.appt-grid tr.is-now td { background: rgba(var(--primary-rgb), .05); }
+.appt-grid td { height: 46px; position: relative; }
+.appt-block { display: block; text-decoration: none; border-radius: 8px; padding: 5px 8px; margin-bottom: 4px; background: color-mix(in srgb, var(--appt) 12%, var(--card)); border-inline-start: 4px solid var(--appt); color: var(--heading); line-height: 1.3; }
+.appt-block:hover { background: color-mix(in srgb, var(--appt) 20%, var(--card)); color: var(--heading); }
+.appt-block-time { font-size: 12px; font-weight: 700; color: var(--appt); }
+[data-bs-theme="dark"] .appt-block-time { color: var(--heading); }
+.appt-block-name { display: block; font-weight: 700; font-size: 13.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.appt-block-meta { display: block; font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.appt-block.is-cancelled, .appt-block.is-no_show { opacity: .55; }
+.appt-block.is-cancelled .appt-block-name, .appt-block.is-no_show .appt-block-name { text-decoration: line-through; }
+.appt-block.is-completed { border-inline-start-style: dashed; }
+.appt-block.is-arrived, .appt-block.is-with_doctor { box-shadow: 0 0 0 2px var(--appt) inset; }
+.appt-free { display: grid; place-items: center; height: 36px; border-radius: 8px; color: var(--muted); opacity: 0; text-decoration: none; }
+.appt-grid td:hover .appt-free, .appt-free:focus { opacity: 1; background: rgba(var(--primary-rgb), .08); color: var(--primary); }
+@media (hover: none) { .appt-free { opacity: .35; } }
+.appt-row-time { min-width: 74px; }
+
+/* ------------------------------------------------------------ the queue */
+.queue-card.is-mine { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
+.queue-label { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin-bottom: 8px; }
+.queue-now { background: rgba(var(--primary-rgb), .06); border-radius: 12px; padding: 12px 14px; }
+.queue-now-patient { font-size: 16px; }
+.queue-token { display: inline-grid; place-items: center; min-width: 38px; height: 28px; padding: 0 8px; border-radius: 8px; background: var(--heading); color: var(--card); font-weight: 800; font-size: 13px; margin-inline-end: 8px; flex-shrink: 0; }
+.queue-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.queue-list li { display: flex; align-items: flex-start; gap: 4px; }
+
+/* ------------------------------------------------------------ the page of a patient */
+.patient-facts { display: grid; gap: 12px; margin: 0; }
+.patient-facts div { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dashed var(--border); padding-bottom: 8px; }
+.patient-facts dt { font-weight: 600; color: var(--muted); }
+.patient-facts dd { margin: 0; color: var(--heading); text-align: end; }
+.patient-allergy { font-size: 15px; }
+.patient-chosen { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px; border: 1px solid var(--primary); border-radius: 10px; background: rgba(var(--primary-rgb), .06); }
+.patient-results { position: absolute; z-index: 20; width: 100%; max-height: 320px; overflow-y: auto; box-shadow: 0 10px 30px rgba(15, 20, 32, .14); }
+.patient-pick [data-patient-find] { position: relative; }

@@ -70,3 +70,6 @@ is-success is-danger is-primary is-warning
 
 # icons of the menu of the reseller panel (layouts.reseller)
 #s-percent #s-wallet #s-user-plus #s-id-badge #s-gauge-high #s-landmark
+
+# the status of an appointment is written on its block of the calendar as "is-" + status
+is-booked is-confirmed is-arrived is-with_doctor is-completed is-no_show is-cancelled

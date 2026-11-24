@@ -223,7 +223,28 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
 
         Route::get('/', DashboardController::class)->name('dashboard');
 
-        // the clinic modules (patients, appointments, visits, prescriptions, billing) are added here as they are built
+        // patients: the list and its search, registration, the page of one patient
+        Route::get('patients/search', [\App\Http\Controllers\PatientController::class, 'search'])->name('patients.search');
+        $crud('patients', \App\Http\Controllers\PatientController::class, 'patients');
+        Route::get('patients/{id}', [\App\Http\Controllers\PatientController::class, 'show'])->name('patients.show')->whereNumber('id');
+
+        // appointments: the calendar of the day, booking, the buttons of a visit, walk-ins and the queue
+        $a = \App\Http\Controllers\AppointmentController::class;
+        Route::get('appointments', [$a, 'index'])->name('appointments.index');
+        Route::get('appointments/create', [$a, 'create'])->name('appointments.create');
+        Route::post('appointments', [$a, 'store'])->name('appointments.store');
+        Route::get('appointments/{id}/edit', [$a, 'edit'])->name('appointments.edit')->whereNumber('id');
+        Route::put('appointments/{id}', [$a, 'update'])->name('appointments.update')->whereNumber('id');
+        Route::post('appointments/{id}/{action}', [$a, 'act'])->name('appointments.act')->whereNumber('id')
+            ->whereIn('action', array_keys(\App\Models\Appointment::ACTIONS));
+        Route::get('queue', [$a, 'queue'])->name('queue.index');
+        Route::post('queue/{doctor}/next', [$a, 'callNext'])->name('queue.next')->whereNumber('doctor');
+
+        // the set-up of the clinic: its doctors and the kinds of appointment it gives
+        $crud('doctors', \App\Http\Controllers\DoctorController::class, 'doctors');
+        $crud('appointment-types', \App\Http\Controllers\AppointmentTypeController::class, 'appointment-types');
+
+        // visits, prescriptions and billing are added here as they are built
 
         // administration
         $crud('branches', BranchController::class, 'branches');

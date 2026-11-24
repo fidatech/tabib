@@ -13,4 +13,8 @@
 */
 
 return [
+    ['label' => 'New appointment', 'icon' => 'calendar-plus', 'tone' => 'primary', 'route' => 'appointments.create', 'active' => 'appointments.create', 'can' => 'appointments.manage'],
+    ['label' => 'Walk-in', 'icon' => 'person-walking', 'tone' => 'warning', 'route' => 'appointments.create', 'params' => ['walk_in' => 1], 'active' => 'appointments.create', 'can' => 'appointments.manage'],
+    ['label' => 'Register a patient', 'icon' => 'user-plus', 'tone' => 'success', 'route' => 'patients.create', 'active' => 'patients.create', 'can' => 'patients.manage'],
+    ['label' => 'Queue', 'icon' => 'list-ol', 'tone' => 'purple', 'route' => 'queue.index', 'can' => 'appointments.view'],
 ];
