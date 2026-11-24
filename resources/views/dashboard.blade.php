@@ -14,13 +14,13 @@
         @if ($url)
             <a class="dc-stat is-link" href="{{ $url }}">
                 <span class="icon-soft {{ $tone }}"><x-icon :name="$icon" /></span>
-                <div class="min-w-0"><div class="dc-stat-value">{{ number_format($count) }}</div><div class="dc-stat-label">{{ __($label) }}</div></div>
+                <div class="min-w-0"><div class="dc-stat-value">{{ is_int($count) ? number_format($count) : $count }}</div><div class="dc-stat-label">{{ __($label) }}</div></div>
                 <span class="dc-stat-go" aria-hidden="true"><x-icon name="arrow-right" class="flip-rtl" /></span>
             </a>
         @else
             <div class="dc-stat">
                 <span class="icon-soft {{ $tone }}"><x-icon :name="$icon" /></span>
-                <div class="min-w-0"><div class="dc-stat-value">{{ number_format($count) }}</div><div class="dc-stat-label">{{ __($label) }}</div></div>
+                <div class="min-w-0"><div class="dc-stat-value">{{ is_int($count) ? number_format($count) : $count }}</div><div class="dc-stat-label">{{ __($label) }}</div></div>
             </div>
         @endif
     @endforeach

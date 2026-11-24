@@ -53,6 +53,13 @@ class DashboardController extends Controller
         if ($user->can('patients.view')) {
             $tiles[] = ['New patients this month', Patient::where('created_at', '>=', $today->copy()->startOfMonth())->count(), 'user-plus', 'info', route('patients.index')];
         }
+        if ($user->can('billing.view')) {
+            $taken = \App\Support\Num::sum(\App\Models\Payment::where('branch_id', current_branch()->id)
+                ->whereBetween('received_at', [$today->copy()->startOfDay(), $today->copy()->endOfDay()])->pluck('amount'));
+            $tiles[] = ['Cash taken today', money($taken), 'cash-register', 'success', route('billing.daily')];
+            $tiles[] = ['Unpaid invoices', \App\Models\Invoice::where('branch_id', current_branch()->id)->whereIn('status', ['unpaid', 'partly'])->count(), 'file-invoice-dollar', 'danger',
+                route('invoices.index', ['status' => 'owed'])];
+        }
         if (! $tiles) {
             $tiles[] = ['Doctors', $doctors, 'user-doctor', 'primary', null];
             $tiles[] = ['Staff who sign in', $staff, 'users', 'success', null];

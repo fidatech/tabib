@@ -1096,3 +1096,6 @@ small, .small { font-size: max(.875em, 12px); }
 .rx-num { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--primary-soft, #e6f4f4); color: var(--primary); font-weight: 800; font-size: 13px; flex-shrink: 0; }
 .med-results { position: absolute; z-index: 30; width: calc(100% - var(--bs-gutter-x, 1rem)); max-height: 320px; overflow-y: auto; box-shadow: 0 10px 30px rgba(15, 20, 32, .14); }
 .rx-verify { max-width: 720px; }
+
+/* ------------------------------------------------------------ billing */
+.patient-owes { color: #b42318; font-weight: 700; text-decoration: underline; }

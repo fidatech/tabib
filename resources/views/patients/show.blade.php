@@ -5,7 +5,7 @@
     $tabNames = [
         'summary' => ['Summary', 'gauge-high'], 'timeline' => ['Timeline', 'timeline'], 'history' => ['History', 'notes-medical'],
         'vitals' => ['Vital signs', 'heart-pulse'], 'visits' => ['Visits', 'stethoscope'], 'prescriptions' => ['Prescriptions', 'prescription-bottle-medical'], 'documents' => ['Documents', 'paperclip'],
-        'appointments' => ['Appointments', 'calendar-days'],
+        'appointments' => ['Appointments', 'calendar-days'], 'billing' => ['Billing', 'file-invoice-dollar'],
     ];
     $facts = array_filter([
         ['hashtag', $patient->number, true],
@@ -14,6 +14,7 @@
         ['phone', $patient->phone, true],
         ['droplet', $patient->blood_group, true],
     ], fn (array $f) => filled($f[1]));
+    $owes = isset($owed) && \App\Support\Num::cmp($owed, '0') > 0;
 @endphp
 
 @section('content')
@@ -30,6 +31,10 @@
         <form method="POST" action="{{ route('prescriptions.start') }}">@csrf<input type="hidden" name="patient_id" value="{{ $patient->id }}">
             <button type="submit" class="btn btn-outline-soft"><x-icon name="prescription-bottle-medical" class="me-1" /> {{ __('Prescription') }}</button></form>
     @endif
+    @can('billing.manage')
+        <form method="POST" action="{{ route('invoices.start') }}">@csrf<input type="hidden" name="patient_id" value="{{ $patient->id }}">
+            <button type="submit" class="btn btn-outline-soft"><x-icon name="file-invoice-dollar" class="me-1" /> {{ __('New invoice') }}</button></form>
+    @endcan
     @if ($canBook)
         <a class="btn btn-primary" href="{{ route('appointments.create', ['patient' => $patient->id]) }}"><x-icon name="calendar-plus" class="me-1" /> {{ __('Book an appointment') }}</a>
     @endif
@@ -40,6 +45,9 @@
     @foreach ($facts as [$icon, $value, $ltr])
         <span><x-icon :name="$icon" /> <b @if ($ltr) dir="ltr" @endif>{{ $value }}</b></span>
     @endforeach
+    @if ($owes)
+        <a class="patient-owes" href="{{ route('patients.show', ['id' => $patient->id, 'tab' => 'billing']) }}"><x-icon name="file-invoice-dollar" /> {{ __('Owes :amount', ['amount' => money($owed, setting('currency'))]) }}</a>
+    @endif
 </div>
 
 @include('patients.partials.allergy-banner')

@@ -72,6 +72,12 @@ class Appointment extends Model
         return $this->belongsTo(Doctor::class);
     }
 
+    /** The invoice of the visit (a voided one does not count). */
+    public function invoice(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Invoice::class)->where('status', '!=', Invoice::VOID)->latestOfMany();
+    }
+
     public function type(): BelongsTo
     {
         return $this->belongsTo(AppointmentType::class, 'appointment_type_id');

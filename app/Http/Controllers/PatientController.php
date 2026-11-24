@@ -152,10 +152,14 @@ class PatientController extends CrudController
         $patient = Patient::findOrFail($id);
         $clinical = $request->user()->can('clinical.view');
         $tabs = $clinical ? ['summary', 'timeline', 'history', 'vitals', 'visits', 'prescriptions', 'documents', 'appointments'] : ['appointments'];
+        $billing = $request->user()->can('billing.view');
+        if ($billing) {
+            $tabs[] = 'billing';
+        }
         $tab = in_array($request->query('tab'), $tabs, true) ? $request->query('tab') : $tabs[0];
         audit('viewed', $patient, $patient->auditLabel().($clinical ? ' · '.$tab : ''));
 
-        $appointments = $patient->appointments()->with(['doctor.user', 'type'])->orderByDesc('starts_at')->get();
+        $appointments = $patient->appointments()->with(['doctor.user', 'type', 'invoice'])->orderByDesc('starts_at')->get();
         $now = now();
         $data = [
             'patient' => $patient, 'tab' => $tab, 'tabs' => $tabs, 'clinical' => $clinical,
@@ -167,6 +171,14 @@ class PatientController extends CrudController
             'upcoming' => $appointments->filter(fn (Appointment $a) => $a->isOpen() && $a->starts_at >= $now->copy()->startOfDay())->sortBy('starts_at')->values(),
             'past' => $appointments->reject(fn (Appointment $a) => $a->isOpen() && $a->starts_at >= $now->copy()->startOfDay())->values(),
         ];
+
+        if ($billing) {
+            // what he owes is shown on every tab to the front desk; the invoices on their own tab
+            $data['owed'] = \App\Services\Cashier::owed($patient);
+            if ($tab === 'billing') {
+                $data['invoices'] = \App\Models\Invoice::with('doctor.user')->where('patient_id', $patient->id)->latest('id')->get();
+            }
+        }
 
         return view('patients.show', $data + ($clinical ? \App\Support\Chart::for($patient, $tab) : []));
     }

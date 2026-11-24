@@ -36,7 +36,7 @@ class AppointmentController extends Controller
             $chosen = 'all';
         }
 
-        $appointments = Appointment::with(['patient', 'type'])
+        $appointments = Appointment::with(['patient', 'type', 'invoice'])
             ->where('branch_id', current_branch()->id)
             ->whereIn('doctor_id', $shown->pluck('id'))
             ->whereBetween('starts_at', [$day->copy()->startOfDay(), $day->copy()->endOfDay()])
@@ -139,7 +139,7 @@ class AppointmentController extends Controller
     {
         Gate::authorize('appointments.view');
         $day = Carbon::parse(today_iso());
-        $today = Appointment::with(['patient', 'type'])->where('branch_id', current_branch()->id)
+        $today = Appointment::with(['patient', 'type', 'invoice'])->where('branch_id', current_branch()->id)
             ->whereBetween('starts_at', [$day->copy()->startOfDay(), $day->copy()->endOfDay()])
             ->orderBy('starts_at')->get()->groupBy('doctor_id');
 

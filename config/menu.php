@@ -27,12 +27,18 @@ return [
     ['label' => 'Queue', 'icon' => 'list-ol', 'route' => 'queue.index', 'can' => 'appointments.view'],
     ['label' => 'Patients', 'icon' => 'hospital-user', 'route' => 'patients.index', 'active' => 'patients.*', 'can' => 'patients.view'],
 
-    // visits, prescriptions, billing and reports are added here as they are built
+    ['label' => 'Billing', 'icon' => 'file-invoice-dollar', 'children' => [
+        ['label' => 'Invoices', 'route' => 'invoices.index', 'active' => 'invoices.*', 'can' => 'billing.view'],
+        ['label' => 'Cash of the day', 'route' => 'billing.daily', 'can' => 'billing.view'],
+    ]],
+
+    // reports are added here as they are built
 
     ['label' => 'Clinic Setup', 'icon' => 'house-medical', 'children' => [
         ['label' => 'Doctors', 'route' => 'doctors.index', 'active' => 'doctors.*', 'can' => 'users.view'],
         ['label' => 'Appointment types', 'route' => 'appointment-types.index', 'active' => 'appointment-types.*', 'can' => 'settings.view'],
         ['label' => 'Medicines', 'route' => 'medicines.index', 'active' => 'medicines.*', 'can' => 'prescriptions.view'],
+        ['label' => 'Price list', 'route' => 'services.index', 'active' => 'services.*', 'can' => 'billing.view'],
     ]],
 
     ['label' => 'Branches', 'icon' => 'code-branch', 'route' => 'branches.index', 'active' => 'branches.*', 'can' => 'branches.view'],

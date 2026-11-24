@@ -287,7 +287,21 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
         Route::get('medicines/search', [$p, 'medicines'])->name('medicines.search');
         $crud('medicines', \App\Http\Controllers\MedicineController::class, 'medicines');
 
-        // billing is added here as it is built
+        // billing: invoices, money taken and given back, the cash of a day; nothing is deleted
+        $i = \App\Http\Controllers\InvoiceController::class;
+        Route::get('invoices', [$i, 'index'])->name('invoices.index');
+        Route::post('invoices', [$i, 'start'])->name('invoices.start');
+        Route::get('invoices/{id}', [$i, 'show'])->name('invoices.show')->whereNumber('id');
+        Route::put('invoices/{id}', [$i, 'update'])->name('invoices.update')->whereNumber('id');
+        Route::post('invoices/{id}/items', [$i, 'addItem'])->name('invoices.items.store')->whereNumber('id');
+        Route::delete('invoices/{id}/items/{item}', [$i, 'removeItem'])->name('invoices.items.destroy')->whereNumber(['id', 'item']);
+        Route::post('invoices/{id}/pay', [$i, 'pay'])->name('invoices.pay')->whereNumber('id');
+        Route::post('invoices/{id}/refund', [$i, 'refund'])->name('invoices.refund')->whereNumber('id');
+        Route::post('invoices/{id}/void', [$i, 'void'])->name('invoices.void')->whereNumber('id');
+        Route::get('invoices/{id}/print', [$i, 'print'])->name('invoices.print')->whereNumber('id');
+        Route::get('receipts/{payment}', [$i, 'receipt'])->name('payments.print')->whereNumber('payment');
+        Route::get('cash', [$i, 'daily'])->name('billing.daily');
+        $crud('price-list', \App\Http\Controllers\PriceListController::class, 'services');
 
         // administration
         $crud('branches', BranchController::class, 'branches');
