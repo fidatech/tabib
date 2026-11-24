@@ -192,6 +192,9 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
     // the support staff of Fida Technologies come in from the administration panel, with their reason
     Route::get('support-enter', [LoginController::class, 'support'])->name('support.enter');
 
+    // the QR code of a printed prescription opens this page: anyone may check it, nobody signs in
+    Route::get('rx/{token}', [\App\Http\Controllers\PrescriptionController::class, 'verify'])->name('rx.verify')->where('token', '[a-z0-9]{32}')->middleware('throttle:60,1,rx');
+
     // the logo of the clinic is also the icon of its browser tab, so the sign-in page can ask for it too
     Route::get('company-logo', [SettingsController::class, 'logo'])->name('settings.logo');
 
@@ -267,7 +270,24 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
         Route::post('visits/{id}/sign', [$e, 'sign'])->name('encounters.sign')->whereNumber('id');
         Route::post('visits/{id}/addenda', [$e, 'addendum'])->name('encounters.addenda.store')->whereNumber('id');
 
-        // prescriptions and billing are added here as they are built
+        // prescriptions: written, checked, signed, printed with a QR code; cancelled, never changed
+        $p = \App\Http\Controllers\PrescriptionController::class;
+        Route::post('prescriptions', [$p, 'start'])->name('prescriptions.start');
+        Route::get('prescriptions/{id}', [$p, 'show'])->name('prescriptions.show')->whereNumber('id');
+        Route::put('prescriptions/{id}', [$p, 'update'])->name('prescriptions.update')->whereNumber('id');
+        Route::post('prescriptions/{id}/items', [$p, 'addItem'])->name('prescriptions.items.store')->whereNumber('id');
+        Route::put('prescriptions/{id}/items/{item}', [$p, 'updateItem'])->name('prescriptions.items.update')->whereNumber(['id', 'item']);
+        Route::delete('prescriptions/{id}/items/{item}', [$p, 'removeItem'])->name('prescriptions.items.destroy')->whereNumber(['id', 'item']);
+        Route::post('prescriptions/{id}/set', [$p, 'applySet'])->name('prescriptions.sets.apply')->whereNumber('id');
+        Route::post('prescriptions/{id}/save-set', [$p, 'saveSet'])->name('prescriptions.sets.store')->whereNumber('id');
+        Route::delete('prescription-sets/{set}', [$p, 'deleteSet'])->name('prescriptions.sets.destroy')->whereNumber('set');
+        Route::post('prescriptions/{id}/sign', [$p, 'sign'])->name('prescriptions.sign')->whereNumber('id');
+        Route::post('prescriptions/{id}/cancel', [$p, 'cancel'])->name('prescriptions.cancel')->whereNumber('id');
+        Route::get('prescriptions/{id}/print', [$p, 'print'])->name('prescriptions.print')->whereNumber('id');
+        Route::get('medicines/search', [$p, 'medicines'])->name('medicines.search');
+        $crud('medicines', \App\Http\Controllers\MedicineController::class, 'medicines');
+
+        // billing is added here as it is built
 
         // administration
         $crud('branches', BranchController::class, 'branches');

@@ -1,0 +1,714 @@
+code,name,strength,form,route,class,mg_per_unit,controlled,brands
+paracetamol-500-mg-tablet,Paracetamol,500 mg,tablet,oral,analgesic,500,0,"PK: Panadol, Calpol | IN: Crocin, Dolo, Calpol | TR: Parol, Minoset, Tylol | US: Tylenol"
+paracetamol-650-mg-tablet,Paracetamol,650 mg,tablet,oral,analgesic,650,0,"PK: Panadol, Calpol | IN: Crocin, Dolo, Calpol | TR: Parol, Minoset, Tylol | US: Tylenol"
+paracetamol-1-g-tablet,Paracetamol,1 g,tablet,oral,analgesic,1000,0,"PK: Panadol, Calpol | IN: Crocin, Dolo, Calpol | TR: Parol, Minoset, Tylol | US: Tylenol"
+paracetamol-120-mg-5-ml-syrup,Paracetamol,120 mg/5 ml,syrup,oral,analgesic,24,0,"PK: Panadol, Calpol | IN: Crocin, Dolo, Calpol | TR: Parol, Minoset, Tylol | US: Tylenol"
+paracetamol-250-mg-5-ml-syrup,Paracetamol,250 mg/5 ml,syrup,oral,analgesic,50,0,"PK: Panadol, Calpol | IN: Crocin, Dolo, Calpol | TR: Parol, Minoset, Tylol | US: Tylenol"
+paracetamol-100-mg-ml-drops,Paracetamol,100 mg/ml,drops,oral,analgesic,100,0,"PK: Panadol, Calpol | IN: Crocin, Dolo, Calpol | TR: Parol, Minoset, Tylol | US: Tylenol"
+paracetamol-125-mg-suppository,Paracetamol,125 mg,suppository,rectal,analgesic,125,0,"PK: Panadol, Calpol | IN: Crocin, Dolo, Calpol | TR: Parol, Minoset, Tylol | US: Tylenol"
+paracetamol-250-mg-suppository,Paracetamol,250 mg,suppository,rectal,analgesic,250,0,"PK: Panadol, Calpol | IN: Crocin, Dolo, Calpol | TR: Parol, Minoset, Tylol | US: Tylenol"
+paracetamol-1-g-100-ml-infusion,Paracetamol,1 g/100 ml,infusion,injection,analgesic,10,0,"PK: Panadol, Calpol | IN: Crocin, Dolo, Calpol | TR: Parol, Minoset, Tylol | US: Tylenol"
+ibuprofen-200-mg-tablet,Ibuprofen,200 mg,tablet,oral,nsaid,200,0,"PK: Brufen | IN: Brufen, Ibugesic | TR: Nurofen, Pedifen, Dolven, Brufen | US: Advil, Motrin"
+ibuprofen-400-mg-tablet,Ibuprofen,400 mg,tablet,oral,nsaid,400,0,"PK: Brufen | IN: Brufen, Ibugesic | TR: Nurofen, Pedifen, Dolven, Brufen | US: Advil, Motrin"
+ibuprofen-600-mg-tablet,Ibuprofen,600 mg,tablet,oral,nsaid,600,0,"PK: Brufen | IN: Brufen, Ibugesic | TR: Nurofen, Pedifen, Dolven, Brufen | US: Advil, Motrin"
+ibuprofen-100-mg-5-ml-suspension,Ibuprofen,100 mg/5 ml,suspension,oral,nsaid,20,0,"PK: Brufen | IN: Brufen, Ibugesic | TR: Nurofen, Pedifen, Dolven, Brufen | US: Advil, Motrin"
+diclofenac-sodium-50-mg-tablet,Diclofenac sodium,50 mg,tablet,oral,nsaid,50,0,"PK: Voltral | IN: Voveran | TR: Voltaren, Dikloron | US: Voltaren"
+diclofenac-sodium-75-mg-sr-tablet,Diclofenac sodium,75 mg SR,tablet,oral,nsaid,75,0,"PK: Voltral | IN: Voveran | TR: Voltaren, Dikloron | US: Voltaren"
+diclofenac-sodium-100-mg-sr-tablet,Diclofenac sodium,100 mg SR,tablet,oral,nsaid,100,0,"PK: Voltral | IN: Voveran | TR: Voltaren, Dikloron | US: Voltaren"
+diclofenac-sodium-75-mg-3-ml-injection,Diclofenac sodium,75 mg/3 ml,injection,injection,nsaid,25,0,"PK: Voltral | IN: Voveran | TR: Voltaren, Dikloron | US: Voltaren"
+diclofenac-sodium-100-mg-suppository,Diclofenac sodium,100 mg,suppository,rectal,nsaid,100,0,"PK: Voltral | IN: Voveran | TR: Voltaren, Dikloron | US: Voltaren"
+diclofenac-sodium-1-gel,Diclofenac sodium,1 %,gel,topical,nsaid,,0,"PK: Voltral | IN: Voveran | TR: Voltaren, Dikloron | US: Voltaren"
+diclofenac-potassium-50-mg-tablet,Diclofenac potassium,50 mg,tablet,oral,nsaid,50,0,PK: Caflam | TR: Cataflam | US: Cataflam
+mefenamic-acid-250-mg-capsule,Mefenamic acid,250 mg,capsule,oral,nsaid,250,0,PK: Ponstan | IN: Meftal | US: Ponstel
+mefenamic-acid-500-mg-tablet,Mefenamic acid,500 mg,tablet,oral,nsaid,500,0,PK: Ponstan | IN: Meftal | US: Ponstel
+mefenamic-acid-50-mg-5-ml-suspension,Mefenamic acid,50 mg/5 ml,suspension,oral,nsaid,10,0,PK: Ponstan | IN: Meftal | US: Ponstel
+naproxen-250-mg-tablet,Naproxen,250 mg,tablet,oral,nsaid,250,0,"PK: Synflex | IN: Naprosyn | TR: Apranax | US: Naprosyn, Aleve"
+naproxen-500-mg-tablet,Naproxen,500 mg,tablet,oral,nsaid,500,0,"PK: Synflex | IN: Naprosyn | TR: Apranax | US: Naprosyn, Aleve"
+naproxen-550-mg-sodium-tablet,Naproxen,550 mg (sodium),tablet,oral,nsaid,550,0,"PK: Synflex | IN: Naprosyn | TR: Apranax | US: Naprosyn, Aleve"
+celecoxib-100-mg-capsule,Celecoxib,100 mg,capsule,oral,nsaid,100,0,TR: Celebrex | US: Celebrex
+celecoxib-200-mg-capsule,Celecoxib,200 mg,capsule,oral,nsaid,200,0,TR: Celebrex | US: Celebrex
+ketorolac-10-mg-tablet,Ketorolac,10 mg,tablet,oral,nsaid,10,0,PK: Toradol | IN: Ketorol | US: Toradol
+ketorolac-30-mg-ml-injection,Ketorolac,30 mg/ml,injection,injection,nsaid,30,0,PK: Toradol | IN: Ketorol | US: Toradol
+flurbiprofen-100-mg-tablet,Flurbiprofen,100 mg,tablet,oral,nsaid,100,0,TR: Majezik | US: Ansaid
+metamizole-500-mg-tablet,Metamizole,500 mg,tablet,oral,analgesic,500,0,TR: Novalgin
+metamizole-1-g-2-ml-injection,Metamizole,1 g/2 ml,injection,injection,analgesic,500,0,TR: Novalgin
+aspirin-75-mg-tablet,Aspirin,75 mg,tablet,oral,nsaid,75,0,"PK: Disprin, Loprin, Ascard | IN: Disprin, Ecosprin | TR: Aspirin, Coraspin | US: Bayer Aspirin, Ecotrin"
+aspirin-81-mg-tablet,Aspirin,81 mg,tablet,oral,nsaid,81,0,"PK: Disprin, Loprin, Ascard | IN: Disprin, Ecosprin | TR: Aspirin, Coraspin | US: Bayer Aspirin, Ecotrin"
+aspirin-100-mg-tablet,Aspirin,100 mg,tablet,oral,nsaid,100,0,"PK: Disprin, Loprin, Ascard | IN: Disprin, Ecosprin | TR: Aspirin, Coraspin | US: Bayer Aspirin, Ecotrin"
+aspirin-300-mg-tablet,Aspirin,300 mg,tablet,oral,nsaid,300,0,"PK: Disprin, Loprin, Ascard | IN: Disprin, Ecosprin | TR: Aspirin, Coraspin | US: Bayer Aspirin, Ecotrin"
+tramadol-50-mg-capsule,Tramadol,50 mg,capsule,oral,opioid,50,1,"PK: Tramal | IN: Contramal, Ultracet (with paracetamol) | TR: Contramal | US: Ultram"
+tramadol-100-mg-2-ml-injection,Tramadol,100 mg/2 ml,injection,injection,opioid,50,1,"PK: Tramal | IN: Contramal, Ultracet (with paracetamol) | TR: Contramal | US: Ultram"
+codeine-phosphate-30-mg-tablet,Codeine phosphate,30 mg,tablet,oral,opioid,30,1,
+morphine-10-mg-ml-injection,Morphine,10 mg/ml,injection,injection,opioid,10,1,US: MS Contin
+morphine-10-mg-tablet,Morphine,10 mg,tablet,oral,opioid,10,1,US: MS Contin
+pethidine-50-mg-ml-injection,Pethidine,50 mg/ml,injection,injection,opioid,50,1,TR: Aldolan | US: Demerol
+nalbuphine-10-mg-ml-injection,Nalbuphine,10 mg/ml,injection,injection,opioid,10,1,US: Nubain
+orphenadrine-paracetamol-35-mg-450-mg-tablet,Orphenadrine + paracetamol,35 mg + 450 mg,tablet,oral,muscle relaxant,,0,"PK: Norgesic, Norflex"
+thiocolchicoside-4-mg-capsule,Thiocolchicoside,4 mg,capsule,oral,muscle relaxant,4,0,IN: Myoril | TR: Muscoril
+thiocolchicoside-8-mg-tablet,Thiocolchicoside,8 mg,tablet,oral,muscle relaxant,8,0,IN: Myoril | TR: Muscoril
+thiocolchicoside-4-mg-2-ml-injection,Thiocolchicoside,4 mg/2 ml,injection,injection,muscle relaxant,2,0,IN: Myoril | TR: Muscoril
+tizanidine-2-mg-tablet,Tizanidine,2 mg,tablet,oral,muscle relaxant,2,0,PK: Sirdalud | IN: Sirdalud | TR: Sirdalud | US: Zanaflex
+tizanidine-4-mg-tablet,Tizanidine,4 mg,tablet,oral,muscle relaxant,4,0,PK: Sirdalud | IN: Sirdalud | TR: Sirdalud | US: Zanaflex
+cyclobenzaprine-5-mg-tablet,Cyclobenzaprine,5 mg,tablet,oral,muscle relaxant,5,0,US: Flexeril
+cyclobenzaprine-10-mg-tablet,Cyclobenzaprine,10 mg,tablet,oral,muscle relaxant,10,0,US: Flexeril
+colchicine-0-5-mg-tablet,Colchicine,0.5 mg,tablet,oral,antigout,0.5,0,PK: Colchicine | IN: Zycolchin | TR: Colchicum Dispert | US: Colcrys
+colchicine-0-6-mg-tablet,Colchicine,0.6 mg,tablet,oral,antigout,0.6,0,PK: Colchicine | IN: Zycolchin | TR: Colchicum Dispert | US: Colcrys
+allopurinol-100-mg-tablet,Allopurinol,100 mg,tablet,oral,antigout,100,0,PK: Zyloric | IN: Zyloric | TR: Urikoliz | US: Zyloprim
+allopurinol-300-mg-tablet,Allopurinol,300 mg,tablet,oral,antigout,300,0,PK: Zyloric | IN: Zyloric | TR: Urikoliz | US: Zyloprim
+febuxostat-40-mg-tablet,Febuxostat,40 mg,tablet,oral,antigout,40,0,"IN: Febutaz, Zurig | TR: Adenuric | US: Uloric"
+febuxostat-80-mg-tablet,Febuxostat,80 mg,tablet,oral,antigout,80,0,"IN: Febutaz, Zurig | TR: Adenuric | US: Uloric"
+amoxicillin-250-mg-capsule,Amoxicillin,250 mg,capsule,oral,penicillin,250,0,"PK: Amoxil | IN: Mox, Novamox | TR: Largopen, Alfoxil | US: Amoxil"
+amoxicillin-500-mg-capsule,Amoxicillin,500 mg,capsule,oral,penicillin,500,0,"PK: Amoxil | IN: Mox, Novamox | TR: Largopen, Alfoxil | US: Amoxil"
+amoxicillin-125-mg-5-ml-suspension,Amoxicillin,125 mg/5 ml,suspension,oral,penicillin,25,0,"PK: Amoxil | IN: Mox, Novamox | TR: Largopen, Alfoxil | US: Amoxil"
+amoxicillin-250-mg-5-ml-suspension,Amoxicillin,250 mg/5 ml,suspension,oral,penicillin,50,0,"PK: Amoxil | IN: Mox, Novamox | TR: Largopen, Alfoxil | US: Amoxil"
+amoxicillin-clavulanic-acid-375-mg-tablet,Amoxicillin + clavulanic acid,375 mg,tablet,oral,penicillin,250,0,"PK: Augmentin | IN: Augmentin, Clavam, Moxikind-CV | TR: Augmentin, Klamoks | US: Augmentin"
+amoxicillin-clavulanic-acid-625-mg-tablet,Amoxicillin + clavulanic acid,625 mg,tablet,oral,penicillin,500,0,"PK: Augmentin | IN: Augmentin, Clavam, Moxikind-CV | TR: Augmentin, Klamoks | US: Augmentin"
+amoxicillin-clavulanic-acid-1-g-tablet,Amoxicillin + clavulanic acid,1 g,tablet,oral,penicillin,875,0,"PK: Augmentin | IN: Augmentin, Clavam, Moxikind-CV | TR: Augmentin, Klamoks | US: Augmentin"
+amoxicillin-clavulanic-acid-156-mg-5-ml-suspension,Amoxicillin + clavulanic acid,156 mg/5 ml,suspension,oral,penicillin,25,0,"PK: Augmentin | IN: Augmentin, Clavam, Moxikind-CV | TR: Augmentin, Klamoks | US: Augmentin"
+amoxicillin-clavulanic-acid-312-mg-5-ml-suspension,Amoxicillin + clavulanic acid,312 mg/5 ml,suspension,oral,penicillin,50,0,"PK: Augmentin | IN: Augmentin, Clavam, Moxikind-CV | TR: Augmentin, Klamoks | US: Augmentin"
+amoxicillin-clavulanic-acid-457-mg-5-ml-suspension,Amoxicillin + clavulanic acid,457 mg/5 ml,suspension,oral,penicillin,80,0,"PK: Augmentin | IN: Augmentin, Clavam, Moxikind-CV | TR: Augmentin, Klamoks | US: Augmentin"
+amoxicillin-clavulanic-acid-1-2-g-injection,Amoxicillin + clavulanic acid,1.2 g,injection,injection,penicillin,,0,"PK: Augmentin | IN: Augmentin, Clavam, Moxikind-CV | TR: Augmentin, Klamoks | US: Augmentin"
+ampicillin-250-mg-capsule,Ampicillin,250 mg,capsule,oral,penicillin,250,0,IN: Roscillin | TR: Ampisina
+ampicillin-500-mg-capsule,Ampicillin,500 mg,capsule,oral,penicillin,500,0,IN: Roscillin | TR: Ampisina
+ampicillin-500-mg-injection,Ampicillin,500 mg,injection,injection,penicillin,,0,IN: Roscillin | TR: Ampisina
+ampicillin-1-g-injection,Ampicillin,1 g,injection,injection,penicillin,,0,IN: Roscillin | TR: Ampisina
+ampicillin-sulbactam-1-5-g-injection,Ampicillin + sulbactam,1.5 g,injection,injection,penicillin,,0,"PK: Unasyn | IN: Sulbacin | TR: Duocid, Sulbactam | US: Unasyn"
+flucloxacillin-250-mg-capsule,Flucloxacillin,250 mg,capsule,oral,penicillin,250,0,PK: Floxapen
+flucloxacillin-500-mg-capsule,Flucloxacillin,500 mg,capsule,oral,penicillin,500,0,PK: Floxapen
+flucloxacillin-125-mg-5-ml-syrup,Flucloxacillin,125 mg/5 ml,syrup,oral,penicillin,25,0,PK: Floxapen
+cloxacillin-250-mg-capsule,Cloxacillin,250 mg,capsule,oral,penicillin,250,0,IN: Klox
+cloxacillin-500-mg-capsule,Cloxacillin,500 mg,capsule,oral,penicillin,500,0,IN: Klox
+phenoxymethylpenicillin-250-mg-tablet,Phenoxymethylpenicillin,250 mg,tablet,oral,penicillin,250,0,US: Penicillin VK
+benzathine-benzylpenicillin-1-2-million-iu-injection,Benzathine benzylpenicillin,1.2 million IU,injection,injection,penicillin,,0,PK: Penidure LA | IN: Penidure LA | TR: Deposilin | US: Bicillin L-A
+benzathine-benzylpenicillin-2-4-million-iu-injection,Benzathine benzylpenicillin,2.4 million IU,injection,injection,penicillin,,0,PK: Penidure LA | IN: Penidure LA | TR: Deposilin | US: Bicillin L-A
+benzylpenicillin-1-million-iu-injection,Benzylpenicillin,1 million IU,injection,injection,penicillin,,0,TR: Pronapen | US: Pfizerpen
+benzylpenicillin-5-million-iu-injection,Benzylpenicillin,5 million IU,injection,injection,penicillin,,0,TR: Pronapen | US: Pfizerpen
+piperacillin-tazobactam-4-5-g-injection,Piperacillin + tazobactam,4.5 g,injection,injection,penicillin,,0,PK: Tazocin | IN: Piptaz | TR: Tazocin | US: Zosyn
+cefalexin-250-mg-capsule,Cefalexin,250 mg,capsule,oral,cephalosporin,250,0,"PK: Keflex | IN: Sporidex, Phexin | TR: Maksipor | US: Keflex"
+cefalexin-500-mg-capsule,Cefalexin,500 mg,capsule,oral,cephalosporin,500,0,"PK: Keflex | IN: Sporidex, Phexin | TR: Maksipor | US: Keflex"
+cefalexin-125-mg-5-ml-suspension,Cefalexin,125 mg/5 ml,suspension,oral,cephalosporin,25,0,"PK: Keflex | IN: Sporidex, Phexin | TR: Maksipor | US: Keflex"
+cefalexin-250-mg-5-ml-suspension,Cefalexin,250 mg/5 ml,suspension,oral,cephalosporin,50,0,"PK: Keflex | IN: Sporidex, Phexin | TR: Maksipor | US: Keflex"
+cefadroxil-500-mg-capsule,Cefadroxil,500 mg,capsule,oral,cephalosporin,500,0,PK: Duricef | IN: Droxyl
+cefadroxil-125-mg-5-ml-suspension,Cefadroxil,125 mg/5 ml,suspension,oral,cephalosporin,25,0,PK: Duricef | IN: Droxyl
+cefadroxil-250-mg-5-ml-suspension,Cefadroxil,250 mg/5 ml,suspension,oral,cephalosporin,50,0,PK: Duricef | IN: Droxyl
+cefradine-500-mg-capsule,Cefradine,500 mg,capsule,oral,cephalosporin,500,0,PK: Velosef
+cefradine-500-mg-injection,Cefradine,500 mg,injection,injection,cephalosporin,,0,PK: Velosef
+cefradine-1-g-injection,Cefradine,1 g,injection,injection,cephalosporin,,0,PK: Velosef
+cefaclor-250-mg-capsule,Cefaclor,250 mg,capsule,oral,cephalosporin,250,0,PK: Ceclor | IN: Keftor | TR: Ceclor
+cefaclor-125-mg-5-ml-suspension,Cefaclor,125 mg/5 ml,suspension,oral,cephalosporin,25,0,PK: Ceclor | IN: Keftor | TR: Ceclor
+cefuroxime-250-mg-tablet,Cefuroxime,250 mg,tablet,oral,cephalosporin,250,0,"PK: Zinnat, Zinacef | IN: Ceftum, Supacef | TR: Zinnat, Aksef, Zinacef | US: Ceftin"
+cefuroxime-500-mg-tablet,Cefuroxime,500 mg,tablet,oral,cephalosporin,500,0,"PK: Zinnat, Zinacef | IN: Ceftum, Supacef | TR: Zinnat, Aksef, Zinacef | US: Ceftin"
+cefuroxime-125-mg-5-ml-suspension,Cefuroxime,125 mg/5 ml,suspension,oral,cephalosporin,25,0,"PK: Zinnat, Zinacef | IN: Ceftum, Supacef | TR: Zinnat, Aksef, Zinacef | US: Ceftin"
+cefuroxime-750-mg-injection,Cefuroxime,750 mg,injection,injection,cephalosporin,,0,"PK: Zinnat, Zinacef | IN: Ceftum, Supacef | TR: Zinnat, Aksef, Zinacef | US: Ceftin"
+cefuroxime-1-5-g-injection,Cefuroxime,1.5 g,injection,injection,cephalosporin,,0,"PK: Zinnat, Zinacef | IN: Ceftum, Supacef | TR: Zinnat, Aksef, Zinacef | US: Ceftin"
+cefixime-200-mg-capsule,Cefixime,200 mg,capsule,oral,cephalosporin,200,0,"PK: Cefspan | IN: Taxim-O, Zifi | TR: Suprax | US: Suprax"
+cefixime-400-mg-capsule,Cefixime,400 mg,capsule,oral,cephalosporin,400,0,"PK: Cefspan | IN: Taxim-O, Zifi | TR: Suprax | US: Suprax"
+cefixime-100-mg-5-ml-suspension,Cefixime,100 mg/5 ml,suspension,oral,cephalosporin,20,0,"PK: Cefspan | IN: Taxim-O, Zifi | TR: Suprax | US: Suprax"
+cefpodoxime-100-mg-tablet,Cefpodoxime,100 mg,tablet,oral,cephalosporin,100,0,IN: Cepodem | TR: Orelox
+cefpodoxime-200-mg-tablet,Cefpodoxime,200 mg,tablet,oral,cephalosporin,200,0,IN: Cepodem | TR: Orelox
+cefpodoxime-50-mg-5-ml-suspension,Cefpodoxime,50 mg/5 ml,suspension,oral,cephalosporin,10,0,IN: Cepodem | TR: Orelox
+cefdinir-300-mg-capsule,Cefdinir,300 mg,capsule,oral,cephalosporin,300,0,PK: Omnicef | US: Omnicef
+cefdinir-125-mg-5-ml-suspension,Cefdinir,125 mg/5 ml,suspension,oral,cephalosporin,25,0,PK: Omnicef | US: Omnicef
+ceftriaxone-250-mg-injection,Ceftriaxone,250 mg,injection,injection,cephalosporin,,0,"PK: Rocephin, Oxidil | IN: Monocef | TR: Rocephin, Novosef | US: Rocephin"
+ceftriaxone-500-mg-injection,Ceftriaxone,500 mg,injection,injection,cephalosporin,,0,"PK: Rocephin, Oxidil | IN: Monocef | TR: Rocephin, Novosef | US: Rocephin"
+ceftriaxone-1-g-injection,Ceftriaxone,1 g,injection,injection,cephalosporin,,0,"PK: Rocephin, Oxidil | IN: Monocef | TR: Rocephin, Novosef | US: Rocephin"
+ceftriaxone-2-g-injection,Ceftriaxone,2 g,injection,injection,cephalosporin,,0,"PK: Rocephin, Oxidil | IN: Monocef | TR: Rocephin, Novosef | US: Rocephin"
+cefotaxime-500-mg-injection,Cefotaxime,500 mg,injection,injection,cephalosporin,,0,PK: Claforan | IN: Taxim | TR: Sefotak | US: Claforan
+cefotaxime-1-g-injection,Cefotaxime,1 g,injection,injection,cephalosporin,,0,PK: Claforan | IN: Taxim | TR: Sefotak | US: Claforan
+ceftazidime-1-g-injection,Ceftazidime,1 g,injection,injection,cephalosporin,,0,PK: Fortum | IN: Fortum | TR: Fortum | US: Fortaz
+cefepime-1-g-injection,Cefepime,1 g,injection,injection,cephalosporin,,0,PK: Maxipime | IN: Cepime | TR: Maxipime | US: Maxipime
+azithromycin-250-mg-capsule,Azithromycin,250 mg,capsule,oral,macrolide,250,0,"PK: Azomax, Zetro | IN: Azithral, Azee | TR: Zitromax, Azitro | US: Zithromax"
+azithromycin-500-mg-tablet,Azithromycin,500 mg,tablet,oral,macrolide,500,0,"PK: Azomax, Zetro | IN: Azithral, Azee | TR: Zitromax, Azitro | US: Zithromax"
+azithromycin-200-mg-5-ml-suspension,Azithromycin,200 mg/5 ml,suspension,oral,macrolide,40,0,"PK: Azomax, Zetro | IN: Azithral, Azee | TR: Zitromax, Azitro | US: Zithromax"
+azithromycin-500-mg-injection,Azithromycin,500 mg,injection,injection,macrolide,,0,"PK: Azomax, Zetro | IN: Azithral, Azee | TR: Zitromax, Azitro | US: Zithromax"
+clarithromycin-250-mg-tablet,Clarithromycin,250 mg,tablet,oral,macrolide,250,0,PK: Klaricid | IN: Claribid | TR: Klacid | US: Biaxin
+clarithromycin-500-mg-tablet,Clarithromycin,500 mg,tablet,oral,macrolide,500,0,PK: Klaricid | IN: Claribid | TR: Klacid | US: Biaxin
+clarithromycin-125-mg-5-ml-suspension,Clarithromycin,125 mg/5 ml,suspension,oral,macrolide,25,0,PK: Klaricid | IN: Claribid | TR: Klacid | US: Biaxin
+clarithromycin-250-mg-5-ml-suspension,Clarithromycin,250 mg/5 ml,suspension,oral,macrolide,50,0,PK: Klaricid | IN: Claribid | TR: Klacid | US: Biaxin
+erythromycin-250-mg-tablet,Erythromycin,250 mg,tablet,oral,macrolide,250,0,"PK: Erythrocin | IN: Althrocin, Erythrocin | US: Ery-Tab, Erythrocin"
+erythromycin-500-mg-tablet,Erythromycin,500 mg,tablet,oral,macrolide,500,0,"PK: Erythrocin | IN: Althrocin, Erythrocin | US: Ery-Tab, Erythrocin"
+erythromycin-200-mg-5-ml-suspension,Erythromycin,200 mg/5 ml,suspension,oral,macrolide,40,0,"PK: Erythrocin | IN: Althrocin, Erythrocin | US: Ery-Tab, Erythrocin"
+doxycycline-100-mg-capsule,Doxycycline,100 mg,capsule,oral,tetracycline,100,0,"PK: Vibramycin | IN: Doxt, Doxy-1 | TR: Monodoks, Tetradox | US: Vibramycin, Doryx"
+tetracycline-250-mg-capsule,Tetracycline,250 mg,capsule,oral,tetracycline,250,0,IN: Resteclin
+tetracycline-1-ointment,Tetracycline,1 %,ointment,topical,tetracycline,,0,IN: Resteclin
+ciprofloxacin-250-mg-tablet,Ciprofloxacin,250 mg,tablet,oral,fluoroquinolone,250,0,"PK: Ciproxin, Novidat | IN: Ciplox, Cifran | TR: Cipro, Siprosan | US: Cipro"
+ciprofloxacin-500-mg-tablet,Ciprofloxacin,500 mg,tablet,oral,fluoroquinolone,500,0,"PK: Ciproxin, Novidat | IN: Ciplox, Cifran | TR: Cipro, Siprosan | US: Cipro"
+ciprofloxacin-750-mg-tablet,Ciprofloxacin,750 mg,tablet,oral,fluoroquinolone,750,0,"PK: Ciproxin, Novidat | IN: Ciplox, Cifran | TR: Cipro, Siprosan | US: Cipro"
+ciprofloxacin-200-mg-100-ml-infusion,Ciprofloxacin,200 mg/100 ml,infusion,injection,fluoroquinolone,2,0,"PK: Ciproxin, Novidat | IN: Ciplox, Cifran | TR: Cipro, Siprosan | US: Cipro"
+ciprofloxacin-0-3-eye-drops,Ciprofloxacin,0.3 %,eye drops,eye,fluoroquinolone,,0,"PK: Ciproxin, Novidat | IN: Ciplox, Cifran | TR: Cipro, Siprosan | US: Cipro"
+levofloxacin-250-mg-tablet,Levofloxacin,250 mg,tablet,oral,fluoroquinolone,250,0,"PK: Tavanic, Leflox | IN: Levoflox, Glevo | TR: Tavanic | US: Levaquin"
+levofloxacin-500-mg-tablet,Levofloxacin,500 mg,tablet,oral,fluoroquinolone,500,0,"PK: Tavanic, Leflox | IN: Levoflox, Glevo | TR: Tavanic | US: Levaquin"
+levofloxacin-750-mg-tablet,Levofloxacin,750 mg,tablet,oral,fluoroquinolone,750,0,"PK: Tavanic, Leflox | IN: Levoflox, Glevo | TR: Tavanic | US: Levaquin"
+levofloxacin-500-mg-100-ml-infusion,Levofloxacin,500 mg/100 ml,infusion,injection,fluoroquinolone,5,0,"PK: Tavanic, Leflox | IN: Levoflox, Glevo | TR: Tavanic | US: Levaquin"
+moxifloxacin-400-mg-tablet,Moxifloxacin,400 mg,tablet,oral,fluoroquinolone,400,0,"PK: Avelox, Moxiget | IN: Moxif | TR: Avelox | US: Avelox"
+moxifloxacin-0-5-eye-drops,Moxifloxacin,0.5 %,eye drops,eye,fluoroquinolone,,0,"PK: Avelox, Moxiget | IN: Moxif | TR: Avelox | US: Avelox"
+ofloxacin-200-mg-tablet,Ofloxacin,200 mg,tablet,oral,fluoroquinolone,200,0,PK: Tarivid | IN: Zanocin | TR: Tarivid | US: Floxin
+ofloxacin-400-mg-tablet,Ofloxacin,400 mg,tablet,oral,fluoroquinolone,400,0,PK: Tarivid | IN: Zanocin | TR: Tarivid | US: Floxin
+ofloxacin-0-3-ear-drops,Ofloxacin,0.3 %,ear drops,ear,fluoroquinolone,,0,PK: Tarivid | IN: Zanocin | TR: Tarivid | US: Floxin
+ofloxacin-0-3-eye-drops,Ofloxacin,0.3 %,eye drops,eye,fluoroquinolone,,0,PK: Tarivid | IN: Zanocin | TR: Tarivid | US: Floxin
+co-trimoxazole-400-mg-80-mg-tablet,Co-trimoxazole,400 mg + 80 mg,tablet,oral,sulfonamide,,0,"PK: Septran | IN: Septran, Bactrim | TR: Bactrim | US: Bactrim"
+co-trimoxazole-800-mg-160-mg-tablet,Co-trimoxazole,800 mg + 160 mg,tablet,oral,sulfonamide,,0,"PK: Septran | IN: Septran, Bactrim | TR: Bactrim | US: Bactrim"
+co-trimoxazole-200-mg-40-mg-5-ml-suspension,Co-trimoxazole,200 mg + 40 mg/5 ml,suspension,oral,sulfonamide,,0,"PK: Septran | IN: Septran, Bactrim | TR: Bactrim | US: Bactrim"
+metronidazole-200-mg-tablet,Metronidazole,200 mg,tablet,oral,nitroimidazole,200,0,"PK: Flagyl | IN: Flagyl, Metrogyl | TR: Flagyl, Nidazol | US: Flagyl"
+metronidazole-400-mg-tablet,Metronidazole,400 mg,tablet,oral,nitroimidazole,400,0,"PK: Flagyl | IN: Flagyl, Metrogyl | TR: Flagyl, Nidazol | US: Flagyl"
+metronidazole-500-mg-tablet,Metronidazole,500 mg,tablet,oral,nitroimidazole,500,0,"PK: Flagyl | IN: Flagyl, Metrogyl | TR: Flagyl, Nidazol | US: Flagyl"
+metronidazole-200-mg-5-ml-suspension,Metronidazole,200 mg/5 ml,suspension,oral,nitroimidazole,40,0,"PK: Flagyl | IN: Flagyl, Metrogyl | TR: Flagyl, Nidazol | US: Flagyl"
+metronidazole-500-mg-100-ml-infusion,Metronidazole,500 mg/100 ml,infusion,injection,nitroimidazole,5,0,"PK: Flagyl | IN: Flagyl, Metrogyl | TR: Flagyl, Nidazol | US: Flagyl"
+metronidazole-0-75-gel,Metronidazole,0.75 %,gel,topical,nitroimidazole,,0,"PK: Flagyl | IN: Flagyl, Metrogyl | TR: Flagyl, Nidazol | US: Flagyl"
+metronidazole-500-mg-vaginal-tablet,Metronidazole,500 mg,vaginal tablet,vaginal,nitroimidazole,,0,"PK: Flagyl | IN: Flagyl, Metrogyl | TR: Flagyl, Nidazol | US: Flagyl"
+tinidazole-500-mg-tablet,Tinidazole,500 mg,tablet,oral,nitroimidazole,500,0,PK: Fasigyn | IN: Tiniba | TR: Fasigyn | US: Tindamax
+secnidazole-500-mg-tablet,Secnidazole,500 mg,tablet,oral,nitroimidazole,500,0,IN: Secnil | US: Solosec
+secnidazole-1-g-tablet,Secnidazole,1 g,tablet,oral,nitroimidazole,1000,0,IN: Secnil | US: Solosec
+nitrofurantoin-50-mg-capsule,Nitrofurantoin,50 mg,capsule,oral,urinary antiseptic,50,0,"PK: Furadantin | IN: Martifur | TR: Piyeloseptyl, Furadantin | US: Macrobid, Macrodantin"
+nitrofurantoin-100-mg-capsule,Nitrofurantoin,100 mg,capsule,oral,urinary antiseptic,100,0,"PK: Furadantin | IN: Martifur | TR: Piyeloseptyl, Furadantin | US: Macrobid, Macrodantin"
+fosfomycin-3-g-sachet,Fosfomycin,3 g,sachet,oral,urinary antiseptic,,0,PK: Monurol | IN: Fosirol | TR: Monurol | US: Monurol
+clindamycin-150-mg-capsule,Clindamycin,150 mg,capsule,oral,lincosamide,150,0,PK: Dalacin C | IN: Dalacin C | TR: Cleocin | US: Cleocin
+clindamycin-300-mg-capsule,Clindamycin,300 mg,capsule,oral,lincosamide,300,0,PK: Dalacin C | IN: Dalacin C | TR: Cleocin | US: Cleocin
+clindamycin-300-mg-2-ml-injection,Clindamycin,300 mg/2 ml,injection,injection,lincosamide,150,0,PK: Dalacin C | IN: Dalacin C | TR: Cleocin | US: Cleocin
+clindamycin-1-gel,Clindamycin,1 %,gel,topical,lincosamide,,0,PK: Dalacin C | IN: Dalacin C | TR: Cleocin | US: Cleocin
+gentamicin-80-mg-2-ml-injection,Gentamicin,80 mg/2 ml,injection,injection,aminoglycoside,40,0,PK: Garamycin | IN: Genticyn | US: Garamycin
+gentamicin-20-mg-2-ml-injection,Gentamicin,20 mg/2 ml,injection,injection,aminoglycoside,10,0,PK: Garamycin | IN: Genticyn | US: Garamycin
+gentamicin-0-3-eye-drops,Gentamicin,0.3 %,eye drops,eye,aminoglycoside,,0,PK: Garamycin | IN: Genticyn | US: Garamycin
+gentamicin-0-1-cream,Gentamicin,0.1 %,cream,topical,aminoglycoside,,0,PK: Garamycin | IN: Genticyn | US: Garamycin
+amikacin-100-mg-2-ml-injection,Amikacin,100 mg/2 ml,injection,injection,aminoglycoside,50,0,IN: Amicin
+amikacin-500-mg-2-ml-injection,Amikacin,500 mg/2 ml,injection,injection,aminoglycoside,250,0,IN: Amicin
+tobramycin-0-3-eye-drops,Tobramycin,0.3 %,eye drops,eye,aminoglycoside,,0,PK: Tobrex | IN: Tobrex | US: Tobrex
+linezolid-600-mg-tablet,Linezolid,600 mg,tablet,oral,oxazolidinone,600,0,"PK: Zyvox | IN: Linospan, Lizolid | TR: Zyvoxid | US: Zyvox"
+vancomycin-500-mg-injection,Vancomycin,500 mg,injection,injection,glycopeptide,,0,PK: Vancomycin | IN: Vancocin | TR: Vancotek | US: Vancocin
+vancomycin-1-g-injection,Vancomycin,1 g,injection,injection,glycopeptide,,0,PK: Vancomycin | IN: Vancocin | TR: Vancotek | US: Vancocin
+meropenem-500-mg-injection,Meropenem,500 mg,injection,injection,carbapenem,,0,PK: Meronem | IN: Meronem | TR: Meronem | US: Merrem
+meropenem-1-g-injection,Meropenem,1 g,injection,injection,carbapenem,,0,PK: Meronem | IN: Meronem | TR: Meronem | US: Merrem
+chloramphenicol-0-5-eye-drops,Chloramphenicol,0.5 %,eye drops,eye,amphenicol,,0,PK: Chloromycetin | IN: Chloromycetin
+chloramphenicol-1-ointment,Chloramphenicol,1 %,ointment,topical,amphenicol,,0,PK: Chloromycetin | IN: Chloromycetin
+fusidic-acid-2-cream,Fusidic acid,2 %,cream,topical,fusidane,,0,PK: Fucidin | IN: Fucidin | TR: Fucidin
+fusidic-acid-2-ointment,Fusidic acid,2 %,ointment,topical,fusidane,,0,PK: Fucidin | IN: Fucidin | TR: Fucidin
+mupirocin-2-ointment,Mupirocin,2 %,ointment,topical,topical antibiotic,,0,PK: Bactroban | IN: T-Bact | TR: Bactroban | US: Bactroban
+silver-sulfadiazine-1-cream,Silver sulfadiazine,1 %,cream,topical,sulfonamide,,0,PK: Silvadene | IN: Silverex | TR: Silverdin | US: Silvadene
+isoniazid-100-mg-tablet,Isoniazid,100 mg,tablet,oral,antituberculosis,100,0,
+isoniazid-300-mg-tablet,Isoniazid,300 mg,tablet,oral,antituberculosis,300,0,
+rifampicin-150-mg-capsule,Rifampicin,150 mg,capsule,oral,antituberculosis,150,0,IN: R-Cin | TR: Rifadin | US: Rifadin
+rifampicin-300-mg-capsule,Rifampicin,300 mg,capsule,oral,antituberculosis,300,0,IN: R-Cin | TR: Rifadin | US: Rifadin
+pyrazinamide-400-mg-tablet,Pyrazinamide,400 mg,tablet,oral,antituberculosis,400,0,
+pyrazinamide-500-mg-tablet,Pyrazinamide,500 mg,tablet,oral,antituberculosis,500,0,
+ethambutol-400-mg-tablet,Ethambutol,400 mg,tablet,oral,antituberculosis,400,0,PK: Myambutol | IN: Combutol | US: Myambutol
+rifampicin-isoniazid-pyrazinamide-ethambutol-150-mg-75-mg-400-mg-275-mg-tablet,Rifampicin + isoniazid + pyrazinamide + ethambutol,150 mg + 75 mg + 400 mg + 275 mg,tablet,oral,antituberculosis,,0,
+rifampicin-isoniazid-150-mg-75-mg-tablet,Rifampicin + isoniazid,150 mg + 75 mg,tablet,oral,antituberculosis,,0,
+fluconazole-50-mg-capsule,Fluconazole,50 mg,capsule,oral,azole antifungal,50,0,"PK: Diflucan | IN: Forcan, Zocon | TR: Triflucan, Fungustatin | US: Diflucan"
+fluconazole-150-mg-capsule,Fluconazole,150 mg,capsule,oral,azole antifungal,150,0,"PK: Diflucan | IN: Forcan, Zocon | TR: Triflucan, Fungustatin | US: Diflucan"
+fluconazole-200-mg-capsule,Fluconazole,200 mg,capsule,oral,azole antifungal,200,0,"PK: Diflucan | IN: Forcan, Zocon | TR: Triflucan, Fungustatin | US: Diflucan"
+itraconazole-100-mg-capsule,Itraconazole,100 mg,capsule,oral,azole antifungal,100,0,"PK: Sporanox | IN: Canditral, Itaspor | TR: Sporanox | US: Sporanox"
+clotrimazole-1-cream,Clotrimazole,1 %,cream,topical,azole antifungal,,0,"PK: Canesten | IN: Candid, Canesten | TR: Canesten | US: Lotrimin"
+clotrimazole-500-mg-vaginal-tablet,Clotrimazole,500 mg,vaginal tablet,vaginal,azole antifungal,,0,"PK: Canesten | IN: Candid, Canesten | TR: Canesten | US: Lotrimin"
+clotrimazole-1-ear-drops,Clotrimazole,1 %,ear drops,ear,azole antifungal,,0,"PK: Canesten | IN: Candid, Canesten | TR: Canesten | US: Lotrimin"
+miconazole-2-cream,Miconazole,2 %,cream,topical,azole antifungal,,0,PK: Daktarin | IN: Daktarin | TR: Daktarin | US: Monistat
+miconazole-2-gel,Miconazole,2 %,gel,topical,azole antifungal,,0,PK: Daktarin | IN: Daktarin | TR: Daktarin | US: Monistat
+ketoconazole-2-cream,Ketoconazole,2 %,cream,topical,azole antifungal,,0,PK: Nizoral | IN: Nizral | TR: Nizoral | US: Nizoral
+ketoconazole-2-shampoo,Ketoconazole,2 %,shampoo,topical,azole antifungal,,0,PK: Nizoral | IN: Nizral | TR: Nizoral | US: Nizoral
+terbinafine-250-mg-tablet,Terbinafine,250 mg,tablet,oral,antifungal,250,0,"PK: Lamisil | IN: Terbicip, Sebifin | TR: Lamisil | US: Lamisil"
+terbinafine-1-cream,Terbinafine,1 %,cream,topical,antifungal,,0,"PK: Lamisil | IN: Terbicip, Sebifin | TR: Lamisil | US: Lamisil"
+nystatin-100-000-iu-ml-suspension,Nystatin,"100,000 IU/ml",suspension,oral,antifungal,,0,PK: Mycostatin | IN: Mycostatin | TR: Mycostatin | US: Mycostatin
+albendazole-200-mg-tablet,Albendazole,200 mg,tablet,oral,anthelmintic,200,0,PK: Zentel | IN: Zentel | TR: Andazol | US: Albenza
+albendazole-400-mg-tablet,Albendazole,400 mg,tablet,oral,anthelmintic,400,0,PK: Zentel | IN: Zentel | TR: Andazol | US: Albenza
+albendazole-200-mg-5-ml-suspension,Albendazole,200 mg/5 ml,suspension,oral,anthelmintic,40,0,PK: Zentel | IN: Zentel | TR: Andazol | US: Albenza
+mebendazole-100-mg-tablet,Mebendazole,100 mg,tablet,oral,anthelmintic,100,0,PK: Vermox | IN: Mebex | TR: Vermazol | US: Emverm
+mebendazole-500-mg-tablet,Mebendazole,500 mg,tablet,oral,anthelmintic,500,0,PK: Vermox | IN: Mebex | TR: Vermazol | US: Emverm
+mebendazole-100-mg-5-ml-suspension,Mebendazole,100 mg/5 ml,suspension,oral,anthelmintic,20,0,PK: Vermox | IN: Mebex | TR: Vermazol | US: Emverm
+ivermectin-6-mg-tablet,Ivermectin,6 mg,tablet,oral,anthelmintic,6,0,IN: Ivecop | US: Stromectol
+ivermectin-12-mg-tablet,Ivermectin,12 mg,tablet,oral,anthelmintic,12,0,IN: Ivecop | US: Stromectol
+praziquantel-600-mg-tablet,Praziquantel,600 mg,tablet,oral,anthelmintic,600,0,US: Biltricide
+nitazoxanide-500-mg-tablet,Nitazoxanide,500 mg,tablet,oral,antiprotozoal,500,0,IN: Nizonide | US: Alinia
+nitazoxanide-100-mg-5-ml-suspension,Nitazoxanide,100 mg/5 ml,suspension,oral,antiprotozoal,20,0,IN: Nizonide | US: Alinia
+artemether-lumefantrine-20-mg-120-mg-tablet,Artemether + lumefantrine,20 mg + 120 mg,tablet,oral,antimalarial,,0,PK: Coartem | IN: Lumerax | US: Coartem
+artemether-lumefantrine-80-mg-480-mg-tablet,Artemether + lumefantrine,80 mg + 480 mg,tablet,oral,antimalarial,,0,PK: Coartem | IN: Lumerax | US: Coartem
+chloroquine-250-mg-150-mg-base-tablet,Chloroquine,250 mg (150 mg base),tablet,oral,antimalarial,150,0,IN: Lariago
+primaquine-7-5-mg-tablet,Primaquine,7.5 mg,tablet,oral,antimalarial,7.5,0,
+primaquine-15-mg-tablet,Primaquine,15 mg,tablet,oral,antimalarial,15,0,
+permethrin-5-cream,Permethrin,5 %,cream,topical,scabicide,,0,IN: Permite | US: Elimite
+permethrin-1-lotion,Permethrin,1 %,lotion,topical,scabicide,,0,IN: Permite | US: Elimite
+aciclovir-200-mg-tablet,Aciclovir,200 mg,tablet,oral,antiviral,200,0,"PK: Zovirax | IN: Acivir, Zovirax | TR: Zovirax, Asiviral | US: Zovirax"
+aciclovir-400-mg-tablet,Aciclovir,400 mg,tablet,oral,antiviral,400,0,"PK: Zovirax | IN: Acivir, Zovirax | TR: Zovirax, Asiviral | US: Zovirax"
+aciclovir-800-mg-tablet,Aciclovir,800 mg,tablet,oral,antiviral,800,0,"PK: Zovirax | IN: Acivir, Zovirax | TR: Zovirax, Asiviral | US: Zovirax"
+aciclovir-5-cream,Aciclovir,5 %,cream,topical,antiviral,,0,"PK: Zovirax | IN: Acivir, Zovirax | TR: Zovirax, Asiviral | US: Zovirax"
+aciclovir-3-ointment,Aciclovir,3 %,ointment,topical,antiviral,,0,"PK: Zovirax | IN: Acivir, Zovirax | TR: Zovirax, Asiviral | US: Zovirax"
+valaciclovir-500-mg-tablet,Valaciclovir,500 mg,tablet,oral,antiviral,500,0,PK: Valtrex | IN: Valcivir | TR: Valtrex | US: Valtrex
+valaciclovir-1-g-tablet,Valaciclovir,1 g,tablet,oral,antiviral,1000,0,PK: Valtrex | IN: Valcivir | TR: Valtrex | US: Valtrex
+oseltamivir-75-mg-capsule,Oseltamivir,75 mg,capsule,oral,antiviral,75,0,"PK: Tamiflu | IN: Fluvir, Antiflu | TR: Tamiflu | US: Tamiflu"
+oseltamivir-30-mg-capsule,Oseltamivir,30 mg,capsule,oral,antiviral,30,0,"PK: Tamiflu | IN: Fluvir, Antiflu | TR: Tamiflu | US: Tamiflu"
+omeprazole-20-mg-capsule,Omeprazole,20 mg,capsule,oral,ppi,20,0,"PK: Risek | IN: Omez | TR: Losec, Omeprol | US: Prilosec"
+omeprazole-40-mg-capsule,Omeprazole,40 mg,capsule,oral,ppi,40,0,"PK: Risek | IN: Omez | TR: Losec, Omeprol | US: Prilosec"
+omeprazole-40-mg-injection,Omeprazole,40 mg,injection,injection,ppi,,0,"PK: Risek | IN: Omez | TR: Losec, Omeprol | US: Prilosec"
+esomeprazole-20-mg-tablet,Esomeprazole,20 mg,tablet,oral,ppi,20,0,"PK: Nexum | IN: Nexpro, Raciper | TR: Nexium | US: Nexium"
+esomeprazole-40-mg-tablet,Esomeprazole,40 mg,tablet,oral,ppi,40,0,"PK: Nexum | IN: Nexpro, Raciper | TR: Nexium | US: Nexium"
+esomeprazole-40-mg-injection,Esomeprazole,40 mg,injection,injection,ppi,,0,"PK: Nexum | IN: Nexpro, Raciper | TR: Nexium | US: Nexium"
+pantoprazole-20-mg-tablet,Pantoprazole,20 mg,tablet,oral,ppi,20,0,"IN: Pan, Pantocid | TR: Pantpas, Controloc | US: Protonix"
+pantoprazole-40-mg-tablet,Pantoprazole,40 mg,tablet,oral,ppi,40,0,"IN: Pan, Pantocid | TR: Pantpas, Controloc | US: Protonix"
+pantoprazole-40-mg-injection,Pantoprazole,40 mg,injection,injection,ppi,,0,"IN: Pan, Pantocid | TR: Pantpas, Controloc | US: Protonix"
+lansoprazole-15-mg-capsule,Lansoprazole,15 mg,capsule,oral,ppi,15,0,"IN: Lanzol, Lan | TR: Lansor | US: Prevacid"
+lansoprazole-30-mg-capsule,Lansoprazole,30 mg,capsule,oral,ppi,30,0,"IN: Lanzol, Lan | TR: Lansor | US: Prevacid"
+rabeprazole-20-mg-tablet,Rabeprazole,20 mg,tablet,oral,ppi,20,0,"IN: Razo, Rablet | TR: Pariet | US: Aciphex"
+famotidine-20-mg-tablet,Famotidine,20 mg,tablet,oral,h2 blocker,20,0,"IN: Famocid | TR: Famodin, Gastrosidin | US: Pepcid"
+famotidine-40-mg-tablet,Famotidine,40 mg,tablet,oral,h2 blocker,40,0,"IN: Famocid | TR: Famodin, Gastrosidin | US: Pepcid"
+aluminium-hydroxide-magnesium-hydroxide-suspension-suspension,Aluminium hydroxide + magnesium hydroxide,suspension,suspension,oral,antacid,,0,"PK: Mucaine (with oxetacaine) | IN: Digene, Gelusil | TR: Talcid (hydrotalcite) | US: Maalox, Mylanta"
+aluminium-hydroxide-magnesium-hydroxide-chewable-tablet,Aluminium hydroxide + magnesium hydroxide,chewable,tablet,oral,antacid,,0,"PK: Mucaine (with oxetacaine) | IN: Digene, Gelusil | TR: Talcid (hydrotalcite) | US: Maalox, Mylanta"
+sucralfate-1-g-tablet,Sucralfate,1 g,tablet,oral,mucosal protectant,1000,0,TR: Antepsin | US: Carafate
+sucralfate-1-g-5-ml-suspension,Sucralfate,1 g/5 ml,suspension,oral,mucosal protectant,200,0,TR: Antepsin | US: Carafate
+bismuth-subsalicylate-262-mg-tablet,Bismuth subsalicylate,262 mg,tablet,oral,antidiarrhoeal,262,0,US: Pepto-Bismol
+domperidone-10-mg-tablet,Domperidone,10 mg,tablet,oral,antiemetic,10,0,PK: Motilium | IN: Domstal | TR: Motilium
+domperidone-5-mg-5-ml-suspension,Domperidone,5 mg/5 ml,suspension,oral,antiemetic,1,0,PK: Motilium | IN: Domstal | TR: Motilium
+metoclopramide-10-mg-tablet,Metoclopramide,10 mg,tablet,oral,antiemetic,10,0,"PK: Maxolon | IN: Perinorm, Reglan | TR: Metpamid | US: Reglan"
+metoclopramide-10-mg-2-ml-injection,Metoclopramide,10 mg/2 ml,injection,injection,antiemetic,5,0,"PK: Maxolon | IN: Perinorm, Reglan | TR: Metpamid | US: Reglan"
+metoclopramide-5-mg-5-ml-syrup,Metoclopramide,5 mg/5 ml,syrup,oral,antiemetic,1,0,"PK: Maxolon | IN: Perinorm, Reglan | TR: Metpamid | US: Reglan"
+ondansetron-4-mg-tablet,Ondansetron,4 mg,tablet,oral,antiemetic,4,0,"PK: Onset, Zofran | IN: Emeset, Vomikind | TR: Zofran, Ondaren | US: Zofran"
+ondansetron-8-mg-tablet,Ondansetron,8 mg,tablet,oral,antiemetic,8,0,"PK: Onset, Zofran | IN: Emeset, Vomikind | TR: Zofran, Ondaren | US: Zofran"
+ondansetron-4-mg-5-ml-syrup,Ondansetron,4 mg/5 ml,syrup,oral,antiemetic,0.8,0,"PK: Onset, Zofran | IN: Emeset, Vomikind | TR: Zofran, Ondaren | US: Zofran"
+ondansetron-4-mg-2-ml-injection,Ondansetron,4 mg/2 ml,injection,injection,antiemetic,2,0,"PK: Onset, Zofran | IN: Emeset, Vomikind | TR: Zofran, Ondaren | US: Zofran"
+ondansetron-8-mg-4-ml-injection,Ondansetron,8 mg/4 ml,injection,injection,antiemetic,2,0,"PK: Onset, Zofran | IN: Emeset, Vomikind | TR: Zofran, Ondaren | US: Zofran"
+prochlorperazine-5-mg-tablet,Prochlorperazine,5 mg,tablet,oral,antiemetic,5,0,PK: Stemetil | IN: Stemetil | US: Compazine
+prochlorperazine-12-5-mg-ml-injection,Prochlorperazine,12.5 mg/ml,injection,injection,antiemetic,12.5,0,PK: Stemetil | IN: Stemetil | US: Compazine
+promethazine-10-mg-tablet,Promethazine,10 mg,tablet,oral,antihistamine,10,0,"PK: Phenergan | IN: Phenergan, Avomine | TR: Phenergan | US: Phenergan"
+promethazine-25-mg-tablet,Promethazine,25 mg,tablet,oral,antihistamine,25,0,"PK: Phenergan | IN: Phenergan, Avomine | TR: Phenergan | US: Phenergan"
+promethazine-5-mg-5-ml-syrup,Promethazine,5 mg/5 ml,syrup,oral,antihistamine,1,0,"PK: Phenergan | IN: Phenergan, Avomine | TR: Phenergan | US: Phenergan"
+promethazine-25-mg-ml-injection,Promethazine,25 mg/ml,injection,injection,antihistamine,25,0,"PK: Phenergan | IN: Phenergan, Avomine | TR: Phenergan | US: Phenergan"
+oral-rehydration-salts-low-osmolarity-1-litre-sachet,Oral rehydration salts,"low osmolarity, 1 litre",sachet,oral,rehydration,,0,PK: ORS | IN: Electral | US: Pedialyte
+zinc-sulfate-20-mg-tablet,Zinc sulfate,20 mg,tablet,oral,mineral,20,0,
+zinc-sulfate-20-mg-5-ml-syrup,Zinc sulfate,20 mg/5 ml,syrup,oral,mineral,4,0,
+loperamide-2-mg-capsule,Loperamide,2 mg,capsule,oral,antidiarrhoeal,2,0,"PK: Imodium | IN: Eldoper, Imodium | TR: Lopermid | US: Imodium"
+hyoscine-butylbromide-10-mg-tablet,Hyoscine butylbromide,10 mg,tablet,oral,antispasmodic,10,0,PK: Buscopan | IN: Buscopan | TR: Buscopan
+hyoscine-butylbromide-20-mg-ml-injection,Hyoscine butylbromide,20 mg/ml,injection,injection,antispasmodic,20,0,PK: Buscopan | IN: Buscopan | TR: Buscopan
+drotaverine-40-mg-tablet,Drotaverine,40 mg,tablet,oral,antispasmodic,40,0,IN: Drotin
+drotaverine-80-mg-tablet,Drotaverine,80 mg,tablet,oral,antispasmodic,80,0,IN: Drotin
+drotaverine-40-mg-2-ml-injection,Drotaverine,40 mg/2 ml,injection,injection,antispasmodic,20,0,IN: Drotin
+mebeverine-135-mg-tablet,Mebeverine,135 mg,tablet,oral,antispasmodic,135,0,PK: Colofac | IN: Colospa | TR: Duspatalin
+mebeverine-200-mg-sr-capsule,Mebeverine,200 mg SR,capsule,oral,antispasmodic,200,0,PK: Colofac | IN: Colospa | TR: Duspatalin
+dicyclomine-10-mg-tablet,Dicyclomine,10 mg,tablet,oral,antispasmodic,10,0,PK: Cyclopam | IN: Cyclopam | US: Bentyl
+dicyclomine-20-mg-tablet,Dicyclomine,20 mg,tablet,oral,antispasmodic,20,0,PK: Cyclopam | IN: Cyclopam | US: Bentyl
+dicyclomine-10-mg-5-ml-syrup,Dicyclomine,10 mg/5 ml,syrup,oral,antispasmodic,2,0,PK: Cyclopam | IN: Cyclopam | US: Bentyl
+simeticone-40-mg-ml-drops,Simeticone,40 mg/ml,drops,oral,antiflatulent,40,0,"IN: Colicaid | TR: Metsil | US: Gas-X, Mylicon"
+simeticone-80-mg-tablet,Simeticone,80 mg,tablet,oral,antiflatulent,80,0,"IN: Colicaid | TR: Metsil | US: Gas-X, Mylicon"
+lactulose-3-35-g-5-ml-syrup,Lactulose,3.35 g/5 ml,syrup,oral,laxative,,0,"PK: Duphalac | IN: Duphalac, Looz | TR: Duphalac | US: Enulose, Kristalose"
+bisacodyl-5-mg-tablet,Bisacodyl,5 mg,tablet,oral,laxative,5,0,PK: Dulcolax | IN: Dulcolax | TR: Dulcolax | US: Dulcolax
+bisacodyl-10-mg-suppository,Bisacodyl,10 mg,suppository,rectal,laxative,10,0,PK: Dulcolax | IN: Dulcolax | TR: Dulcolax | US: Dulcolax
+ispaghula-husk-3-5-g-sachet,Ispaghula husk,3.5 g,sachet,oral,laxative,,0,"PK: Isabgol | IN: Isabgol, Naturolax | TR: Metamucil | US: Metamucil"
+glycerin-adult-suppository,Glycerin,adult,suppository,rectal,laxative,,0,
+glycerin-child-suppository,Glycerin,child,suppository,rectal,laxative,,0,
+ursodeoxycholic-acid-150-mg-tablet,Ursodeoxycholic acid,150 mg,tablet,oral,bile acid,150,0,"IN: Udiliv | TR: Ursactive | US: Actigall, Urso"
+ursodeoxycholic-acid-250-mg-capsule,Ursodeoxycholic acid,250 mg,capsule,oral,bile acid,250,0,"IN: Udiliv | TR: Ursactive | US: Actigall, Urso"
+ursodeoxycholic-acid-300-mg-tablet,Ursodeoxycholic acid,300 mg,tablet,oral,bile acid,300,0,"IN: Udiliv | TR: Ursactive | US: Actigall, Urso"
+amlodipine-2-5-mg-tablet,Amlodipine,2.5 mg,tablet,oral,calcium channel blocker,2.5,0,"PK: Norvasc | IN: Amlong, Amlodac | TR: Norvasc | US: Norvasc"
+amlodipine-5-mg-tablet,Amlodipine,5 mg,tablet,oral,calcium channel blocker,5,0,"PK: Norvasc | IN: Amlong, Amlodac | TR: Norvasc | US: Norvasc"
+amlodipine-10-mg-tablet,Amlodipine,10 mg,tablet,oral,calcium channel blocker,10,0,"PK: Norvasc | IN: Amlong, Amlodac | TR: Norvasc | US: Norvasc"
+nifedipine-10-mg-capsule,Nifedipine,10 mg,capsule,oral,calcium channel blocker,10,0,"PK: Adalat | IN: Depin, Adalat | TR: Adalat Crono, Nidilat | US: Procardia"
+nifedipine-20-mg-sr-tablet,Nifedipine,20 mg SR,tablet,oral,calcium channel blocker,20,0,"PK: Adalat | IN: Depin, Adalat | TR: Adalat Crono, Nidilat | US: Procardia"
+nifedipine-30-mg-la-tablet,Nifedipine,30 mg LA,tablet,oral,calcium channel blocker,30,0,"PK: Adalat | IN: Depin, Adalat | TR: Adalat Crono, Nidilat | US: Procardia"
+diltiazem-30-mg-tablet,Diltiazem,30 mg,tablet,oral,calcium channel blocker,30,0,PK: Herbesser | IN: Dilzem | TR: Diltizem | US: Cardizem
+diltiazem-60-mg-tablet,Diltiazem,60 mg,tablet,oral,calcium channel blocker,60,0,PK: Herbesser | IN: Dilzem | TR: Diltizem | US: Cardizem
+diltiazem-90-mg-sr-tablet,Diltiazem,90 mg SR,tablet,oral,calcium channel blocker,90,0,PK: Herbesser | IN: Dilzem | TR: Diltizem | US: Cardizem
+verapamil-40-mg-tablet,Verapamil,40 mg,tablet,oral,calcium channel blocker,40,0,PK: Isoptin | IN: Calaptin | TR: Isoptin | US: Calan
+verapamil-80-mg-tablet,Verapamil,80 mg,tablet,oral,calcium channel blocker,80,0,PK: Isoptin | IN: Calaptin | TR: Isoptin | US: Calan
+losartan-25-mg-tablet,Losartan,25 mg,tablet,oral,arb,25,0,"PK: Cozaar | IN: Losar, Repace | TR: Cozaar | US: Cozaar"
+losartan-50-mg-tablet,Losartan,50 mg,tablet,oral,arb,50,0,"PK: Cozaar | IN: Losar, Repace | TR: Cozaar | US: Cozaar"
+losartan-100-mg-tablet,Losartan,100 mg,tablet,oral,arb,100,0,"PK: Cozaar | IN: Losar, Repace | TR: Cozaar | US: Cozaar"
+losartan-hydrochlorothiazide-50-mg-12-5-mg-tablet,Losartan + hydrochlorothiazide,50 mg + 12.5 mg,tablet,oral,arb,,0,PK: Hyzaar | IN: Losar-H | TR: Hyzaar | US: Hyzaar
+valsartan-80-mg-tablet,Valsartan,80 mg,tablet,oral,arb,80,0,PK: Diovan | IN: Valzaar | TR: Diovan | US: Diovan
+valsartan-160-mg-tablet,Valsartan,160 mg,tablet,oral,arb,160,0,PK: Diovan | IN: Valzaar | TR: Diovan | US: Diovan
+telmisartan-20-mg-tablet,Telmisartan,20 mg,tablet,oral,arb,20,0,PK: Micardis | IN: Telma | TR: Micardis | US: Micardis
+telmisartan-40-mg-tablet,Telmisartan,40 mg,tablet,oral,arb,40,0,PK: Micardis | IN: Telma | TR: Micardis | US: Micardis
+telmisartan-80-mg-tablet,Telmisartan,80 mg,tablet,oral,arb,80,0,PK: Micardis | IN: Telma | TR: Micardis | US: Micardis
+irbesartan-150-mg-tablet,Irbesartan,150 mg,tablet,oral,arb,150,0,PK: Aprovel | IN: Irovel | TR: Aprovel | US: Avapro
+irbesartan-300-mg-tablet,Irbesartan,300 mg,tablet,oral,arb,300,0,PK: Aprovel | IN: Irovel | TR: Aprovel | US: Avapro
+olmesartan-20-mg-tablet,Olmesartan,20 mg,tablet,oral,arb,20,0,IN: Olmezest | TR: Olmetec | US: Benicar
+olmesartan-40-mg-tablet,Olmesartan,40 mg,tablet,oral,arb,40,0,IN: Olmezest | TR: Olmetec | US: Benicar
+captopril-25-mg-tablet,Captopril,25 mg,tablet,oral,ace inhibitor,25,0,PK: Capoten | IN: Aceten | TR: Kaptoril | US: Capoten
+enalapril-5-mg-tablet,Enalapril,5 mg,tablet,oral,ace inhibitor,5,0,PK: Renitec | IN: Envas | TR: Renitec | US: Vasotec
+enalapril-10-mg-tablet,Enalapril,10 mg,tablet,oral,ace inhibitor,10,0,PK: Renitec | IN: Envas | TR: Renitec | US: Vasotec
+enalapril-20-mg-tablet,Enalapril,20 mg,tablet,oral,ace inhibitor,20,0,PK: Renitec | IN: Envas | TR: Renitec | US: Vasotec
+lisinopril-5-mg-tablet,Lisinopril,5 mg,tablet,oral,ace inhibitor,5,0,"PK: Zestril | IN: Listril, Lipril | TR: Zestril, Sinopryl | US: Zestril, Prinivil"
+lisinopril-10-mg-tablet,Lisinopril,10 mg,tablet,oral,ace inhibitor,10,0,"PK: Zestril | IN: Listril, Lipril | TR: Zestril, Sinopryl | US: Zestril, Prinivil"
+lisinopril-20-mg-tablet,Lisinopril,20 mg,tablet,oral,ace inhibitor,20,0,"PK: Zestril | IN: Listril, Lipril | TR: Zestril, Sinopryl | US: Zestril, Prinivil"
+ramipril-2-5-mg-capsule,Ramipril,2.5 mg,capsule,oral,ace inhibitor,2.5,0,"PK: Tritace | IN: Cardace | TR: Delix, Ramace | US: Altace"
+ramipril-5-mg-capsule,Ramipril,5 mg,capsule,oral,ace inhibitor,5,0,"PK: Tritace | IN: Cardace | TR: Delix, Ramace | US: Altace"
+ramipril-10-mg-capsule,Ramipril,10 mg,capsule,oral,ace inhibitor,10,0,"PK: Tritace | IN: Cardace | TR: Delix, Ramace | US: Altace"
+perindopril-4-mg-tablet,Perindopril,4 mg,tablet,oral,ace inhibitor,4,0,PK: Coversyl | IN: Coversyl | TR: Coversyl | US: Aceon
+perindopril-5-mg-tablet,Perindopril,5 mg,tablet,oral,ace inhibitor,5,0,PK: Coversyl | IN: Coversyl | TR: Coversyl | US: Aceon
+atenolol-25-mg-tablet,Atenolol,25 mg,tablet,oral,beta blocker,25,0,"PK: Tenormin | IN: Aten, Tenormin | TR: Tensinor | US: Tenormin"
+atenolol-50-mg-tablet,Atenolol,50 mg,tablet,oral,beta blocker,50,0,"PK: Tenormin | IN: Aten, Tenormin | TR: Tensinor | US: Tenormin"
+atenolol-100-mg-tablet,Atenolol,100 mg,tablet,oral,beta blocker,100,0,"PK: Tenormin | IN: Aten, Tenormin | TR: Tensinor | US: Tenormin"
+metoprolol-25-mg-tablet,Metoprolol,25 mg,tablet,oral,beta blocker,25,0,"PK: Lopressor | IN: Metolar, Met XL | TR: Beloc ZOK | US: Lopressor, Toprol-XL"
+metoprolol-50-mg-tablet,Metoprolol,50 mg,tablet,oral,beta blocker,50,0,"PK: Lopressor | IN: Metolar, Met XL | TR: Beloc ZOK | US: Lopressor, Toprol-XL"
+metoprolol-100-mg-tablet,Metoprolol,100 mg,tablet,oral,beta blocker,100,0,"PK: Lopressor | IN: Metolar, Met XL | TR: Beloc ZOK | US: Lopressor, Toprol-XL"
+bisoprolol-2-5-mg-tablet,Bisoprolol,2.5 mg,tablet,oral,beta blocker,2.5,0,PK: Concor | IN: Concor | TR: Concor | US: Zebeta
+bisoprolol-5-mg-tablet,Bisoprolol,5 mg,tablet,oral,beta blocker,5,0,PK: Concor | IN: Concor | TR: Concor | US: Zebeta
+bisoprolol-10-mg-tablet,Bisoprolol,10 mg,tablet,oral,beta blocker,10,0,PK: Concor | IN: Concor | TR: Concor | US: Zebeta
+propranolol-10-mg-tablet,Propranolol,10 mg,tablet,oral,beta blocker,10,0,"PK: Inderal | IN: Inderal, Ciplar | TR: Dideral | US: Inderal"
+propranolol-40-mg-tablet,Propranolol,40 mg,tablet,oral,beta blocker,40,0,"PK: Inderal | IN: Inderal, Ciplar | TR: Dideral | US: Inderal"
+carvedilol-6-25-mg-tablet,Carvedilol,6.25 mg,tablet,oral,beta blocker,6.25,0,IN: Carloc | TR: Dilatrend | US: Coreg
+carvedilol-12-5-mg-tablet,Carvedilol,12.5 mg,tablet,oral,beta blocker,12.5,0,IN: Carloc | TR: Dilatrend | US: Coreg
+carvedilol-25-mg-tablet,Carvedilol,25 mg,tablet,oral,beta blocker,25,0,IN: Carloc | TR: Dilatrend | US: Coreg
+nebivolol-5-mg-tablet,Nebivolol,5 mg,tablet,oral,beta blocker,5,0,PK: Nebil | IN: Nebicard | TR: Vasoxen | US: Bystolic
+labetalol-100-mg-tablet,Labetalol,100 mg,tablet,oral,beta blocker,100,0,PK: Trandate | IN: Labebet | TR: Trandate | US: Trandate
+labetalol-200-mg-tablet,Labetalol,200 mg,tablet,oral,beta blocker,200,0,PK: Trandate | IN: Labebet | TR: Trandate | US: Trandate
+labetalol-5-mg-ml-injection,Labetalol,5 mg/ml,injection,injection,beta blocker,5,0,PK: Trandate | IN: Labebet | TR: Trandate | US: Trandate
+methyldopa-250-mg-tablet,Methyldopa,250 mg,tablet,oral,antihypertensive,250,0,PK: Aldomet | IN: Alphadopa | TR: Alfamet | US: Aldomet
+hydrochlorothiazide-12-5-mg-tablet,Hydrochlorothiazide,12.5 mg,tablet,oral,thiazide diuretic,12.5,0,PK: Esidrex | IN: Aquazide | TR: Esidrex | US: Microzide
+hydrochlorothiazide-25-mg-tablet,Hydrochlorothiazide,25 mg,tablet,oral,thiazide diuretic,25,0,PK: Esidrex | IN: Aquazide | TR: Esidrex | US: Microzide
+chlortalidone-12-5-mg-tablet,Chlortalidone,12.5 mg,tablet,oral,thiazide diuretic,12.5,0,PK: Hygroton | IN: Thalitone | TR: Hygroton | US: Thalitone
+chlortalidone-25-mg-tablet,Chlortalidone,25 mg,tablet,oral,thiazide diuretic,25,0,PK: Hygroton | IN: Thalitone | TR: Hygroton | US: Thalitone
+indapamide-1-5-mg-sr-tablet,Indapamide,1.5 mg SR,tablet,oral,thiazide diuretic,1.5,0,PK: Natrilix SR | IN: Natrilix SR | TR: Fludex SR
+indapamide-2-5-mg-tablet,Indapamide,2.5 mg,tablet,oral,thiazide diuretic,2.5,0,PK: Natrilix SR | IN: Natrilix SR | TR: Fludex SR
+furosemide-20-mg-tablet,Furosemide,20 mg,tablet,oral,loop diuretic,20,0,PK: Lasix | IN: Lasix | TR: Lasix | US: Lasix
+furosemide-40-mg-tablet,Furosemide,40 mg,tablet,oral,loop diuretic,40,0,PK: Lasix | IN: Lasix | TR: Lasix | US: Lasix
+furosemide-20-mg-2-ml-injection,Furosemide,20 mg/2 ml,injection,injection,loop diuretic,10,0,PK: Lasix | IN: Lasix | TR: Lasix | US: Lasix
+torasemide-10-mg-tablet,Torasemide,10 mg,tablet,oral,loop diuretic,10,0,PK: Torsemide | IN: Dytor | TR: Torem | US: Demadex
+torasemide-20-mg-tablet,Torasemide,20 mg,tablet,oral,loop diuretic,20,0,PK: Torsemide | IN: Dytor | TR: Torem | US: Demadex
+spironolactone-25-mg-tablet,Spironolactone,25 mg,tablet,oral,potassium-sparing diuretic,25,0,PK: Aldactone | IN: Aldactone | TR: Aldactone | US: Aldactone
+spironolactone-100-mg-tablet,Spironolactone,100 mg,tablet,oral,potassium-sparing diuretic,100,0,PK: Aldactone | IN: Aldactone | TR: Aldactone | US: Aldactone
+atorvastatin-10-mg-tablet,Atorvastatin,10 mg,tablet,oral,statin,10,0,"PK: Lipiget, Lipitor | IN: Atorva, Storvas | TR: Lipitor, Ator | US: Lipitor"
+atorvastatin-20-mg-tablet,Atorvastatin,20 mg,tablet,oral,statin,20,0,"PK: Lipiget, Lipitor | IN: Atorva, Storvas | TR: Lipitor, Ator | US: Lipitor"
+atorvastatin-40-mg-tablet,Atorvastatin,40 mg,tablet,oral,statin,40,0,"PK: Lipiget, Lipitor | IN: Atorva, Storvas | TR: Lipitor, Ator | US: Lipitor"
+atorvastatin-80-mg-tablet,Atorvastatin,80 mg,tablet,oral,statin,80,0,"PK: Lipiget, Lipitor | IN: Atorva, Storvas | TR: Lipitor, Ator | US: Lipitor"
+rosuvastatin-5-mg-tablet,Rosuvastatin,5 mg,tablet,oral,statin,5,0,"PK: Rovista, Crestor | IN: Rosuvas, Rozavel | TR: Crestor | US: Crestor"
+rosuvastatin-10-mg-tablet,Rosuvastatin,10 mg,tablet,oral,statin,10,0,"PK: Rovista, Crestor | IN: Rosuvas, Rozavel | TR: Crestor | US: Crestor"
+rosuvastatin-20-mg-tablet,Rosuvastatin,20 mg,tablet,oral,statin,20,0,"PK: Rovista, Crestor | IN: Rosuvas, Rozavel | TR: Crestor | US: Crestor"
+rosuvastatin-40-mg-tablet,Rosuvastatin,40 mg,tablet,oral,statin,40,0,"PK: Rovista, Crestor | IN: Rosuvas, Rozavel | TR: Crestor | US: Crestor"
+simvastatin-10-mg-tablet,Simvastatin,10 mg,tablet,oral,statin,10,0,PK: Zocor | TR: Zocor | US: Zocor
+simvastatin-20-mg-tablet,Simvastatin,20 mg,tablet,oral,statin,20,0,PK: Zocor | TR: Zocor | US: Zocor
+simvastatin-40-mg-tablet,Simvastatin,40 mg,tablet,oral,statin,40,0,PK: Zocor | TR: Zocor | US: Zocor
+fenofibrate-145-mg-tablet,Fenofibrate,145 mg,tablet,oral,fibrate,145,0,PK: Lipanthyl | IN: Lipicard | TR: Lipanthyl | US: Tricor
+fenofibrate-160-mg-tablet,Fenofibrate,160 mg,tablet,oral,fibrate,160,0,PK: Lipanthyl | IN: Lipicard | TR: Lipanthyl | US: Tricor
+fenofibrate-200-mg-capsule,Fenofibrate,200 mg,capsule,oral,fibrate,200,0,PK: Lipanthyl | IN: Lipicard | TR: Lipanthyl | US: Tricor
+clopidogrel-75-mg-tablet,Clopidogrel,75 mg,tablet,oral,antiplatelet,75,0,"PK: Plavix, Lowplat | IN: Clopilet, Deplatt | TR: Plavix, Karum | US: Plavix"
+ticagrelor-90-mg-tablet,Ticagrelor,90 mg,tablet,oral,antiplatelet,90,0,"PK: Brilinta | IN: Brilinta, Axcer | TR: Brilinta | US: Brilinta"
+warfarin-1-mg-tablet,Warfarin,1 mg,tablet,oral,anticoagulant,1,0,"PK: Coumadin | IN: Warf, Uniwarfin | TR: Coumadin | US: Coumadin, Jantoven"
+warfarin-5-mg-tablet,Warfarin,5 mg,tablet,oral,anticoagulant,5,0,"PK: Coumadin | IN: Warf, Uniwarfin | TR: Coumadin | US: Coumadin, Jantoven"
+rivaroxaban-10-mg-tablet,Rivaroxaban,10 mg,tablet,oral,anticoagulant,10,0,PK: Xarelto | IN: Xarelto | TR: Xarelto | US: Xarelto
+rivaroxaban-15-mg-tablet,Rivaroxaban,15 mg,tablet,oral,anticoagulant,15,0,PK: Xarelto | IN: Xarelto | TR: Xarelto | US: Xarelto
+rivaroxaban-20-mg-tablet,Rivaroxaban,20 mg,tablet,oral,anticoagulant,20,0,PK: Xarelto | IN: Xarelto | TR: Xarelto | US: Xarelto
+apixaban-2-5-mg-tablet,Apixaban,2.5 mg,tablet,oral,anticoagulant,2.5,0,PK: Eliquis | IN: Eliquis | TR: Eliquis | US: Eliquis
+apixaban-5-mg-tablet,Apixaban,5 mg,tablet,oral,anticoagulant,5,0,PK: Eliquis | IN: Eliquis | TR: Eliquis | US: Eliquis
+enoxaparin-40-mg-0-4-ml-injection,Enoxaparin,40 mg/0.4 ml,injection,injection,anticoagulant,100,0,PK: Clexane | IN: Clexane | TR: Clexane | US: Lovenox
+enoxaparin-60-mg-0-6-ml-injection,Enoxaparin,60 mg/0.6 ml,injection,injection,anticoagulant,100,0,PK: Clexane | IN: Clexane | TR: Clexane | US: Lovenox
+heparin-5-000-iu-ml-injection,Heparin,"5,000 IU/ml",injection,injection,anticoagulant,,0,PK: Heparin | IN: Heparin | TR: Nevparin | US: Heparin
+digoxin-0-25-mg-tablet,Digoxin,0.25 mg,tablet,oral,cardiac glycoside,0.25,0,PK: Lanoxin | IN: Lanoxin | TR: Digoxin | US: Lanoxin
+amiodarone-200-mg-tablet,Amiodarone,200 mg,tablet,oral,antiarrhythmic,200,0,PK: Cordarone | IN: Cordarone | TR: Cordarone | US: Pacerone
+amiodarone-150-mg-3-ml-injection,Amiodarone,150 mg/3 ml,injection,injection,antiarrhythmic,50,0,PK: Cordarone | IN: Cordarone | TR: Cordarone | US: Pacerone
+isosorbide-mononitrate-20-mg-tablet,Isosorbide mononitrate,20 mg,tablet,oral,nitrate,20,0,PK: Monis | IN: Monotrate | TR: Monoket | US: Imdur
+isosorbide-mononitrate-60-mg-sr-tablet,Isosorbide mononitrate,60 mg SR,tablet,oral,nitrate,60,0,PK: Monis | IN: Monotrate | TR: Monoket | US: Imdur
+isosorbide-dinitrate-5-mg-under-the-tongue-tablet,Isosorbide dinitrate,5 mg (under the tongue),tablet,oral,nitrate,5,0,PK: Isordil | IN: Sorbitrate | TR: Isordil | US: Isordil
+isosorbide-dinitrate-10-mg-tablet,Isosorbide dinitrate,10 mg,tablet,oral,nitrate,10,0,PK: Isordil | IN: Sorbitrate | TR: Isordil | US: Isordil
+glyceryl-trinitrate-0-5-mg-under-the-tongue-tablet,Glyceryl trinitrate,0.5 mg (under the tongue),tablet,oral,nitrate,0.5,0,PK: Angised | IN: Angised | US: Nitrostat
+trimetazidine-35-mg-mr-tablet,Trimetazidine,35 mg MR,tablet,oral,antianginal,35,0,PK: Vastarel | IN: Flavedon | TR: Vastarel
+metformin-500-mg-tablet,Metformin,500 mg,tablet,oral,biguanide,500,0,"PK: Glucophage | IN: Glycomet, Obimet | TR: Glucophage, Glifor | US: Glucophage"
+metformin-850-mg-tablet,Metformin,850 mg,tablet,oral,biguanide,850,0,"PK: Glucophage | IN: Glycomet, Obimet | TR: Glucophage, Glifor | US: Glucophage"
+metformin-1000-mg-tablet,Metformin,1000 mg,tablet,oral,biguanide,1000,0,"PK: Glucophage | IN: Glycomet, Obimet | TR: Glucophage, Glifor | US: Glucophage"
+metformin-500-mg-xr-tablet,Metformin,500 mg XR,tablet,oral,biguanide,500,0,"PK: Glucophage | IN: Glycomet, Obimet | TR: Glucophage, Glifor | US: Glucophage"
+metformin-1000-mg-xr-tablet,Metformin,1000 mg XR,tablet,oral,biguanide,1000,0,"PK: Glucophage | IN: Glycomet, Obimet | TR: Glucophage, Glifor | US: Glucophage"
+glibenclamide-5-mg-tablet,Glibenclamide,5 mg,tablet,oral,sulfonylurea,5,0,"PK: Daonil | IN: Daonil | US: Diabeta, Glynase"
+gliclazide-80-mg-tablet,Gliclazide,80 mg,tablet,oral,sulfonylurea,80,0,"PK: Diamicron | IN: Diamicron, Glizid | TR: Diamicron"
+gliclazide-30-mg-mr-tablet,Gliclazide,30 mg MR,tablet,oral,sulfonylurea,30,0,"PK: Diamicron | IN: Diamicron, Glizid | TR: Diamicron"
+gliclazide-60-mg-mr-tablet,Gliclazide,60 mg MR,tablet,oral,sulfonylurea,60,0,"PK: Diamicron | IN: Diamicron, Glizid | TR: Diamicron"
+glimepiride-1-mg-tablet,Glimepiride,1 mg,tablet,oral,sulfonylurea,1,0,"PK: Amaryl, Getryl | IN: Amaryl, Glimy | TR: Amaryl | US: Amaryl"
+glimepiride-2-mg-tablet,Glimepiride,2 mg,tablet,oral,sulfonylurea,2,0,"PK: Amaryl, Getryl | IN: Amaryl, Glimy | TR: Amaryl | US: Amaryl"
+glimepiride-3-mg-tablet,Glimepiride,3 mg,tablet,oral,sulfonylurea,3,0,"PK: Amaryl, Getryl | IN: Amaryl, Glimy | TR: Amaryl | US: Amaryl"
+glimepiride-4-mg-tablet,Glimepiride,4 mg,tablet,oral,sulfonylurea,4,0,"PK: Amaryl, Getryl | IN: Amaryl, Glimy | TR: Amaryl | US: Amaryl"
+glimepiride-metformin-1-mg-500-mg-tablet,Glimepiride + metformin,1 mg + 500 mg,tablet,oral,sulfonylurea,,0,"PK: Amaryl M | IN: Glycomet GP, Amaryl M | TR: Amaryl M"
+glimepiride-metformin-2-mg-500-mg-tablet,Glimepiride + metformin,2 mg + 500 mg,tablet,oral,sulfonylurea,,0,"PK: Amaryl M | IN: Glycomet GP, Amaryl M | TR: Amaryl M"
+sitagliptin-50-mg-tablet,Sitagliptin,50 mg,tablet,oral,dpp-4 inhibitor,50,0,"PK: Januvia | IN: Januvia, Istavel | TR: Januvia | US: Januvia"
+sitagliptin-100-mg-tablet,Sitagliptin,100 mg,tablet,oral,dpp-4 inhibitor,100,0,"PK: Januvia | IN: Januvia, Istavel | TR: Januvia | US: Januvia"
+sitagliptin-metformin-50-mg-500-mg-tablet,Sitagliptin + metformin,50 mg + 500 mg,tablet,oral,dpp-4 inhibitor,,0,"PK: Janumet | IN: Janumet, Istamet | TR: Janumet | US: Janumet"
+sitagliptin-metformin-50-mg-1000-mg-tablet,Sitagliptin + metformin,50 mg + 1000 mg,tablet,oral,dpp-4 inhibitor,,0,"PK: Janumet | IN: Janumet, Istamet | TR: Janumet | US: Janumet"
+vildagliptin-50-mg-tablet,Vildagliptin,50 mg,tablet,oral,dpp-4 inhibitor,50,0,"PK: Galvus | IN: Galvus, Jalra | TR: Galvus"
+vildagliptin-metformin-50-mg-500-mg-tablet,Vildagliptin + metformin,50 mg + 500 mg,tablet,oral,dpp-4 inhibitor,,0,PK: Galvus Met | IN: Galvus Met | TR: Galvus Met
+vildagliptin-metformin-50-mg-1000-mg-tablet,Vildagliptin + metformin,50 mg + 1000 mg,tablet,oral,dpp-4 inhibitor,,0,PK: Galvus Met | IN: Galvus Met | TR: Galvus Met
+linagliptin-5-mg-tablet,Linagliptin,5 mg,tablet,oral,dpp-4 inhibitor,5,0,PK: Trajenta | IN: Trajenta | TR: Trajenta | US: Tradjenta
+empagliflozin-10-mg-tablet,Empagliflozin,10 mg,tablet,oral,sglt2 inhibitor,10,0,PK: Jardiance | IN: Jardiance | TR: Jardiance | US: Jardiance
+empagliflozin-25-mg-tablet,Empagliflozin,25 mg,tablet,oral,sglt2 inhibitor,25,0,PK: Jardiance | IN: Jardiance | TR: Jardiance | US: Jardiance
+dapagliflozin-10-mg-tablet,Dapagliflozin,10 mg,tablet,oral,sglt2 inhibitor,10,0,"PK: Forxiga | IN: Forxiga, Oxra | TR: Forziga | US: Farxiga"
+pioglitazone-15-mg-tablet,Pioglitazone,15 mg,tablet,oral,thiazolidinedione,15,0,IN: Pioz | TR: Actos | US: Actos
+pioglitazone-30-mg-tablet,Pioglitazone,30 mg,tablet,oral,thiazolidinedione,30,0,IN: Pioz | TR: Actos | US: Actos
+insulin-regular-human-100-iu-ml-injection,Insulin regular (human),100 IU/ml,injection,injection,insulin,,0,"PK: Actrapid, Humulin R | IN: Actrapid, Huminsulin R | TR: Actrapid, Humulin R | US: Humulin R, Novolin R"
+insulin-isophane-nph-100-iu-ml-injection,Insulin isophane (NPH),100 IU/ml,injection,injection,insulin,,0,"PK: Insulatard, Humulin N | IN: Insulatard, Huminsulin N | TR: Insulatard, Humulin N | US: Humulin N, Novolin N"
+insulin-premixed-70-30-human-100-iu-ml-injection,Insulin premixed 70/30 (human),100 IU/ml,injection,injection,insulin,,0,"PK: Mixtard 30, Humulin 70/30 | IN: Mixtard 30, Huminsulin 30/70 | TR: Mixtard 30, Humulin M3 | US: Humulin 70/30, Novolin 70/30"
+insulin-glargine-100-iu-ml-injection,Insulin glargine,100 IU/ml,injection,injection,insulin,,0,"PK: Lantus | IN: Lantus, Basalog | TR: Lantus | US: Lantus, Basaglar"
+insulin-aspart-100-iu-ml-injection,Insulin aspart,100 IU/ml,injection,injection,insulin,,0,PK: NovoRapid | IN: NovoRapid | TR: NovoRapid | US: NovoLog
+insulin-lispro-100-iu-ml-injection,Insulin lispro,100 IU/ml,injection,injection,insulin,,0,PK: Humalog | IN: Humalog | TR: Humalog | US: Humalog
+insulin-aspart-premixed-30-70-100-iu-ml-injection,Insulin aspart premixed 30/70,100 IU/ml,injection,injection,insulin,,0,PK: NovoMix 30 | IN: NovoMix 30 | TR: NovoMix 30 | US: NovoLog Mix 70/30
+salbutamol-100-mcg-puff-inhaler,Salbutamol,100 mcg/puff,inhaler,inhaled,beta-2 agonist,,0,"PK: Ventolin | IN: Asthalin, Ventorlin | TR: Ventolin | US: ProAir, Ventolin"
+salbutamol-2-mg-tablet,Salbutamol,2 mg,tablet,oral,beta-2 agonist,2,0,"PK: Ventolin | IN: Asthalin, Ventorlin | TR: Ventolin | US: ProAir, Ventolin"
+salbutamol-4-mg-tablet,Salbutamol,4 mg,tablet,oral,beta-2 agonist,4,0,"PK: Ventolin | IN: Asthalin, Ventorlin | TR: Ventolin | US: ProAir, Ventolin"
+salbutamol-2-mg-5-ml-syrup,Salbutamol,2 mg/5 ml,syrup,oral,beta-2 agonist,0.4,0,"PK: Ventolin | IN: Asthalin, Ventorlin | TR: Ventolin | US: ProAir, Ventolin"
+salbutamol-5-mg-ml-nebuliser-solution,Salbutamol,5 mg/ml,nebuliser solution,inhaled,beta-2 agonist,5,0,"PK: Ventolin | IN: Asthalin, Ventorlin | TR: Ventolin | US: ProAir, Ventolin"
+salbutamol-2-5-mg-2-5-ml-nebuliser-solution,Salbutamol,2.5 mg/2.5 ml,nebuliser solution,inhaled,beta-2 agonist,1,0,"PK: Ventolin | IN: Asthalin, Ventorlin | TR: Ventolin | US: ProAir, Ventolin"
+ipratropium-bromide-250-mcg-ml-nebuliser-solution,Ipratropium bromide,250 mcg/ml,nebuliser solution,inhaled,anticholinergic bronchodilator,,0,PK: Atrovent | IN: Ipravent | TR: Atrovent | US: Atrovent
+ipratropium-bromide-20-mcg-puff-inhaler,Ipratropium bromide,20 mcg/puff,inhaler,inhaled,anticholinergic bronchodilator,,0,PK: Atrovent | IN: Ipravent | TR: Atrovent | US: Atrovent
+budesonide-200-mcg-puff-inhaler,Budesonide,200 mcg/puff,inhaler,inhaled,inhaled corticosteroid,,0,PK: Pulmicort | IN: Budecort | TR: Pulmicort | US: Pulmicort
+budesonide-0-5-mg-2-ml-nebuliser-solution,Budesonide,0.5 mg/2 ml,nebuliser solution,inhaled,inhaled corticosteroid,,0,PK: Pulmicort | IN: Budecort | TR: Pulmicort | US: Pulmicort
+beclometasone-100-mcg-puff-inhaler,Beclometasone,100 mcg/puff,inhaler,inhaled,inhaled corticosteroid,,0,PK: Becotide | IN: Beclate | TR: Becotide | US: Qvar
+beclometasone-250-mcg-puff-inhaler,Beclometasone,250 mcg/puff,inhaler,inhaled,inhaled corticosteroid,,0,PK: Becotide | IN: Beclate | TR: Becotide | US: Qvar
+fluticasone-salmeterol-125-25-mcg-puff-inhaler,Fluticasone + salmeterol,125/25 mcg/puff,inhaler,inhaled,inhaled corticosteroid,,0,PK: Seretide | IN: Seroflo | TR: Seretide | US: Advair
+fluticasone-salmeterol-250-50-mcg-powder-inhaler,Fluticasone + salmeterol,250/50 mcg (powder),inhaler,inhaled,inhaled corticosteroid,,0,PK: Seretide | IN: Seroflo | TR: Seretide | US: Advair
+budesonide-formoterol-160-4-5-mcg-puff-inhaler,Budesonide + formoterol,160/4.5 mcg/puff,inhaler,inhaled,inhaled corticosteroid,,0,PK: Symbicort | IN: Foracort | TR: Symbicort | US: Symbicort
+tiotropium-18-mcg-inhaler,Tiotropium,18 mcg,inhaler,inhaled,anticholinergic bronchodilator,,0,PK: Spiriva | IN: Tiova | TR: Spiriva | US: Spiriva
+montelukast-4-mg-chewable-tablet,Montelukast,4 mg (chewable),tablet,oral,leukotriene antagonist,4,0,"PK: Singulair, Montiget | IN: Montair, Montek | TR: Singulair | US: Singulair"
+montelukast-5-mg-chewable-tablet,Montelukast,5 mg (chewable),tablet,oral,leukotriene antagonist,5,0,"PK: Singulair, Montiget | IN: Montair, Montek | TR: Singulair | US: Singulair"
+montelukast-10-mg-tablet,Montelukast,10 mg,tablet,oral,leukotriene antagonist,10,0,"PK: Singulair, Montiget | IN: Montair, Montek | TR: Singulair | US: Singulair"
+montelukast-4-mg-sachet,Montelukast,4 mg,sachet,oral,leukotriene antagonist,4,0,"PK: Singulair, Montiget | IN: Montair, Montek | TR: Singulair | US: Singulair"
+theophylline-200-mg-sr-tablet,Theophylline,200 mg SR,tablet,oral,methylxanthine,200,0,IN: Theo-Asthalin | US: Theo-24
+theophylline-300-mg-sr-tablet,Theophylline,300 mg SR,tablet,oral,methylxanthine,300,0,IN: Theo-Asthalin | US: Theo-24
+aminophylline-250-mg-10-ml-injection,Aminophylline,250 mg/10 ml,injection,injection,methylxanthine,25,0,
+prednisolone-5-mg-tablet,Prednisolone,5 mg,tablet,oral,corticosteroid,5,0,"PK: Deltacortril | IN: Wysolone, Omnacortil | US: Orapred, Millipred"
+prednisolone-20-mg-tablet,Prednisolone,20 mg,tablet,oral,corticosteroid,20,0,"PK: Deltacortril | IN: Wysolone, Omnacortil | US: Orapred, Millipred"
+prednisolone-15-mg-5-ml-syrup,Prednisolone,15 mg/5 ml,syrup,oral,corticosteroid,3,0,"PK: Deltacortril | IN: Wysolone, Omnacortil | US: Orapred, Millipred"
+prednisolone-1-eye-drops,Prednisolone,1 %,eye drops,eye,corticosteroid,,0,"PK: Deltacortril | IN: Wysolone, Omnacortil | US: Orapred, Millipred"
+methylprednisolone-4-mg-tablet,Methylprednisolone,4 mg,tablet,oral,corticosteroid,4,0,"PK: Medrol, Solu-Medrol | IN: Medrol | TR: Prednol, Depo-Medrol | US: Medrol, Solu-Medrol"
+methylprednisolone-16-mg-tablet,Methylprednisolone,16 mg,tablet,oral,corticosteroid,16,0,"PK: Medrol, Solu-Medrol | IN: Medrol | TR: Prednol, Depo-Medrol | US: Medrol, Solu-Medrol"
+methylprednisolone-40-mg-injection,Methylprednisolone,40 mg,injection,injection,corticosteroid,,0,"PK: Medrol, Solu-Medrol | IN: Medrol | TR: Prednol, Depo-Medrol | US: Medrol, Solu-Medrol"
+methylprednisolone-500-mg-injection,Methylprednisolone,500 mg,injection,injection,corticosteroid,,0,"PK: Medrol, Solu-Medrol | IN: Medrol | TR: Prednol, Depo-Medrol | US: Medrol, Solu-Medrol"
+dexamethasone-0-5-mg-tablet,Dexamethasone,0.5 mg,tablet,oral,corticosteroid,0.5,0,"PK: Decadron | IN: Decdan, Dexona | TR: Dekort | US: Decadron"
+dexamethasone-4-mg-tablet,Dexamethasone,4 mg,tablet,oral,corticosteroid,4,0,"PK: Decadron | IN: Decdan, Dexona | TR: Dekort | US: Decadron"
+dexamethasone-4-mg-ml-injection,Dexamethasone,4 mg/ml,injection,injection,corticosteroid,4,0,"PK: Decadron | IN: Decdan, Dexona | TR: Dekort | US: Decadron"
+dexamethasone-8-mg-2-ml-injection,Dexamethasone,8 mg/2 ml,injection,injection,corticosteroid,4,0,"PK: Decadron | IN: Decdan, Dexona | TR: Dekort | US: Decadron"
+hydrocortisone-100-mg-injection,Hydrocortisone,100 mg,injection,injection,corticosteroid,,0,"PK: Solu-Cortef | IN: Efcorlin, Solu-Cortef | US: Solu-Cortef, Cortef"
+hydrocortisone-10-mg-tablet,Hydrocortisone,10 mg,tablet,oral,corticosteroid,10,0,"PK: Solu-Cortef | IN: Efcorlin, Solu-Cortef | US: Solu-Cortef, Cortef"
+hydrocortisone-1-cream,Hydrocortisone,1 %,cream,topical,corticosteroid,,0,"PK: Solu-Cortef | IN: Efcorlin, Solu-Cortef | US: Solu-Cortef, Cortef"
+cetirizine-10-mg-tablet,Cetirizine,10 mg,tablet,oral,antihistamine,10,0,"PK: Zyrtec | IN: Cetzine, Alerid | TR: Zyrtec | US: Zyrtec"
+cetirizine-5-mg-5-ml-syrup,Cetirizine,5 mg/5 ml,syrup,oral,antihistamine,1,0,"PK: Zyrtec | IN: Cetzine, Alerid | TR: Zyrtec | US: Zyrtec"
+levocetirizine-5-mg-tablet,Levocetirizine,5 mg,tablet,oral,antihistamine,5,0,"PK: Xyzal | IN: Levocet, Teczine | TR: Xyzal | US: Xyzal"
+levocetirizine-2-5-mg-5-ml-syrup,Levocetirizine,2.5 mg/5 ml,syrup,oral,antihistamine,0.5,0,"PK: Xyzal | IN: Levocet, Teczine | TR: Xyzal | US: Xyzal"
+loratadine-10-mg-tablet,Loratadine,10 mg,tablet,oral,antihistamine,10,0,PK: Softin | IN: Lorfast | TR: Claritine | US: Claritin
+loratadine-5-mg-5-ml-syrup,Loratadine,5 mg/5 ml,syrup,oral,antihistamine,1,0,PK: Softin | IN: Lorfast | TR: Claritine | US: Claritin
+desloratadine-5-mg-tablet,Desloratadine,5 mg,tablet,oral,antihistamine,5,0,PK: Aerius | TR: Aerius | US: Clarinex
+desloratadine-2-5-mg-5-ml-syrup,Desloratadine,2.5 mg/5 ml,syrup,oral,antihistamine,0.5,0,PK: Aerius | TR: Aerius | US: Clarinex
+fexofenadine-120-mg-tablet,Fexofenadine,120 mg,tablet,oral,antihistamine,120,0,"PK: Fexet, Telfast | IN: Allegra | TR: Telfast | US: Allegra"
+fexofenadine-180-mg-tablet,Fexofenadine,180 mg,tablet,oral,antihistamine,180,0,"PK: Fexet, Telfast | IN: Allegra | TR: Telfast | US: Allegra"
+fexofenadine-30-mg-5-ml-suspension,Fexofenadine,30 mg/5 ml,suspension,oral,antihistamine,6,0,"PK: Fexet, Telfast | IN: Allegra | TR: Telfast | US: Allegra"
+chlorphenamine-4-mg-tablet,Chlorphenamine,4 mg,tablet,oral,antihistamine,4,0,"PK: Piriton | IN: Piriton, Cadistin | US: Chlor-Trimeton"
+chlorphenamine-2-mg-5-ml-syrup,Chlorphenamine,2 mg/5 ml,syrup,oral,antihistamine,0.4,0,"PK: Piriton | IN: Piriton, Cadistin | US: Chlor-Trimeton"
+chlorphenamine-10-mg-ml-injection,Chlorphenamine,10 mg/ml,injection,injection,antihistamine,10,0,"PK: Piriton | IN: Piriton, Cadistin | US: Chlor-Trimeton"
+pheniramine-25-mg-tablet,Pheniramine,25 mg,tablet,oral,antihistamine,25,0,PK: Avil | IN: Avil | TR: Avil
+pheniramine-45-5-mg-2-ml-injection,Pheniramine,45.5 mg/2 ml,injection,injection,antihistamine,22.75,0,PK: Avil | IN: Avil | TR: Avil
+hydroxyzine-10-mg-tablet,Hydroxyzine,10 mg,tablet,oral,antihistamine,10,0,"PK: Atarax | IN: Atarax | TR: Atarax | US: Atarax, Vistaril"
+hydroxyzine-25-mg-tablet,Hydroxyzine,25 mg,tablet,oral,antihistamine,25,0,"PK: Atarax | IN: Atarax | TR: Atarax | US: Atarax, Vistaril"
+hydroxyzine-10-mg-5-ml-syrup,Hydroxyzine,10 mg/5 ml,syrup,oral,antihistamine,2,0,"PK: Atarax | IN: Atarax | TR: Atarax | US: Atarax, Vistaril"
+diphenhydramine-25-mg-capsule,Diphenhydramine,25 mg,capsule,oral,antihistamine,25,0,PK: Benadryl | IN: Benadryl | TR: Benadryl | US: Benadryl
+diphenhydramine-12-5-mg-5-ml-syrup,Diphenhydramine,12.5 mg/5 ml,syrup,oral,antihistamine,2.5,0,PK: Benadryl | IN: Benadryl | TR: Benadryl | US: Benadryl
+ambroxol-30-mg-tablet,Ambroxol,30 mg,tablet,oral,mucolytic,30,0,"PK: Mucosolvan | IN: Ambrodil, Mucolite | TR: Mucosolvan, Surfactal"
+ambroxol-15-mg-5-ml-syrup,Ambroxol,15 mg/5 ml,syrup,oral,mucolytic,3,0,"PK: Mucosolvan | IN: Ambrodil, Mucolite | TR: Mucosolvan, Surfactal"
+ambroxol-30-mg-5-ml-syrup,Ambroxol,30 mg/5 ml,syrup,oral,mucolytic,6,0,"PK: Mucosolvan | IN: Ambrodil, Mucolite | TR: Mucosolvan, Surfactal"
+bromhexine-8-mg-tablet,Bromhexine,8 mg,tablet,oral,mucolytic,8,0,PK: Bisolvon | IN: Bisolvon | TR: Bisolvon
+bromhexine-4-mg-5-ml-syrup,Bromhexine,4 mg/5 ml,syrup,oral,mucolytic,0.8,0,PK: Bisolvon | IN: Bisolvon | TR: Bisolvon
+acetylcysteine-600-mg-tablet,Acetylcysteine,600 mg,tablet,oral,mucolytic,600,0,"IN: Mucomix | TR: Asist, Mentopin | US: Acetadote"
+acetylcysteine-200-mg-sachet,Acetylcysteine,200 mg,sachet,oral,mucolytic,200,0,"IN: Mucomix | TR: Asist, Mentopin | US: Acetadote"
+acetylcysteine-600-mg-sachet,Acetylcysteine,600 mg,sachet,oral,mucolytic,600,0,"IN: Mucomix | TR: Asist, Mentopin | US: Acetadote"
+guaifenesin-100-mg-5-ml-syrup,Guaifenesin,100 mg/5 ml,syrup,oral,expectorant,20,0,"US: Mucinex, Robitussin"
+guaifenesin-600-mg-er-tablet,Guaifenesin,600 mg ER,tablet,oral,expectorant,600,0,"US: Mucinex, Robitussin"
+dextromethorphan-15-mg-5-ml-syrup,Dextromethorphan,15 mg/5 ml,syrup,oral,antitussive,3,0,"US: Delsym, Robitussin DM"
+fluticasone-propionate-50-mcg-spray-nasal-spray,Fluticasone propionate,50 mcg/spray,nasal spray,nasal,nasal corticosteroid,,0,PK: Flixonase | IN: Flomist | TR: Flixonase | US: Flonase
+mometasone-furoate-50-mcg-spray-nasal-spray,Mometasone furoate,50 mcg/spray,nasal spray,nasal,nasal corticosteroid,,0,"PK: Nasonex | IN: Nasonex, Metaspray | TR: Nasonex | US: Nasonex"
+mometasone-furoate-0-1-cream,Mometasone furoate,0.1 %,cream,topical,nasal corticosteroid,,0,"PK: Nasonex | IN: Nasonex, Metaspray | TR: Nasonex | US: Nasonex"
+xylometazoline-0-1-nasal-spray,Xylometazoline,0.1 %,nasal spray,nasal,decongestant,,0,PK: Otrivin | IN: Otrivin
+xylometazoline-0-05-nasal-spray,Xylometazoline,0.05 %,nasal spray,nasal,decongestant,,0,PK: Otrivin | IN: Otrivin
+oxymetazoline-0-05-nasal-spray,Oxymetazoline,0.05 %,nasal spray,nasal,decongestant,,0,PK: Nasivin | IN: Nasivion | TR: Iliadin | US: Afrin
+oxymetazoline-0-025-nasal-spray,Oxymetazoline,0.025 %,nasal spray,nasal,decongestant,,0,PK: Nasivin | IN: Nasivion | TR: Iliadin | US: Afrin
+sodium-chloride-0-65-nasal-nasal-spray,Sodium chloride,0.65 % nasal,nasal spray,nasal,saline,,0,
+sodium-chloride-0-9-infusion,Sodium chloride,0.9 %,infusion,injection,saline,,0,
+sodium-chloride-3-nebuliser-nebuliser-solution,Sodium chloride,3 % nebuliser,nebuliser solution,inhaled,saline,,0,
+amitriptyline-10-mg-tablet,Amitriptyline,10 mg,tablet,oral,tricyclic antidepressant,10,0,"PK: Tryptanol | IN: Tryptomer, Amitone | TR: Laroxyl | US: Elavil"
+amitriptyline-25-mg-tablet,Amitriptyline,25 mg,tablet,oral,tricyclic antidepressant,25,0,"PK: Tryptanol | IN: Tryptomer, Amitone | TR: Laroxyl | US: Elavil"
+fluoxetine-20-mg-capsule,Fluoxetine,20 mg,capsule,oral,ssri,20,0,"PK: Prozac | IN: Fludac, Prodep | TR: Prozac, Depreks | US: Prozac"
+sertraline-50-mg-tablet,Sertraline,50 mg,tablet,oral,ssri,50,0,"PK: Serlift, Zoloft | IN: Serta, Daxid | TR: Lustral | US: Zoloft"
+sertraline-100-mg-tablet,Sertraline,100 mg,tablet,oral,ssri,100,0,"PK: Serlift, Zoloft | IN: Serta, Daxid | TR: Lustral | US: Zoloft"
+escitalopram-5-mg-tablet,Escitalopram,5 mg,tablet,oral,ssri,5,0,"PK: Cipralex | IN: Nexito, Stalopam | TR: Cipralex | US: Lexapro"
+escitalopram-10-mg-tablet,Escitalopram,10 mg,tablet,oral,ssri,10,0,"PK: Cipralex | IN: Nexito, Stalopam | TR: Cipralex | US: Lexapro"
+escitalopram-20-mg-tablet,Escitalopram,20 mg,tablet,oral,ssri,20,0,"PK: Cipralex | IN: Nexito, Stalopam | TR: Cipralex | US: Lexapro"
+citalopram-20-mg-tablet,Citalopram,20 mg,tablet,oral,ssri,20,0,IN: Celica | TR: Cipram | US: Celexa
+paroxetine-20-mg-tablet,Paroxetine,20 mg,tablet,oral,ssri,20,0,PK: Seroxat | IN: Paxidep | TR: Seroxat | US: Paxil
+mirtazapine-15-mg-tablet,Mirtazapine,15 mg,tablet,oral,antidepressant,15,0,PK: Remeron | IN: Mirtaz | TR: Remeron | US: Remeron
+mirtazapine-30-mg-tablet,Mirtazapine,30 mg,tablet,oral,antidepressant,30,0,PK: Remeron | IN: Mirtaz | TR: Remeron | US: Remeron
+venlafaxine-75-mg-xr-capsule,Venlafaxine,75 mg XR,capsule,oral,snri,75,0,PK: Efexor XR | IN: Venlor | TR: Efexor XR | US: Effexor XR
+venlafaxine-150-mg-xr-capsule,Venlafaxine,150 mg XR,capsule,oral,snri,150,0,PK: Efexor XR | IN: Venlor | TR: Efexor XR | US: Effexor XR
+duloxetine-30-mg-capsule,Duloxetine,30 mg,capsule,oral,snri,30,0,PK: Cymbalta | IN: Duzela | TR: Cymbalta | US: Cymbalta
+duloxetine-60-mg-capsule,Duloxetine,60 mg,capsule,oral,snri,60,0,PK: Cymbalta | IN: Duzela | TR: Cymbalta | US: Cymbalta
+diazepam-2-mg-tablet,Diazepam,2 mg,tablet,oral,benzodiazepine,2,1,"PK: Valium | IN: Valium, Calmpose | TR: Diazem | US: Valium"
+diazepam-5-mg-tablet,Diazepam,5 mg,tablet,oral,benzodiazepine,5,1,"PK: Valium | IN: Valium, Calmpose | TR: Diazem | US: Valium"
+diazepam-10-mg-tablet,Diazepam,10 mg,tablet,oral,benzodiazepine,10,1,"PK: Valium | IN: Valium, Calmpose | TR: Diazem | US: Valium"
+diazepam-10-mg-2-ml-injection,Diazepam,10 mg/2 ml,injection,injection,benzodiazepine,5,1,"PK: Valium | IN: Valium, Calmpose | TR: Diazem | US: Valium"
+diazepam-5-mg-rectal-suppository,Diazepam,5 mg rectal,suppository,rectal,benzodiazepine,5,1,"PK: Valium | IN: Valium, Calmpose | TR: Diazem | US: Valium"
+alprazolam-0-25-mg-tablet,Alprazolam,0.25 mg,tablet,oral,benzodiazepine,0.25,1,"PK: Xanax | IN: Alprax, Restyl | TR: Xanax | US: Xanax"
+alprazolam-0-5-mg-tablet,Alprazolam,0.5 mg,tablet,oral,benzodiazepine,0.5,1,"PK: Xanax | IN: Alprax, Restyl | TR: Xanax | US: Xanax"
+clonazepam-0-5-mg-tablet,Clonazepam,0.5 mg,tablet,oral,benzodiazepine,0.5,1,"PK: Rivotril | IN: Clonotril, Rivotril | TR: Rivotril | US: Klonopin"
+clonazepam-2-mg-tablet,Clonazepam,2 mg,tablet,oral,benzodiazepine,2,1,"PK: Rivotril | IN: Clonotril, Rivotril | TR: Rivotril | US: Klonopin"
+lorazepam-1-mg-tablet,Lorazepam,1 mg,tablet,oral,benzodiazepine,1,1,PK: Ativan | IN: Ativan | TR: Ativan | US: Ativan
+lorazepam-2-mg-tablet,Lorazepam,2 mg,tablet,oral,benzodiazepine,2,1,PK: Ativan | IN: Ativan | TR: Ativan | US: Ativan
+lorazepam-2-mg-ml-injection,Lorazepam,2 mg/ml,injection,injection,benzodiazepine,2,1,PK: Ativan | IN: Ativan | TR: Ativan | US: Ativan
+bromazepam-3-mg-tablet,Bromazepam,3 mg,tablet,oral,benzodiazepine,3,1,PK: Lexotanil | IN: Lexotanil | TR: Lexotanil
+midazolam-5-mg-ml-injection,Midazolam,5 mg/ml,injection,injection,benzodiazepine,5,1,PK: Dormicum | IN: Mezolam | TR: Dormicum | US: Versed
+olanzapine-5-mg-tablet,Olanzapine,5 mg,tablet,oral,antipsychotic,5,0,PK: Zyprexa | IN: Oleanz | TR: Zyprexa | US: Zyprexa
+olanzapine-10-mg-tablet,Olanzapine,10 mg,tablet,oral,antipsychotic,10,0,PK: Zyprexa | IN: Oleanz | TR: Zyprexa | US: Zyprexa
+risperidone-1-mg-tablet,Risperidone,1 mg,tablet,oral,antipsychotic,1,0,"PK: Risperdal | IN: Sizodon, Risdone | TR: Risperdal | US: Risperdal"
+risperidone-2-mg-tablet,Risperidone,2 mg,tablet,oral,antipsychotic,2,0,"PK: Risperdal | IN: Sizodon, Risdone | TR: Risperdal | US: Risperdal"
+risperidone-4-mg-tablet,Risperidone,4 mg,tablet,oral,antipsychotic,4,0,"PK: Risperdal | IN: Sizodon, Risdone | TR: Risperdal | US: Risperdal"
+quetiapine-25-mg-tablet,Quetiapine,25 mg,tablet,oral,antipsychotic,25,0,PK: Seroquel | IN: Qutipin | TR: Seroquel | US: Seroquel
+quetiapine-100-mg-tablet,Quetiapine,100 mg,tablet,oral,antipsychotic,100,0,PK: Seroquel | IN: Qutipin | TR: Seroquel | US: Seroquel
+quetiapine-200-mg-tablet,Quetiapine,200 mg,tablet,oral,antipsychotic,200,0,PK: Seroquel | IN: Qutipin | TR: Seroquel | US: Seroquel
+haloperidol-1-5-mg-tablet,Haloperidol,1.5 mg,tablet,oral,antipsychotic,1.5,0,PK: Serenace | IN: Serenace | TR: Norodol | US: Haldol
+haloperidol-5-mg-tablet,Haloperidol,5 mg,tablet,oral,antipsychotic,5,0,PK: Serenace | IN: Serenace | TR: Norodol | US: Haldol
+haloperidol-5-mg-ml-injection,Haloperidol,5 mg/ml,injection,injection,antipsychotic,5,0,PK: Serenace | IN: Serenace | TR: Norodol | US: Haldol
+aripiprazole-10-mg-tablet,Aripiprazole,10 mg,tablet,oral,antipsychotic,10,0,PK: Abilify | IN: Arip MT | TR: Abilify | US: Abilify
+aripiprazole-15-mg-tablet,Aripiprazole,15 mg,tablet,oral,antipsychotic,15,0,PK: Abilify | IN: Arip MT | TR: Abilify | US: Abilify
+carbamazepine-200-mg-tablet,Carbamazepine,200 mg,tablet,oral,antiepileptic,200,0,"PK: Tegral | IN: Tegretol, Mazetol | TR: Tegretol | US: Tegretol"
+carbamazepine-200-mg-cr-tablet,Carbamazepine,200 mg CR,tablet,oral,antiepileptic,200,0,"PK: Tegral | IN: Tegretol, Mazetol | TR: Tegretol | US: Tegretol"
+carbamazepine-400-mg-cr-tablet,Carbamazepine,400 mg CR,tablet,oral,antiepileptic,400,0,"PK: Tegral | IN: Tegretol, Mazetol | TR: Tegretol | US: Tegretol"
+carbamazepine-100-mg-5-ml-syrup,Carbamazepine,100 mg/5 ml,syrup,oral,antiepileptic,20,0,"PK: Tegral | IN: Tegretol, Mazetol | TR: Tegretol | US: Tegretol"
+sodium-valproate-200-mg-tablet,Sodium valproate,200 mg,tablet,oral,antiepileptic,200,0,"PK: Epilim | IN: Encorate, Valparin | TR: Depakin | US: Depakote"
+sodium-valproate-500-mg-tablet,Sodium valproate,500 mg,tablet,oral,antiepileptic,500,0,"PK: Epilim | IN: Encorate, Valparin | TR: Depakin | US: Depakote"
+sodium-valproate-200-mg-5-ml-syrup,Sodium valproate,200 mg/5 ml,syrup,oral,antiepileptic,40,0,"PK: Epilim | IN: Encorate, Valparin | TR: Depakin | US: Depakote"
+phenytoin-100-mg-capsule,Phenytoin,100 mg,capsule,oral,antiepileptic,100,0,"PK: Epanutin | IN: Eptoin, Dilantin | TR: Epanutin | US: Dilantin"
+phenytoin-50-mg-ml-injection,Phenytoin,50 mg/ml,injection,injection,antiepileptic,50,0,"PK: Epanutin | IN: Eptoin, Dilantin | TR: Epanutin | US: Dilantin"
+levetiracetam-250-mg-tablet,Levetiracetam,250 mg,tablet,oral,antiepileptic,250,0,"PK: Keppra | IN: Levipil, Keppra | TR: Keppra | US: Keppra"
+levetiracetam-500-mg-tablet,Levetiracetam,500 mg,tablet,oral,antiepileptic,500,0,"PK: Keppra | IN: Levipil, Keppra | TR: Keppra | US: Keppra"
+levetiracetam-1000-mg-tablet,Levetiracetam,1000 mg,tablet,oral,antiepileptic,1000,0,"PK: Keppra | IN: Levipil, Keppra | TR: Keppra | US: Keppra"
+levetiracetam-100-mg-ml-syrup,Levetiracetam,100 mg/ml,syrup,oral,antiepileptic,100,0,"PK: Keppra | IN: Levipil, Keppra | TR: Keppra | US: Keppra"
+lamotrigine-25-mg-tablet,Lamotrigine,25 mg,tablet,oral,antiepileptic,25,0,PK: Lamictal | IN: Lametec | TR: Lamictal | US: Lamictal
+lamotrigine-50-mg-tablet,Lamotrigine,50 mg,tablet,oral,antiepileptic,50,0,PK: Lamictal | IN: Lametec | TR: Lamictal | US: Lamictal
+lamotrigine-100-mg-tablet,Lamotrigine,100 mg,tablet,oral,antiepileptic,100,0,PK: Lamictal | IN: Lametec | TR: Lamictal | US: Lamictal
+phenobarbital-30-mg-tablet,Phenobarbital,30 mg,tablet,oral,barbiturate,30,1,PK: Luminal | IN: Gardenal | TR: Luminal
+phenobarbital-60-mg-tablet,Phenobarbital,60 mg,tablet,oral,barbiturate,60,1,PK: Luminal | IN: Gardenal | TR: Luminal
+gabapentin-100-mg-capsule,Gabapentin,100 mg,capsule,oral,gabapentinoid,100,0,PK: Neurontin | IN: Gabapin | TR: Neurontin | US: Neurontin
+gabapentin-300-mg-capsule,Gabapentin,300 mg,capsule,oral,gabapentinoid,300,0,PK: Neurontin | IN: Gabapin | TR: Neurontin | US: Neurontin
+gabapentin-400-mg-capsule,Gabapentin,400 mg,capsule,oral,gabapentinoid,400,0,PK: Neurontin | IN: Gabapin | TR: Neurontin | US: Neurontin
+pregabalin-50-mg-capsule,Pregabalin,50 mg,capsule,oral,gabapentinoid,50,1,"PK: Lyrica | IN: Pregalin, Lyrica | TR: Lyrica | US: Lyrica"
+pregabalin-75-mg-capsule,Pregabalin,75 mg,capsule,oral,gabapentinoid,75,1,"PK: Lyrica | IN: Pregalin, Lyrica | TR: Lyrica | US: Lyrica"
+pregabalin-150-mg-capsule,Pregabalin,150 mg,capsule,oral,gabapentinoid,150,1,"PK: Lyrica | IN: Pregalin, Lyrica | TR: Lyrica | US: Lyrica"
+topiramate-25-mg-tablet,Topiramate,25 mg,tablet,oral,antiepileptic,25,0,PK: Topamax | TR: Topamax | US: Topamax
+topiramate-50-mg-tablet,Topiramate,50 mg,tablet,oral,antiepileptic,50,0,PK: Topamax | TR: Topamax | US: Topamax
+betahistine-8-mg-tablet,Betahistine,8 mg,tablet,oral,antivertigo,8,0,PK: Serc | IN: Vertin | TR: Betaserc
+betahistine-16-mg-tablet,Betahistine,16 mg,tablet,oral,antivertigo,16,0,PK: Serc | IN: Vertin | TR: Betaserc
+betahistine-24-mg-tablet,Betahistine,24 mg,tablet,oral,antivertigo,24,0,PK: Serc | IN: Vertin | TR: Betaserc
+cinnarizine-25-mg-tablet,Cinnarizine,25 mg,tablet,oral,antivertigo,25,0,PK: Stugeron | IN: Stugeron | TR: Stugeron
+flunarizine-5-mg-capsule,Flunarizine,5 mg,capsule,oral,antivertigo,5,0,PK: Sibelium | IN: Sibelium | TR: Sibelium
+flunarizine-10-mg-capsule,Flunarizine,10 mg,capsule,oral,antivertigo,10,0,PK: Sibelium | IN: Sibelium | TR: Sibelium
+sumatriptan-50-mg-tablet,Sumatriptan,50 mg,tablet,oral,triptan,50,0,PK: Imigran | IN: Suminat | TR: Imigran | US: Imitrex
+sumatriptan-100-mg-tablet,Sumatriptan,100 mg,tablet,oral,triptan,100,0,PK: Imigran | IN: Suminat | TR: Imigran | US: Imitrex
+donepezil-5-mg-tablet,Donepezil,5 mg,tablet,oral,anti-dementia,5,0,PK: Aricept | TR: Aricept | US: Aricept
+donepezil-10-mg-tablet,Donepezil,10 mg,tablet,oral,anti-dementia,10,0,PK: Aricept | TR: Aricept | US: Aricept
+levodopa-carbidopa-100-mg-25-mg-tablet,Levodopa + carbidopa,100 mg + 25 mg,tablet,oral,antiparkinson,,0,"PK: Sinemet | IN: Syndopa, Sinemet | TR: Sinemet | US: Sinemet"
+levodopa-carbidopa-250-mg-25-mg-tablet,Levodopa + carbidopa,250 mg + 25 mg,tablet,oral,antiparkinson,,0,"PK: Sinemet | IN: Syndopa, Sinemet | TR: Sinemet | US: Sinemet"
+trihexyphenidyl-2-mg-tablet,Trihexyphenidyl,2 mg,tablet,oral,antiparkinson,2,0,PK: Artane | IN: Pacitane | TR: Artane
+methylcobalamin-500-mcg-tablet,Methylcobalamin,500 mcg,tablet,oral,vitamin,,0,"PK: Methycobal | IN: Methycobal, Nurokind"
+methylcobalamin-1500-mcg-tablet,Methylcobalamin,1500 mcg,tablet,oral,vitamin,,0,"PK: Methycobal | IN: Methycobal, Nurokind"
+methylcobalamin-500-mcg-ml-injection,Methylcobalamin,500 mcg/ml,injection,injection,vitamin,,0,"PK: Methycobal | IN: Methycobal, Nurokind"
+levothyroxine-25-mcg-tablet,Levothyroxine,25 mcg,tablet,oral,thyroid hormone,0.025,0,"PK: Thyroxine | IN: Thyronorm, Eltroxin | TR: Levotiron, Euthyrox | US: Synthroid, Levoxyl"
+levothyroxine-50-mcg-tablet,Levothyroxine,50 mcg,tablet,oral,thyroid hormone,0.05,0,"PK: Thyroxine | IN: Thyronorm, Eltroxin | TR: Levotiron, Euthyrox | US: Synthroid, Levoxyl"
+levothyroxine-75-mcg-tablet,Levothyroxine,75 mcg,tablet,oral,thyroid hormone,0.075,0,"PK: Thyroxine | IN: Thyronorm, Eltroxin | TR: Levotiron, Euthyrox | US: Synthroid, Levoxyl"
+levothyroxine-100-mcg-tablet,Levothyroxine,100 mcg,tablet,oral,thyroid hormone,0.1,0,"PK: Thyroxine | IN: Thyronorm, Eltroxin | TR: Levotiron, Euthyrox | US: Synthroid, Levoxyl"
+carbimazole-5-mg-tablet,Carbimazole,5 mg,tablet,oral,antithyroid,5,0,PK: Neo-Mercazole | IN: Neo-Mercazole
+carbimazole-20-mg-tablet,Carbimazole,20 mg,tablet,oral,antithyroid,20,0,PK: Neo-Mercazole | IN: Neo-Mercazole
+thiamazole-5-mg-tablet,Thiamazole,5 mg,tablet,oral,antithyroid,5,0,IN: Thyrocab | TR: Thyromazol | US: Tapazole
+thiamazole-10-mg-tablet,Thiamazole,10 mg,tablet,oral,antithyroid,10,0,IN: Thyrocab | TR: Thyromazol | US: Tapazole
+propylthiouracil-50-mg-tablet,Propylthiouracil,50 mg,tablet,oral,antithyroid,50,0,IN: PTU | US: PTU
+folic-acid-0-4-mg-tablet,Folic acid,0.4 mg,tablet,oral,vitamin,0.4,0,PK: Folic acid | IN: Folvite | TR: Folbiol | US: Folic acid
+folic-acid-5-mg-tablet,Folic acid,5 mg,tablet,oral,vitamin,5,0,PK: Folic acid | IN: Folvite | TR: Folbiol | US: Folic acid
+ferrous-sulfate-200-mg-65-mg-iron-tablet,Ferrous sulfate,200 mg (65 mg iron),tablet,oral,iron,65,0,"PK: Fefol (with folic acid) | IN: Fefol, Livogen | TR: Ferro Sanol | US: Feosol"
+ferrous-fumarate-200-mg-65-mg-iron-tablet,Ferrous fumarate,200 mg (65 mg iron),tablet,oral,iron,65,0,IN: Autrin | US: Ferretts
+iron-iii-hydroxide-polymaltose-100-mg-iron-tablet,Iron (III) hydroxide polymaltose,100 mg iron,tablet,oral,iron,100,0,PK: Ferrum | TR: Ferrum Hausmann
+iron-iii-hydroxide-polymaltose-50-mg-iron-5-ml-syrup,Iron (III) hydroxide polymaltose,50 mg iron/5 ml,syrup,oral,iron,10,0,PK: Ferrum | TR: Ferrum Hausmann
+iron-iii-hydroxide-polymaltose-50-mg-iron-ml-drops,Iron (III) hydroxide polymaltose,50 mg iron/ml,drops,oral,iron,50,0,PK: Ferrum | TR: Ferrum Hausmann
+iron-sucrose-100-mg-5-ml-injection,Iron sucrose,100 mg/5 ml,injection,injection,iron,20,0,PK: Venofer | IN: Orofer S | TR: Venofer | US: Venofer
+calcium-carbonate-vitamin-d3-500-mg-200-iu-tablet,Calcium carbonate + vitamin D3,500 mg + 200 IU,tablet,oral,mineral,,0,"PK: Caltrate, Qalsium D | IN: Shelcal, Calcimax | US: Os-Cal, Caltrate"
+calcium-carbonate-vitamin-d3-600-mg-400-iu-tablet,Calcium carbonate + vitamin D3,600 mg + 400 IU,tablet,oral,mineral,,0,"PK: Caltrate, Qalsium D | IN: Shelcal, Calcimax | US: Os-Cal, Caltrate"
+cholecalciferol-vitamin-d3-200-000-iu-ml-oral-or-injection-injection,Cholecalciferol (vitamin D3),"200,000 IU/ml (oral or injection)",injection,injection,vitamin,,0,"PK: Indrop-D, Sunny D | IN: Uprise-D3, D-Rise | TR: Devit-3 | US: D3 (vitamin D3)"
+cholecalciferol-vitamin-d3-60-000-iu-capsule,Cholecalciferol (vitamin D3),"60,000 IU",capsule,oral,vitamin,,0,"PK: Indrop-D, Sunny D | IN: Uprise-D3, D-Rise | TR: Devit-3 | US: D3 (vitamin D3)"
+cholecalciferol-vitamin-d3-400-iu-drop-drops,Cholecalciferol (vitamin D3),400 IU/drop,drops,oral,vitamin,,0,"PK: Indrop-D, Sunny D | IN: Uprise-D3, D-Rise | TR: Devit-3 | US: D3 (vitamin D3)"
+cholecalciferol-vitamin-d3-1-000-iu-tablet,Cholecalciferol (vitamin D3),"1,000 IU",tablet,oral,vitamin,,0,"PK: Indrop-D, Sunny D | IN: Uprise-D3, D-Rise | TR: Devit-3 | US: D3 (vitamin D3)"
+misoprostol-200-mcg-tablet,Misoprostol,200 mcg,tablet,oral,prostaglandin,0.2,0,"PK: Cytotec | IN: Cytolog, Misoprost | TR: Cytotec | US: Cytotec"
+oxytocin-10-iu-ml-injection,Oxytocin,10 IU/ml,injection,injection,uterotonic,,0,"PK: Syntocinon | IN: Pitocin, Syntocinon | TR: Synpitan | US: Pitocin"
+oxytocin-5-iu-ml-injection,Oxytocin,5 IU/ml,injection,injection,uterotonic,,0,"PK: Syntocinon | IN: Pitocin, Syntocinon | TR: Synpitan | US: Pitocin"
+methylergometrine-0-125-mg-tablet,Methylergometrine,0.125 mg,tablet,oral,uterotonic,0.125,0,PK: Methergin | IN: Methergin | TR: Methergin | US: Methergine
+methylergometrine-0-2-mg-ml-injection,Methylergometrine,0.2 mg/ml,injection,injection,uterotonic,0.2,0,PK: Methergin | IN: Methergin | TR: Methergin | US: Methergine
+magnesium-sulfate-50-500-mg-ml-injection,Magnesium sulfate,50 % (500 mg/ml),injection,injection,anticonvulsant,500,0,
+dydrogesterone-10-mg-tablet,Dydrogesterone,10 mg,tablet,oral,progestogen,10,0,PK: Duphaston | IN: Duphaston | TR: Duphaston
+progesterone-200-mg-capsule,Progesterone,200 mg,capsule,oral,progestogen,200,0,PK: Cyclogest | IN: Susten | TR: Progestan | US: Prometrium
+progesterone-400-mg-suppository,Progesterone,400 mg,suppository,rectal,progestogen,400,0,PK: Cyclogest | IN: Susten | TR: Progestan | US: Prometrium
+norethisterone-5-mg-tablet,Norethisterone,5 mg,tablet,oral,progestogen,5,0,"PK: Primolut-N | IN: Primolut-N, Regestrone | TR: Primolut-N | US: Aygestin"
+medroxyprogesterone-10-mg-tablet,Medroxyprogesterone,10 mg,tablet,oral,progestogen,10,0,"PK: Provera, Depo-Provera | IN: Meprate, Depo-Provera | US: Provera, Depo-Provera"
+medroxyprogesterone-150-mg-ml-injection,Medroxyprogesterone,150 mg/ml,injection,injection,progestogen,,0,"PK: Provera, Depo-Provera | IN: Meprate, Depo-Provera | US: Provera, Depo-Provera"
+levonorgestrel-ethinylestradiol-0-15-mg-0-03-mg-tablet,Levonorgestrel + ethinylestradiol,0.15 mg + 0.03 mg,tablet,oral,contraceptive,,0,"PK: Microgynon | IN: Ovral L | TR: Microgynon | US: Levora, Seasonique"
+levonorgestrel-1-5-mg-tablet,Levonorgestrel,1.5 mg,tablet,oral,contraceptive,1.5,0,"PK: Postinor-2 | IN: i-pill, Unwanted 72 | TR: Postinor | US: Plan B One-Step"
+clomifene-50-mg-tablet,Clomifene,50 mg,tablet,oral,ovulation inducer,50,0,"PK: Clomid | IN: Fertomid, Siphene | TR: Klomen | US: Clomid"
+letrozole-2-5-mg-tablet,Letrozole,2.5 mg,tablet,oral,aromatase inhibitor,2.5,0,PK: Femara | IN: Letroz | TR: Femara | US: Femara
+cabergoline-0-5-mg-tablet,Cabergoline,0.5 mg,tablet,oral,dopamine agonist,0.5,0,PK: Dostinex | IN: Cabgolin | TR: Dostinex | US: Dostinex
+tranexamic-acid-500-mg-tablet,Tranexamic acid,500 mg,tablet,oral,antifibrinolytic,500,0,"PK: Transamin | IN: Pause, Trapic | TR: Transamin | US: Lysteda, Cyklokapron"
+tranexamic-acid-500-mg-5-ml-injection,Tranexamic acid,500 mg/5 ml,injection,injection,antifibrinolytic,100,0,"PK: Transamin | IN: Pause, Trapic | TR: Transamin | US: Lysteda, Cyklokapron"
+phytomenadione-vitamin-k1-1-mg-0-5-ml-injection,Phytomenadione (vitamin K1),1 mg/0.5 ml,injection,injection,vitamin,2,0,PK: Konakion | IN: Kenadion | TR: Konakion | US: Mephyton
+phytomenadione-vitamin-k1-10-mg-ml-injection,Phytomenadione (vitamin K1),10 mg/ml,injection,injection,vitamin,10,0,PK: Konakion | IN: Kenadion | TR: Konakion | US: Mephyton
+tamsulosin-0-4-mg-capsule,Tamsulosin,0.4 mg,capsule,oral,alpha blocker,0.4,0,"PK: Flomax | IN: Urimax, Veltam | TR: Flomax | US: Flomax"
+finasteride-5-mg-tablet,Finasteride,5 mg,tablet,oral,5-alpha reductase inhibitor,5,0,"PK: Proscar | IN: Finast | TR: Proscar | US: Proscar, Propecia"
+finasteride-1-mg-tablet,Finasteride,1 mg,tablet,oral,5-alpha reductase inhibitor,1,0,"PK: Proscar | IN: Finast | TR: Proscar | US: Proscar, Propecia"
+oxybutynin-5-mg-tablet,Oxybutynin,5 mg,tablet,oral,antimuscarinic,5,0,PK: Ditropan | IN: Cystran | TR: Uropan | US: Ditropan
+solifenacin-5-mg-tablet,Solifenacin,5 mg,tablet,oral,antimuscarinic,5,0,PK: Vesicare | TR: Vesicare | US: Vesicare
+solifenacin-10-mg-tablet,Solifenacin,10 mg,tablet,oral,antimuscarinic,10,0,PK: Vesicare | TR: Vesicare | US: Vesicare
+sildenafil-50-mg-tablet,Sildenafil,50 mg,tablet,oral,pde5 inhibitor,50,0,"PK: Viagra, Vega | IN: Penegra, Manforce | TR: Viagra | US: Viagra"
+sildenafil-100-mg-tablet,Sildenafil,100 mg,tablet,oral,pde5 inhibitor,100,0,"PK: Viagra, Vega | IN: Penegra, Manforce | TR: Viagra | US: Viagra"
+tadalafil-5-mg-tablet,Tadalafil,5 mg,tablet,oral,pde5 inhibitor,5,0,"PK: Cialis | IN: Tadacip, Megalis | TR: Cialis | US: Cialis"
+tadalafil-20-mg-tablet,Tadalafil,20 mg,tablet,oral,pde5 inhibitor,20,0,"PK: Cialis | IN: Tadacip, Megalis | TR: Cialis | US: Cialis"
+potassium-citrate-1-5-g-5-ml-syrup,Potassium citrate,1.5 g/5 ml,syrup,oral,urinary alkaliniser,,0,IN: Alkasol | US: Urocit-K
+potassium-citrate-10-meq-tablet,Potassium citrate,10 mEq,tablet,oral,urinary alkaliniser,,0,IN: Alkasol | US: Urocit-K
+potassium-chloride-600-mg-sr-tablet,Potassium chloride,600 mg SR,tablet,oral,electrolyte,600,0,PK: Slow-K | US: Klor-Con
+potassium-chloride-15-2-meq-ml-injection,Potassium chloride,15 % (2 mEq/ml),injection,injection,electrolyte,,0,PK: Slow-K | US: Klor-Con
+betamethasone-valerate-0-1-cream,Betamethasone valerate,0.1 %,cream,topical,topical corticosteroid,,0,PK: Betnovate | IN: Betnovate | TR: Betnovate | US: Valisone
+betamethasone-valerate-0-1-ointment,Betamethasone valerate,0.1 %,ointment,topical,topical corticosteroid,,0,PK: Betnovate | IN: Betnovate | TR: Betnovate | US: Valisone
+betamethasone-valerate-0-1-lotion,Betamethasone valerate,0.1 %,lotion,topical,topical corticosteroid,,0,PK: Betnovate | IN: Betnovate | TR: Betnovate | US: Valisone
+clobetasol-propionate-0-05-cream,Clobetasol propionate,0.05 %,cream,topical,topical corticosteroid,,0,"PK: Dermovate | IN: Tenovate, Lobate | TR: Dermovate | US: Temovate"
+clobetasol-propionate-0-05-ointment,Clobetasol propionate,0.05 %,ointment,topical,topical corticosteroid,,0,"PK: Dermovate | IN: Tenovate, Lobate | TR: Dermovate | US: Temovate"
+mometasone-furoate-cream-0-1-cream,Mometasone furoate cream,0.1 %,cream,topical,topical corticosteroid,,0,PK: Elocon | IN: Momate | TR: Elocon | US: Elocon
+mometasone-furoate-cream-0-1-ointment,Mometasone furoate cream,0.1 %,ointment,topical,topical corticosteroid,,0,PK: Elocon | IN: Momate | TR: Elocon | US: Elocon
+hydrocortisone-butyrate-0-1-cream,Hydrocortisone butyrate,0.1 %,cream,topical,topical corticosteroid,,0,PK: Locoid | IN: Locoid | TR: Locoid | US: Locoid
+calamine-lotion-lotion,Calamine,lotion,lotion,topical,antipruritic,,0,PK: Calamine lotion | IN: Lacto Calamine | US: Caladryl
+benzoyl-peroxide-2-5-gel,Benzoyl peroxide,2.5 %,gel,topical,anti-acne,,0,"PK: Benzac AC | IN: Persol, Benzac AC | TR: Benzac AC | US: PanOxyl"
+benzoyl-peroxide-5-gel,Benzoyl peroxide,5 %,gel,topical,anti-acne,,0,"PK: Benzac AC | IN: Persol, Benzac AC | TR: Benzac AC | US: PanOxyl"
+adapalene-0-1-gel,Adapalene,0.1 %,gel,topical,retinoid,,0,PK: Differin | IN: Adaferin | TR: Differin | US: Differin
+tretinoin-0-025-cream,Tretinoin,0.025 %,cream,topical,retinoid,,0,PK: Retin-A | IN: Retino-A | TR: Retin-A | US: Retin-A
+tretinoin-0-05-cream,Tretinoin,0.05 %,cream,topical,retinoid,,0,PK: Retin-A | IN: Retino-A | TR: Retin-A | US: Retin-A
+isotretinoin-10-mg-capsule,Isotretinoin,10 mg,capsule,oral,retinoid,10,0,"PK: Acnetrex, Roaccutane | IN: Isotroin, Sotret | TR: Roaccutane, Zoretanin | US: Absorica, Claravis"
+isotretinoin-20-mg-capsule,Isotretinoin,20 mg,capsule,oral,retinoid,20,0,"PK: Acnetrex, Roaccutane | IN: Isotroin, Sotret | TR: Roaccutane, Zoretanin | US: Absorica, Claravis"
+clindamycin-benzoyl-peroxide-1-5-gel,Clindamycin + benzoyl peroxide,1 % + 5 %,gel,topical,anti-acne,,0,"PK: Duac | IN: Clindac A, Duac | TR: Duac | US: Duac, BenzaClin"
+zinc-oxide-cream-cream,Zinc oxide,cream,cream,topical,skin protectant,,0,PK: Sudocrem | IN: Rashfree | TR: Sudocrem | US: Desitin
+salicylic-acid-2-ointment,Salicylic acid,2 %,ointment,topical,keratolytic,,0,PK: Salicylic acid | US: Compound W
+salicylic-acid-6-ointment,Salicylic acid,6 %,ointment,topical,keratolytic,,0,PK: Salicylic acid | US: Compound W
+lidocaine-2-20-mg-ml-injection,Lidocaine,2 % (20 mg/ml),injection,injection,local anaesthetic,20,0,"PK: Xylocaine | IN: Xylocaine, Lox | TR: Jetokain, Aritmal | US: Xylocaine"
+lidocaine-2-gel,Lidocaine,2 %,gel,topical,local anaesthetic,,0,"PK: Xylocaine | IN: Xylocaine, Lox | TR: Jetokain, Aritmal | US: Xylocaine"
+lidocaine-5-ointment,Lidocaine,5 %,ointment,topical,local anaesthetic,,0,"PK: Xylocaine | IN: Xylocaine, Lox | TR: Jetokain, Aritmal | US: Xylocaine"
+tobramycin-dexamethasone-0-3-0-1-eye-drops,Tobramycin + dexamethasone,0.3 % + 0.1 %,eye drops,eye,aminoglycoside,,0,PK: Tobradex | IN: Tobradex | TR: Tobradex | US: TobraDex
+prednisolone-acetate-1-eye-drops,Prednisolone acetate,1 %,eye drops,eye,corticosteroid,,0,PK: Pred Forte | IN: Pred Forte | TR: Pred Forte | US: Pred Forte
+timolol-0-5-eye-drops,Timolol,0.5 %,eye drops,eye,beta blocker,,0,PK: Timoptol | IN: Iotim | TR: Timoptic | US: Timoptic
+latanoprost-0-005-eye-drops,Latanoprost,0.005 %,eye drops,eye,prostaglandin analogue,,0,"PK: Xalatan | IN: Xalatan, 9 PM | TR: Xalatan | US: Xalatan"
+olopatadine-0-1-eye-drops,Olopatadine,0.1 %,eye drops,eye,antihistamine,,0,"PK: Patanol | IN: Olopat | TR: Patanol | US: Patanol, Pataday"
+hypromellose-artificial-tears-0-3-eye-drops,Hypromellose (artificial tears),0.3 %,eye drops,eye,lubricant,,0,"PK: Tears Naturale | IN: Refresh Tears, Genteal | TR: Tears Naturale | US: GenTeal"
+ciprofloxacin-dexamethasone-ear-drops-ear-drops,Ciprofloxacin + dexamethasone,ear drops,ear drops,ear,fluoroquinolone,,0,IN: Ciplox D | US: Ciprodex
+vitamin-b-complex-tablet-tablet,Vitamin B complex,tablet,tablet,oral,vitamin,,0,"PK: Neurobion | IN: Becosules, Neurobion Forte | TR: Bemiks | US: Nature Made B complex"
+vitamin-b-complex-injection-injection,Vitamin B complex,injection,injection,injection,vitamin,,0,"PK: Neurobion | IN: Becosules, Neurobion Forte | TR: Bemiks | US: Nature Made B complex"
+thiamine-vitamin-b1-100-mg-tablet,Thiamine (vitamin B1),100 mg,tablet,oral,vitamin,100,0,PK: Benerva | IN: Benerva | TR: Benexol | US: Thiamine
+thiamine-vitamin-b1-100-mg-ml-injection,Thiamine (vitamin B1),100 mg/ml,injection,injection,vitamin,100,0,PK: Benerva | IN: Benerva | TR: Benexol | US: Thiamine
+cyanocobalamin-vitamin-b12-1000-mcg-ml-injection,Cyanocobalamin (vitamin B12),1000 mcg/ml,injection,injection,vitamin,,0,"IN: Neurobion (with B1, B6) | TR: Dodex | US: Nascobal"
+ascorbic-acid-vitamin-c-500-mg-tablet,Ascorbic acid (vitamin C),500 mg,tablet,oral,vitamin,500,0,"PK: Celin | IN: Celin, Limcee | TR: Redoxon | US: Ester-C"
+ascorbic-acid-vitamin-c-100-mg-ml-drops,Ascorbic acid (vitamin C),100 mg/ml,drops,oral,vitamin,100,0,"PK: Celin | IN: Celin, Limcee | TR: Redoxon | US: Ester-C"
+vitamin-a-retinol-200-000-iu-capsule,Vitamin A (retinol),"200,000 IU",capsule,oral,vitamin,,0,
+vitamin-a-retinol-100-000-iu-capsule,Vitamin A (retinol),"100,000 IU",capsule,oral,vitamin,,0,
+multivitamin-tablet-tablet,Multivitamin,tablet,tablet,oral,vitamin,,0,"PK: Surbex Z, Centrum | IN: Becadexamin, Supradyn | TR: Supradyn, Centrum | US: Centrum"
+multivitamin-syrup-syrup,Multivitamin,syrup,syrup,oral,vitamin,,0,"PK: Surbex Z, Centrum | IN: Becadexamin, Supradyn | TR: Supradyn, Centrum | US: Centrum"
+multivitamin-drops-drops,Multivitamin,drops,drops,oral,vitamin,,0,"PK: Surbex Z, Centrum | IN: Becadexamin, Supradyn | TR: Supradyn, Centrum | US: Centrum"
+adrenaline-epinephrine-1-mg-ml-1-1000-injection,Adrenaline (epinephrine),1 mg/ml (1:1000),injection,injection,sympathomimetic,1,0,"PK: Adrenaline | IN: Adrenaline | TR: Adrenalin | US: EpiPen, Adrenalin"
+atropine-0-6-mg-ml-injection,Atropine,0.6 mg/ml,injection,injection,anticholinergic,0.6,0,
+atropine-1-mg-ml-injection,Atropine,1 mg/ml,injection,injection,anticholinergic,1,0,
+naloxone-0-4-mg-ml-injection,Naloxone,0.4 mg/ml,injection,injection,opioid antagonist,0.4,0,PK: Narcan | TR: Narcan | US: Narcan
+glucose-dextrose-5-infusion,Glucose (dextrose),5 %,infusion,injection,fluid,,0,
+glucose-dextrose-10-infusion,Glucose (dextrose),10 %,infusion,injection,fluid,,0,
+glucose-dextrose-25-injection,Glucose (dextrose),25 %,injection,injection,fluid,,0,
+glucose-dextrose-50-injection,Glucose (dextrose),50 %,injection,injection,fluid,,0,
+ringer-lactate-500-ml-infusion,Ringer lactate,500 ml,infusion,injection,fluid,,0,PK: Ringer lactate | IN: Ringer lactate | TR: Laktatli Ringer | US: Lactated Ringer
+ringer-lactate-1000-ml-infusion,Ringer lactate,1000 ml,infusion,injection,fluid,,0,PK: Ringer lactate | IN: Ringer lactate | TR: Laktatli Ringer | US: Lactated Ringer
+dextrose-sodium-chloride-5-0-9-infusion,Dextrose + sodium chloride,5 % + 0.9 %,infusion,injection,fluid,,0,
+dextrose-sodium-chloride-5-0-45-infusion,Dextrose + sodium chloride,5 % + 0.45 %,infusion,injection,fluid,,0,
+activated-charcoal-50-g-suspension,Activated charcoal,50 g,suspension,oral,antidote,,0,US: Actidose-Aqua
+ketamine-50-mg-ml-injection,Ketamine,50 mg/ml,injection,injection,anaesthetic,50,1,PK: Ketalar | TR: Ketalar | US: Ketalar
+tetanus-immunoglobulin-250-iu-injection,Tetanus immunoglobulin,250 IU,injection,injection,immunoglobulin,,0,PK: Tetagam | IN: Tetaglob | TR: Tetagam | US: HyperTET

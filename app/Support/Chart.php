@@ -26,6 +26,7 @@ class Chart
             'vitals' => self::vitals($patient),
             'visits' => ['encounters' => Encounter::with(['doctor.user', 'diagnoses'])->where('patient_id', $patient->id)->latest('started_at')->get()],
             'documents' => ['documents' => PatientDocument::with('author')->where('patient_id', $patient->id)->latest('id')->get()],
+            'prescriptions' => ['prescriptions' => \App\Models\Prescription::with(['doctor.user', 'items'])->where('patient_id', $patient->id)->latest('id')->get()],
             default => [],
         };
     }
@@ -105,6 +106,13 @@ class Chart
                         'detail' => $entry->isError() ? __('Entered in error').': '.$entry->error_reason : null, 'url' => route('patients.show', ['id' => $patient->id, 'tab' => 'history']).'#h-'.$key,
                         'error' => $entry->isError(), 'badge' => $entry->isError() ? null : __($def['statuses'][$entry->status] ?? $entry->status)]);
                 }
+            }
+        }
+        if ($want('prescriptions')) {
+            foreach (\App\Models\Prescription::with('items')->where('patient_id', $patient->id)->where('status', '!=', 'draft')->get() as $rx) {
+                $events->push(['at' => $rx->signed_at, 'kind' => 'prescriptions', 'icon' => 'prescription-bottle-medical', 'title' => __('Prescription :number', ['number' => $rx->number]),
+                    'detail' => $rx->items->map->label()->implode(', '), 'url' => route('prescriptions.show', ['id' => $rx->id]), 'error' => $rx->status === 'cancelled',
+                    'badge' => $rx->status === 'cancelled' ? __('Cancelled') : null]);
             }
         }
         if ($want('vitals')) {

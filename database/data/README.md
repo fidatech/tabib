@@ -12,3 +12,20 @@ up to five characters are kept; the 6th and 7th characters (side, episode of an 
 out for a small clinic.
 
 Loaded into the central database with `php artisan icd10:import` (also run by every deploy).
+
+## medicines.csv
+
+A starter list of medicines for Tabib, written for it: 328 generic medicines in 713 strengths
+and forms, with the class used to match allergies (penicillin, cephalosporin, nsaid, sulfonamide ...),
+whether it is a controlled medicine, the milligrams in one unit (one tablet, one ml, ...) where
+that is a single number, and common brand names in Pakistan (PK), India (IN), Turkey (TR) and the
+United States (US). Brand names are trademarks of their owners and are listed only so staff can
+find the generic medicine. Only brands we were sure of are listed.
+
+**To be reviewed by a pharmacist before use.** Dose limits are not in this file on purpose: each
+clinic writes the limits its own pharmacist or doctors approve (Clinic Setup > Medicines). Every
+clinic gets the list when it is opened and its new rows after an update (`php artisan tenants:migrate`);
+a clinic's own medicines and its changes to limits are never overwritten.
+
+Columns: code, name, strength, form, route, class, mg_per_unit, controlled (1/0), brands
+("PK: A, B | IN: C | TR: D | US: E").

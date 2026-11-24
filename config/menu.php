@@ -32,6 +32,7 @@ return [
     ['label' => 'Clinic Setup', 'icon' => 'house-medical', 'children' => [
         ['label' => 'Doctors', 'route' => 'doctors.index', 'active' => 'doctors.*', 'can' => 'users.view'],
         ['label' => 'Appointment types', 'route' => 'appointment-types.index', 'active' => 'appointment-types.*', 'can' => 'settings.view'],
+        ['label' => 'Medicines', 'route' => 'medicines.index', 'active' => 'medicines.*', 'can' => 'prescriptions.view'],
     ]],
 
     ['label' => 'Branches', 'icon' => 'code-branch', 'route' => 'branches.index', 'active' => 'branches.*', 'can' => 'branches.view'],

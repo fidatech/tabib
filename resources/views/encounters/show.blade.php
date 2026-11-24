@@ -105,6 +105,25 @@
             </div>
         </div>
 
+        {{-- the prescriptions of this visit --}}
+        @php $visitRx = \App\Models\Prescription::with('items')->where('encounter_id', $encounter->id)->latest('id')->get(); @endphp
+        <div class="card mb-3">
+            <div class="card-header d-flex align-items-center"><h2 class="h5 card-title mb-0 flex-grow-1">{{ __('Prescriptions') }}</h2>
+                @if (($canWrite || $encounter->isSigned()) && auth()->user()->can('prescriptions.manage') && \App\Services\Prescribing::doctorOf(auth()->id())?->id === $encounter->doctor_id)
+                    <form method="POST" action="{{ route('prescriptions.start') }}">@csrf<input type="hidden" name="patient_id" value="{{ $patient->id }}"><input type="hidden" name="encounter_id" value="{{ $encounter->id }}">
+                        <button type="submit" class="btn btn-sm btn-primary"><x-icon name="prescription-bottle-medical" class="me-1" /> {{ __('Write a prescription') }}</button></form>
+                @endif
+            </div>
+            <div class="list-group list-group-flush">
+                @forelse ($visitRx as $rx)
+                    <a class="list-group-item list-group-item-action small" href="{{ route('prescriptions.show', ['id' => $rx->id]) }}"><b>{{ $rx->number ?? __('Draft') }}</b> · {{ $rx->items->map->label()->implode(' · ') ?: __('No medicine yet') }}
+                        @if ($rx->status === 'cancelled')<span class="badge bg-danger">{{ __('Cancelled') }}</span>@endif</a>
+                @empty
+                    <div class="list-group-item text-muted small">{{ __('None written.') }}</div>
+                @endforelse
+            </div>
+        </div>
+
         {{-- signing, or what was added after --}}
         @if ($canWrite)
             <div class="card mb-3 border-primary">

@@ -12,10 +12,11 @@ use App\Support\Roles;
 /** The first records of a new clinic: roles, the main branch, the owner and the settings. */
 class TenantSetup
 {
-    /** Records every clinic needs and that a new version may add to: the permissions. */
+    /** Records every clinic needs and that a new version may add to: the permissions and the list of medicines. */
     public function baseData(): void
     {
         Permissions::sync();
+        \App\Services\Prescribing::syncMedicines();
     }
 
     public function run(Tenant $tenant, array $data): void

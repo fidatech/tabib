@@ -4,7 +4,7 @@
     $canBook = auth()->user()->can('appointments.manage');
     $tabNames = [
         'summary' => ['Summary', 'gauge-high'], 'timeline' => ['Timeline', 'timeline'], 'history' => ['History', 'notes-medical'],
-        'vitals' => ['Vital signs', 'heart-pulse'], 'visits' => ['Visits', 'stethoscope'], 'documents' => ['Documents', 'paperclip'],
+        'vitals' => ['Vital signs', 'heart-pulse'], 'visits' => ['Visits', 'stethoscope'], 'prescriptions' => ['Prescriptions', 'prescription-bottle-medical'], 'documents' => ['Documents', 'paperclip'],
         'appointments' => ['Appointments', 'calendar-days'],
     ];
     $facts = array_filter([
@@ -25,6 +25,10 @@
     @if ($isDoctor && $canWrite)
         <form method="POST" action="{{ route('encounters.start') }}">@csrf<input type="hidden" name="patient_id" value="{{ $patient->id }}">
             <button type="submit" class="btn btn-outline-soft"><x-icon name="stethoscope" class="me-1" /> {{ __('New visit') }}</button></form>
+    @endif
+    @if ($isDoctor && $canPrescribe)
+        <form method="POST" action="{{ route('prescriptions.start') }}">@csrf<input type="hidden" name="patient_id" value="{{ $patient->id }}">
+            <button type="submit" class="btn btn-outline-soft"><x-icon name="prescription-bottle-medical" class="me-1" /> {{ __('Prescription') }}</button></form>
     @endif
     @if ($canBook)
         <a class="btn btn-primary" href="{{ route('appointments.create', ['patient' => $patient->id]) }}"><x-icon name="calendar-plus" class="me-1" /> {{ __('Book an appointment') }}</a>

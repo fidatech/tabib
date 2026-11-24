@@ -151,7 +151,7 @@ class PatientController extends CrudController
         Gate::authorize('patients.view');
         $patient = Patient::findOrFail($id);
         $clinical = $request->user()->can('clinical.view');
-        $tabs = $clinical ? ['summary', 'timeline', 'history', 'vitals', 'visits', 'documents', 'appointments'] : ['appointments'];
+        $tabs = $clinical ? ['summary', 'timeline', 'history', 'vitals', 'visits', 'prescriptions', 'documents', 'appointments'] : ['appointments'];
         $tab = in_array($request->query('tab'), $tabs, true) ? $request->query('tab') : $tabs[0];
         audit('viewed', $patient, $patient->auditLabel().($clinical ? ' · '.$tab : ''));
 
@@ -161,6 +161,7 @@ class PatientController extends CrudController
             'patient' => $patient, 'tab' => $tab, 'tabs' => $tabs, 'clinical' => $clinical,
             'canWrite' => $request->user()->can('clinical.manage'),
             'isDoctor' => Doctor::where('user_id', $request->user()->id)->where('is_active', true)->exists(),
+            'canPrescribe' => $request->user()->can('prescriptions.manage'),
             // the allergies are shown to everyone who sees the patient: the front desk hands out medicine too
             'allergies' => \App\Models\History\Allergy::where('patient_id', $patient->id)->where('status', 'active')->get(),
             'upcoming' => $appointments->filter(fn (Appointment $a) => $a->isOpen() && $a->starts_at >= $now->copy()->startOfDay())->sortBy('starts_at')->values(),
