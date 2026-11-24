@@ -358,6 +358,8 @@ kbd { background: var(--hover); color: var(--muted); border: 1px solid var(--bor
 .btn-outline-soft:hover, .btn-outline-soft:focus { border-color: rgba(var(--primary-rgb), .5); color: var(--primary); background: var(--card); }
 .btn-light-secondary { background: var(--hover); border: 1px solid var(--border); color: var(--text); }
 .btn-light-secondary:hover { background: var(--border); color: var(--heading); }
+/* a page link that cannot be pressed stays readable: dimmed by its frame, not by fading the words */
+.btn-light-secondary.disabled, .btn-light-secondary:disabled { opacity: 1; color: var(--muted-strong, #5b616b); background: var(--hover); }
 .btn-icon { width: 36px; height: 36px; padding: 0; display: inline-grid; place-items: center; border-radius: 9px; border: 0; font-size: 14px; flex-shrink: 0; }
 .btn-icon.btn-sm { width: 30px; height: 30px; font-size: 12.5px; border-radius: 7px; }
 .btn-icon.rounded-circle { border-radius: 50%; }

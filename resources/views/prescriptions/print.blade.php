@@ -13,7 +13,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+@unless (config('app.indexable'))
 <meta name="robots" content="noindex, nofollow">
+@endunless
+<meta name="description" content="{{ $t('Prescription', 'نسخه', 'نسخه') }} {{ $rx->number }} · {{ $company }}">
+<link rel="icon" href="{{ $logo ?? asset_v('img/favicon.svg') }}"@unless ($logo) type="image/svg+xml"@endunless>
 <title>{{ $rx->number }} | {{ $company }}</title>
 <style>
 @page{size:A5;margin:10mm}
@@ -26,7 +30,7 @@ body{margin:0;padding:16px;background:#eef3f3;color:#111827;font:13px/1.45 syste
 .head{display:flex;justify-content:space-between;gap:12px;align-items:center;padding-bottom:8px;border-bottom:3px solid #0a5f61}
 .head img{max-height:52px;max-width:140px;object-fit:contain}
 .head h1{margin:0;font-size:17px;color:#0a5f61}
-.small{font-size:11px;color:#4b5563}
+.small{font-size:12px;color:#4b5563}
 .doc{text-align:end}
 .who{display:flex;flex-wrap:wrap;gap:4px 18px;margin:10px 0;padding:8px 10px;background:#f1f7f7;border-radius:8px}
 .who b{color:#0a5f61}
@@ -34,7 +38,7 @@ body{margin:0;padding:16px;background:#eef3f3;color:#111827;font:13px/1.45 syste
 ol{margin:0;padding-inline-start:20px}
 li{margin:0 0 9px;break-inside:avoid}
 li .name{font-weight:700}
-li .qty{color:#4b5563;font-size:11.5px}
+li .qty{color:#4b5563;font-size:12px}
 .allergy{margin:6px 0;padding:6px 10px;border:1px solid #b91c1c;border-radius:6px;color:#b91c1c;font-weight:600}
 .note{margin-top:8px;font-size:12px}
 .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding-top:10px;border-top:1px solid #d1d5db}
