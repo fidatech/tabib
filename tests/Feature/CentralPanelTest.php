@@ -204,6 +204,21 @@ class CentralPanelTest extends TestCase
         $this->assertFalse($cpanel->enabled());
     }
 
+    public function test_the_registration_form_asks_for_a_known_kind_of_clinic_and_the_terms(): void
+    {
+        $this->central();
+        $form = ['name' => 'Shifa Clinic', 'slug' => 'shifa', 'clinic_type' => 'dental', 'doctors' => 2, 'owner_name' => 'Dr. Shifa', 'owner_email' => 'shifa@shifa.test',
+            'owner_phone' => '0700123456', 'password' => 'a-good-password', 'password_confirmation' => 'a-good-password', 'terms' => '1'];
+
+        $this->post('/register', ['clinic_type' => 'casino'] + $form)->assertSessionHasErrors('clinic_type');
+        $this->post('/register', ['terms' => null] + $form)->assertSessionHasErrors('terms');
+        $this->post('/register', ['doctors' => 0] + $form)->assertSessionHasErrors('doctors');
+        $this->assertSame(0, \App\Models\Central\Signup::count());
+
+        $this->post('/register', $form)->assertSessionHasNoErrors();
+        $this->assertSame(['dental', 2], [\App\Models\Central\Signup::sole()->clinic_type, \App\Models\Central\Signup::sole()->doctors]);
+    }
+
     public function test_a_clinic_registers_on_the_website_waits_on_its_subscription_page_and_is_approved_or_rejected(): void
     {
         config(['tenancy.base_domain' => 'tabib.test']);
@@ -216,9 +231,8 @@ class CentralPanelTest extends TestCase
 
         $form = ['name' => 'Kabul Family Clinic', 'slug' => 'Kabul', 'licence_no' => 'MOPH-55', 'clinic_type' => 'general', 'province' => 'Kabul', 'city' => 'Kabul', 'doctors' => 3, 'branches' => 2, 'owner_name' => 'Karim Khan',
             'owner_email' => 'karim@kabul.test', 'owner_phone' => '0700123456', 'password' => 'a-good-password', 'password_confirmation' => 'a-good-password', 'message' => 'Call after noon.', 'terms' => '1'];
-        // what is refused: a taken or reserved address, a short password, an unknown kind of clinic, the terms not accepted, the box only robots fill
-        $this->post('/register', ['clinic_type' => 'casino'] + $form)->assertSessionHasErrors('clinic_type');
-        $this->post('/register', ['terms' => null] + $form)->assertSessionHasErrors('terms');
+        // what is refused: a taken or reserved address, a short password, the box only robots fill
+        // (the kind of clinic and the terms are checked in their own test: the form takes 10 posts an hour from one address)
         $this->post('/register', ['slug' => 'admin'] + $form)->assertSessionHasErrors('slug');
         $this->post('/register', ['slug' => 'a b'] + $form)->assertSessionHasErrors('slug');
         $this->post('/register', ['password' => 'short', 'password_confirmation' => 'short'] + $form)->assertSessionHasErrors('password');
