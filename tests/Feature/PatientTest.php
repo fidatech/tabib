@@ -33,7 +33,7 @@ class PatientTest extends TestCase
         // the page of the patient: the allergy in red, and the way to book
         $this->get('/patients/'.$patient->id)->assertOk()->assertSee('P-000001')->assertSee('patient-allergy', false)->assertSee('Penicillin')
             ->assertSee('Book an appointment')->assertSee('Rahim');
-        $this->assertTrue(AuditLog::where('action', 'viewed')->where('subject_type', Patient::class)->where('subject_id', $patient->id)->exists());
+        $this->assertTrue(AuditLog::where('action', 'viewed')->where('subject_type', 'Patient')->where('subject_id', $patient->id)->exists());
 
         // the next one gets the next number; only the age is known
         $this->post('/patients', ['name' => 'Zarghona', 'gender' => 'female', 'age' => '4', 'allergies' => 'None known']);

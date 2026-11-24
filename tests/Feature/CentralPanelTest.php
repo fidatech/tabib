@@ -68,7 +68,7 @@ class CentralPanelTest extends TestCase
         // the dashboard of a new clinic: who is signed in, the subscription, and what to do before the first patient
         $this->get('/')->assertOk()->assertSee('Main branch')->assertSee('Subscription')->assertSee('dash-top', false)->assertSee('Get the clinic ready')
             ->assertSee('Add the doctors of the clinic')->assertSee('1405')->assertSee('data-clock', false)->assertSee('data-primary="tabib"', false)
-            ->assertDontSee('quickbar-item', false)->assertDontSee('id="ratesModal"', false)->assertDontSee('/transactions/', false)->assertDontSee('DAB Links')->assertDontSee('Period Closing');
+            ->assertSee('quickbar-item', false)->assertSee('/appointments/create', false)->assertSee('/patients/create', false)->assertDontSee('id="ratesModal"', false)->assertDontSee('/transactions/', false)->assertDontSee('DAB Links')->assertDontSee('Period Closing');
         $this->get('/day')->assertNotFound();
     }
 

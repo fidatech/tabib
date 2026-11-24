@@ -134,6 +134,7 @@ class AppointmentTest extends TestCase
 
         // the doctor: his own column first, every doctor on request
         $this->actingAs(User::where('email', 'ahmad@acme.test')->sole());
+        $this->get('/queue');   // reads the message of the booking above, so it is not on the next page
         $this->get('/appointments')->assertOk()->assertSee('Dr. Ahmad')->assertDontSee('Gul Ahmad');
         $this->get('/appointments?doctor=all')->assertOk()->assertSee('Gul Ahmad');
         $this->get('/queue')->assertOk()->assertSee('queue-card is-mine', false);
