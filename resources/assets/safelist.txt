@@ -1,0 +1,72 @@
+# Class names and icons that the build cannot see in the views or scripts.
+# One or more per line. Icons are written as #s-name (solid) or #r-name (regular).
+
+# icons used from JavaScript
+#s-sun #s-moon #s-file #s-arrow-right
+#s-circle-check #s-circle-xmark #s-circle-info #s-circle-question #s-triangle-exclamation
+#r-eye #r-eye-slash
+
+# toast colours are built in JavaScript as "is-" + type
+is-success is-danger is-warning is-info
+
+# screen icons chosen in PHP lists (AccountController::SCREENS, ItemController)
+#s-user-group #s-truck-field #s-building-columns #s-money-bill-transfer #s-vault #s-handshake
+#s-id-badge #s-user-tie #s-hand-holding-dollar #s-receipt #s-sack-dollar #s-folder #s-flask #s-box
+
+# screen icons chosen in PHP lists (LookupController::LISTS, HrRecordController::SCREENS)
+#s-building-user #s-user-tag #s-folder-tree #s-layer-group
+#s-umbrella-beach #s-star #s-file-signature #s-clock #s-business-time #s-scale-unbalanced
+#s-list-check #s-vial
+
+# balance colours are built in PHP as "bal-" / "is-" + tone (Account::balanceTone)
+bal-due bal-owe bal-capital bal-zero bal-plain is-due is-owe is-capital is-zero is-plain
+
+# Excel and PDF buttons are added by JavaScript
+#s-file-excel #s-file-pdf
+
+# icons of the report cards (App\Reports\Tables::LIST)
+#s-arrow-right-arrow-left #s-chart-column #s-chart-line #s-clipboard-check #s-coins #s-gavel #s-hourglass-half #s-id-card #s-layer-group #s-list-check #s-money-bill-transfer #s-money-bill-wave #s-paper-plane #s-pen #s-percent #s-receipt #s-trash #s-triangle-exclamation #s-users
+
+# icons of the row buttons (x-act)
+#s-eye #s-receipt #s-pen #s-trash #s-ban
+
+# icons of the administration and inspection menus (named in arrays)
+#s-gauge-high #s-landmark #s-headset #s-bullhorn #s-receipt #s-money-bill-wave #s-chart-column #s-user-shield #s-building-columns #s-database #s-heart-pulse #s-clock-rotate-left #s-users-gear #s-gear #s-clipboard-list #s-clipboard-check #s-users #s-id-badge #s-triangle-exclamation #s-circle-check #s-hourglass-half #s-code-branch #s-lock #s-lock-open #s-download #s-rotate-left #s-paper-plane #s-file-invoice-dollar #s-wallet #s-calendar-days #s-list-check #s-magnifying-glass #s-print #s-user-tie #s-sitemap
+
+# built in the views as "sev-" or "is-" + a value (findings of an inspection, service strips)
+sev-minor sev-major sev-critical sev-note is-minor is-major is-critical is-note
+
+# icons of the workspace menu of a Sarafi (PortalController::SECTIONS)
+#s-arrow-right-arrow-left #s-file-excel #s-paper-plane #s-download
+
+# results of an inspection, built as "is-" + result (coverage of inspections)
+is-observations is-violations is-satisfactory is-done is-now is-later
+#r-circle-check #s-xmark #s-check #s-download #s-calendar-days #s-landmark
+
+# stars of the boxes of a form
+req is-later
+
+# the public website: state of a request, icons of the features
+is-approved is-rejected is-pending
+#s-money-bill-transfer #s-users #s-code-branch #s-file-excel #s-book #s-language
+
+# state of the subscription on the dashboard
+is-ok is-soon is-ended
+#r-clock
+
+# dashboard cards: tones and icons held in arrays
+is-success is-danger is-primary is-warning
+#s-arrow-right-arrow-left #s-arrow-down #s-arrow-up #s-paper-plane #s-user-plus #s-user #s-building #s-users #s-hourglass-half #s-circle-check #s-inbox #s-money-bill-wave #s-building-columns #s-receipt #s-chevron-right
+
+# icons of the row of daily work (config/quickbar.php)
+#s-arrow-down #s-arrow-up #s-arrow-right-arrow-left #s-paper-plane #s-landmark #s-building #s-receipt #s-chevron-down #s-plus
+#s-gavel #s-file-shield #s-user-shield
+#s-user-pen #s-user-check
+#s-user-tie #s-phone #s-file-shield #s-shield-halved
+#s-store #s-users
+
+# icons of the menu of the administrator panel (layouts.central)
+#s-rotate #s-handshake #s-list-check
+
+# icons of the menu of the reseller panel (layouts.reseller)
+#s-percent #s-wallet #s-user-plus #s-id-badge #s-gauge-high #s-landmark

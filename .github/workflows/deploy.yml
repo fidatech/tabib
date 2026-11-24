@@ -1,0 +1,357 @@
+name: deploy
+
+# Puts Tabib on its server over SSH. Made for a cPanel account, works
+# on a plain server too.
+#
+#   a tag "check-<anything>"   looks at the server and reports what it has; nothing is changed
+#   a tag "deploy-<anything>"  puts the tagged commit on the server
+#   the file .github/deploy-tabib changed on the development branch: its first word, check or deploy
+#   "Run workflow" on GitHub   the same two, once this file is on the default branch
+#
+# Variable of the repository (Settings > Secrets and variables > Actions > Variables):
+#   TABIB_DOMAIN        the domain of the SaaS, for example tabib.af (clinics get name.tabib.af)
+#
+# Secrets of the repository (Settings > Secrets and variables > Actions):
+#   TABIB_SSH_HOST      server address: the domain of the SaaS or its IP
+#   TABIB_SSH_USER      SSH user (on cPanel: the cPanel user name)
+#   TABIB_SSH_KEY       private key of a key pair made for deploying (the public half is in ~/.ssh/authorized_keys)
+#   TABIB_SSH_PORT      optional, 22 when empty
+#   TABIB_DEPLOY_PATH   optional: folder of the system on the server; ~/tabib when empty
+#   TABIB_ENV_FILE      optional: the whole .env of the server, written only when the server has none yet.
+#                       On cPanel it is not needed: the first deploy makes the database, its user and the .env itself.
+#   TABIB_PHP           optional: the PHP command of the server, when the one found by itself is not the right one
+#
+# On cPanel the first deploy also: makes the central database and its user, makes an API token so the
+# system can make the database and the subdomain of every new clinic, and points the website of the
+# domain at the "public" folder of the system (what was in the old folder is kept beside it).
+
+on:
+  push:
+    tags: ['deploy-*', 'check-*']
+    # or: change the file .github/deploy-tabib on the development branch; its first word is "check" or "deploy"
+    branches: [development]
+    paths: ['.github/deploy-tabib']
+  workflow_dispatch:
+    inputs:
+      action:
+        description: check the server, or deploy
+        type: choice
+        options: [check, deploy]
+        default: check
+
+concurrency:
+  group: deploy-tabib
+  cancel-in-progress: false
+
+jobs:
+  server:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      DOMAIN: ${{ vars.TABIB_DOMAIN }}
+      SSH_HOST: ${{ secrets.TABIB_SSH_HOST }}
+      SSH_USER: ${{ secrets.TABIB_SSH_USER }}
+      SSH_PORT: ${{ secrets.TABIB_SSH_PORT }}
+      WANTED_PATH: ${{ secrets.TABIB_DEPLOY_PATH }}
+      WANTED_PHP: ${{ secrets.TABIB_PHP }}
+      WANTED_ACTION: ${{ github.event_name == 'workflow_dispatch' && inputs.action || (startsWith(github.ref_name, 'deploy-') && 'deploy' || (startsWith(github.ref_name, 'check-') && 'check' || 'file')) }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Open the SSH connection
+        env:
+          SSH_KEY: ${{ secrets.TABIB_SSH_KEY }}
+        run: |
+          ACTION="$WANTED_ACTION"
+          if [ "$ACTION" = file ]; then ACTION=$(awk 'NR==1 {print $1}' .github/deploy-tabib); fi
+          case "$ACTION" in check|deploy) ;; *) echo "::error::The file .github/deploy-tabib must start with the word check or deploy."; exit 1 ;; esac
+          echo "ACTION=$ACTION" >> "$GITHUB_ENV"
+          echo "Action: $ACTION"
+          for name in SSH_HOST SSH_USER SSH_KEY; do
+            if [ -z "${!name}" ]; then echo "::error::The secret TABIB_$name is not set."; exit 1; fi
+          done
+          if [ -z "$DOMAIN" ]; then echo "::error::The variable TABIB_DOMAIN (the domain of the SaaS) is not set."; exit 1; fi
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_KEY" | tr -d '\r' > ~/.ssh/deploy && chmod 600 ~/.ssh/deploy
+          PORT="${SSH_PORT:-22}"
+          ssh-keyscan -p "$PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
+          {
+            echo "Host server"
+            echo "  HostName $SSH_HOST"
+            echo "  User $SSH_USER"
+            echo "  Port $PORT"
+            echo "  IdentityFile ~/.ssh/deploy"
+            echo "  IdentitiesOnly yes"
+            echo "  BatchMode yes"
+            echo "  ConnectTimeout 20"
+            echo "  ServerAliveInterval 30"
+          } > ~/.ssh/config
+          if ! ssh server 'echo "Connected to $(hostname) as $(whoami)"'; then
+            echo "::error::No SSH connection to the server on port $PORT. Check the port, that SSH is switched on for the account, that the public key is in ~/.ssh/authorized_keys, and that the host does not block foreign addresses."
+            exit 1
+          fi
+
+      - name: Look at the server
+        id: look
+        run: |
+          ssh server "WANTED_PHP='$WANTED_PHP' WANTED_PATH='$WANTED_PATH' DOMAIN='$DOMAIN' bash -s" <<'SH' > look.txt
+          # the first PHP of 8.3 or newer: the one asked for, the plain one, then those of cPanel and CloudLinux
+          PHP=''
+          for candidate in "$WANTED_PHP" php /opt/cpanel/ea-php85/root/usr/bin/php /opt/cpanel/ea-php84/root/usr/bin/php /opt/cpanel/ea-php83/root/usr/bin/php \
+                           /opt/alt/php85/usr/bin/php /opt/alt/php84/usr/bin/php /opt/alt/php83/usr/bin/php /usr/local/bin/php; do
+            [ -n "$candidate" ] || continue
+            if "$candidate" -r 'exit(PHP_VERSION_ID >= 80300 ? 0 : 1);' 2>/dev/null; then PHP=$(command -v "$candidate" || echo "$candidate"); break; fi
+          done
+          FOLDER="${WANTED_PATH:-$HOME/tabib}"
+          PANEL=none
+          if command -v uapi >/dev/null 2>&1; then PANEL=cpanel; fi
+          echo "System       : $( (. /etc/os-release 2>/dev/null && echo "$PRETTY_NAME") || uname -sr)"
+          echo "User         : $(whoami) (home $HOME)"
+          echo "Control panel: $PANEL"
+          echo "PHP (plain)  : $(php -r 'echo PHP_VERSION;' 2>/dev/null || echo 'not found')"
+          echo "PHP (used)   : ${PHP:-NONE OF 8.3 OR NEWER} $(if [ -n "$PHP" ]; then "$PHP" -r 'echo PHP_VERSION;'; fi)"
+          echo "PHP modules  : $(if [ -n "$PHP" ]; then "$PHP" -m 2>/dev/null | grep -Ei '^(bcmath|ctype|curl|dom|fileinfo|intl|mbstring|openssl|pdo_mysql|tokenizer|xml|zip|zlib)$' | tr '\n' ' '; fi)"
+          echo "PHP installed: $(ls -d /opt/cpanel/ea-php*/ /opt/alt/php[0-9]*/ 2>/dev/null | xargs -r -n1 basename | tr '\n' ' ')"
+          echo "MySQL client : $( (mysql --version || mariadb --version) 2>/dev/null | head -1)"
+          echo "rsync        : $(rsync --version 2>/dev/null | head -1)"
+          echo "crontab      : $(if command -v crontab >/dev/null 2>&1; then echo yes; else echo no; fi)"
+          echo "Folder       : $FOLDER $(if [ -d "$FOLDER" ]; then echo '(exists)'; else echo '(will be made)'; fi)"
+          echo ".env         : $(if [ -f "$FOLDER/.env" ]; then echo 'on the server'; else echo 'not there yet'; fi)"
+          if [ "$PANEL" = cpanel ]; then
+            echo "Website root : $(uapi --output=json DomainInfo single_domain_data domain="$DOMAIN" 2>/dev/null | "${PHP:-php}" -r '$j = json_decode(stream_get_contents(STDIN), true); echo $j["result"]["data"]["documentroot"] ?? "unknown (is the domain on this account?)";' 2>/dev/null)"
+            echo "public_html  : $(ls -A "$HOME/public_html" 2>/dev/null | tr '\n' ' ' | cut -c1-200)"
+          fi
+          echo "Free disk    : $(df -h "$HOME" 2>/dev/null | awk 'NR==2 {print $4}')"
+          echo "@php=$PHP"
+          echo "@version=$(if [ -n "$PHP" ]; then "$PHP" -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;'; fi)"
+          echo "@folder=$FOLDER"
+          echo "@panel=$PANEL"
+          SH
+          grep -v '^@' look.txt | tee report.txt
+          { echo "### Server of $DOMAIN"; echo '```'; cat report.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          value() { sed -n "s/^@$1=//p" look.txt; }
+          echo "php=$(value version)" >> "$GITHUB_OUTPUT"
+          echo "REMOTE_PHP=$(value php)" >> "$GITHUB_ENV"
+          echo "REMOTE_PATH=$(value folder)" >> "$GITHUB_ENV"
+          echo "PANEL=$(value panel)" >> "$GITHUB_ENV"
+          case "$(value folder)" in /*/*) ;; *) echo "::error::The folder of the system must be a full path, like /home/user/tabib."; exit 1 ;; esac
+          if [ "$ACTION" = deploy ]; then
+            [ -n "$(value php)" ] || { echo "::error::The server has no PHP 8.3 or newer on the command line. Install it (cPanel: MultiPHP Manager or Select PHP Version) or set the secret TABIB_PHP."; exit 1; }
+            for module in bcmath mbstring pdo_mysql; do
+              grep -qi "PHP modules.*$module" report.txt || { echo "::error::The PHP of the server lacks the module $module."; exit 1; }
+            done
+          fi
+          rm -f look.txt report.txt
+
+      # the libraries are installed here, with the PHP version of the server, and sent ready: the server needs no composer
+      - uses: shivammathur/setup-php@v2
+        if: env.ACTION == 'deploy'
+        with:
+          php-version: ${{ steps.look.outputs.php }}
+          extensions: mbstring, bcmath, intl, pdo_mysql, zip, dom
+          coverage: none
+
+      - name: Install the libraries and check the built assets
+        if: env.ACTION == 'deploy'
+        run: |
+          php tools/build-assets.php --check
+          composer install --no-dev --no-interaction --prefer-dist --no-progress --optimize-autoloader
+
+      # one packed file over SSH (the server needs no rsync), unpacked beside the running system and swapped in
+      - name: Send the files
+        if: env.ACTION == 'deploy'
+        run: |
+          tar czf /tmp/release.tgz --exclude=./.git --exclude=./.github --exclude=./.env --exclude=./.env.example --exclude=./tests --exclude=./phpunit.xml \
+            --exclude=./storage --exclude='./bootstrap/cache/*.php' --exclude=./public/storage --exclude=./node_modules .
+          ls -lh /tmp/release.tgz | awk '{print "Packed: " $5}'
+          ssh server 'cat > "$HOME/tabib-release.tgz"' < /tmp/release.tgz
+          ssh server "PHP='$REMOTE_PHP' FOLDER='$REMOTE_PATH' bash -s" <<'SH'
+          set -e
+          new="$FOLDER.new"
+          old="$FOLDER.old"
+          rm -rf "$new" "$old"
+          mkdir -p "$new"
+          tar xzf "$HOME/tabib-release.tgz" -C "$new"
+          rm -f "$HOME/tabib-release.tgz"
+          if [ -d "$FOLDER" ]; then
+            if [ -f "$FOLDER/artisan" ] && [ -d "$FOLDER/vendor" ] && [ -f "$FOLDER/.env" ]; then (cd "$FOLDER" && "$PHP" artisan down --retry=30) || true; fi
+            # what belongs to the server, not to the code, moves to the new copy
+            for keep in .env storage public/storage public/.well-known public/cgi-bin public/.user.ini public/php.ini; do
+              if [ -e "$FOLDER/$keep" ] || [ -L "$FOLDER/$keep" ]; then rm -rf "$new/$keep"; mv "$FOLDER/$keep" "$new/$keep"; fi
+            done
+            # and the lines cPanel wrote into .htaccess (the PHP version of the website)
+            if [ -f "$FOLDER/public/.htaccess" ]; then
+              awk '/BEGIN cPanel-generated/{on=1} on{print} /END cPanel-generated/{on=0}' "$FOLDER/public/.htaccess" > "$new/panel.htaccess"
+              if [ -s "$new/panel.htaccess" ]; then { echo; cat "$new/panel.htaccess"; } >> "$new/public/.htaccess"; fi
+              rm -f "$new/panel.htaccess"
+            fi
+            mv "$FOLDER" "$old"
+          fi
+          mv "$new" "$FOLDER"
+          rm -rf "$old"
+          echo "The files are in place."
+          SH
+
+      - name: First time - the database, the .env and the website folder
+        if: env.ACTION == 'deploy'
+        env:
+          ENV_FILE: ${{ secrets.TABIB_ENV_FILE }}
+        run: |
+          if ! ssh server "test -f '$REMOTE_PATH/.env'" && [ -n "$ENV_FILE" ]; then
+            printf '%s\n' "$ENV_FILE" | tr -d '\r' | ssh server "umask 077 && cat > '$REMOTE_PATH/.env'"
+            echo "The .env was written from the secret TABIB_ENV_FILE."
+          fi
+          ssh server "PHP='$REMOTE_PHP' FOLDER='$REMOTE_PATH' DOMAIN='$DOMAIN' PANEL='$PANEL' bash -s" <<'SH'
+          set -e
+          cd "$FOLDER"
+          # one call of cPanel: fails with the words of the panel, prints the token when it made one
+          panel() {
+            uapi --output=json "$@" | "$PHP" -r '$r = json_decode(stream_get_contents(STDIN), true)["result"] ?? []; if ((int) ($r["status"] ?? 0) !== 1) { fwrite(STDERR, implode(" ", (array) ($r["errors"] ?? ["cPanel did not answer"]))."\n"); exit(1); } echo is_array($r["data"] ?? null) ? ($r["data"]["token"] ?? "") : "";'
+          }
+          if [ ! -f .env ]; then
+            if [ "$PANEL" != cpanel ]; then
+              echo "::error::The server has no .env. Put it in the secret TABIB_ENV_FILE (see .env.production.example)."
+              exit 1
+            fi
+            me=$(whoami)
+            database="${me}_tabib"
+            password=$("$PHP" -r 'echo "Fs".bin2hex(random_bytes(14))."x9";')
+            if ! panel Mysql create_database name="$database" 2>panel.err; then
+              grep -qi 'exist' panel.err || { cat panel.err; exit 1; }
+            fi
+            if ! panel Mysql create_user name="$database" password="$password" 2>panel.err; then
+              panel Mysql set_password user="$database" password="$password"
+            fi
+            panel Mysql set_privileges_on_database user="$database" database="$database" privileges='ALL PRIVILEGES'
+            panel Tokens revoke name=tabib >/dev/null 2>&1 || true
+            token=$(panel Tokens create_full_access name=tabib)
+            [ -n "$token" ] || { echo "::error::cPanel gave no API token."; exit 1; }
+            rm -f panel.err
+            umask 077
+            sed -e "s|^DB_DATABASE=.*|DB_DATABASE=$database|" -e "s|^DB_USERNAME=.*|DB_USERNAME=$database|" -e "s|^DB_PASSWORD=.*|DB_PASSWORD=$password|" \
+                -e "s|^TENANT_DATABASE_PREFIX=.*|TENANT_DATABASE_PREFIX=${me}_s_|" .env.production.example > .env
+            printf '\n# cPanel: the system asks the panel for the database and the subdomain of a new clinic\nCPANEL_USER=%s\nCPANEL_TOKEN=%s\n' "$me" "$token" >> .env
+            echo "The database $database, its user, an API token and the .env were made."
+          fi
+          if [ "$PANEL" = cpanel ]; then
+            # the website of the domain is served from the "public" folder of the system
+            root=$(uapi --output=json DomainInfo single_domain_data domain="$DOMAIN" | "$PHP" -r '$j = json_decode(stream_get_contents(STDIN), true); echo $j["result"]["data"]["documentroot"] ?? "";')
+            if [ -z "$root" ]; then
+              echo "::warning::cPanel does not know the domain $DOMAIN on this account; point its website at $FOLDER/public by hand."
+            else
+              if [ "$(readlink -f "$root")" != "$(readlink -f "$FOLDER/public")" ]; then
+                case "$root" in "$HOME"/*) ;; *) echo "::error::Unexpected website folder: $root"; exit 1 ;; esac
+                if [ -e "$root" ] && [ ! -L "$root" ]; then
+                  # what the panel keeps in the website folder stays with the website
+                  for keep in .well-known cgi-bin .user.ini php.ini; do
+                    if [ -e "$root/$keep" ] && [ ! -e "$FOLDER/public/$keep" ]; then cp -a "$root/$keep" "$FOLDER/public/$keep"; fi
+                  done
+                  if [ -f "$root/.htaccess" ]; then
+                    awk '/BEGIN cPanel-generated/{on=1} on{print} /END cPanel-generated/{on=0}' "$root/.htaccess" > panel.htaccess
+                    if [ -s panel.htaccess ]; then { echo; cat panel.htaccess; } >> "$FOLDER/public/.htaccess"; fi
+                    rm -f panel.htaccess
+                  fi
+                  mv "$root" "$root.before-tabib-$(date +%Y%m%d%H%M%S)"
+                fi
+                rm -f "$root"
+                ln -s "$FOLDER/public" "$root"
+                echo "The website of $DOMAIN now shows $FOLDER/public (the old folder is kept beside it)."
+              fi
+              grep -q '^CPANEL_DOCROOT=' .env || echo "CPANEL_DOCROOT=${root#$HOME/}" >> .env
+              # every name under the domain reaches the system: a "*" subdomain, which cPanel covers with a wildcard certificate
+              if ! panel SubDomain addsubdomain domain='*' rootdomain="$DOMAIN" dir="${root#$HOME/}" 2>panel.err; then
+                grep -qi 'exist' panel.err || echo "::warning::The wildcard subdomain could not be made: $(head -c 300 panel.err)"
+              else
+                echo "The wildcard subdomain *.$DOMAIN was made."
+              fi
+              rm -f panel.err
+            fi
+            # the website runs the same PHP as the command line, when that is one of cPanel's
+            case "$PHP" in
+              /opt/cpanel/ea-php*)
+                version=$(echo "$PHP" | sed 's|/opt/cpanel/\(ea-php[0-9]*\)/.*|\1|')
+                panel LangPHP php_set_vhost_versions version="$version" vhost="$DOMAIN" >/dev/null 2>&1 || echo "::warning::Set PHP $version for $DOMAIN in cPanel (MultiPHP Manager)."
+                ;;
+            esac
+          fi
+          SH
+
+      - name: Migrate and switch on
+        if: env.ACTION == 'deploy'
+        run: |
+          ssh server "PHP='$REMOTE_PHP' FOLDER='$REMOTE_PATH' bash -s" <<'SH'
+          set -e
+          cd "$FOLDER"
+          mkdir -p storage/app/private storage/app/public storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs bootstrap/cache
+          chmod -R u+rwX storage bootstrap/cache
+          # mail really leaves the server (registrations are sent to the administrator): the log only is the setting of before
+          sed -i 's/^MAIL_MAILER=log$/MAIL_MAILER=failover/' .env
+          "$PHP" artisan config:clear
+          if grep -q '^APP_KEY=$' .env; then "$PHP" artisan key:generate --force; fi
+          "$PHP" artisan migrate --force
+          "$PHP" artisan tenants:migrate
+          [ -e public/storage ] || "$PHP" artisan storage:link || true
+          "$PHP" artisan config:cache
+          "$PHP" artisan route:clear
+          "$PHP" artisan view:cache
+          # the daily jobs (closing of days, licences, backups): one line in the crontab of this user
+          line="* * * * * cd $FOLDER && $PHP artisan schedule:run >> /dev/null 2>&1"
+          if command -v crontab >/dev/null 2>&1; then
+            { crontab -l 2>/dev/null | grep -vF "cd $FOLDER && " || true; echo "$line"; } | crontab - || echo "::warning::The crontab could not be written; add this cron job by hand: $line"
+          else
+            echo "::warning::No crontab on the server; add this cron job in the hosting panel: $line"
+          fi
+          "$PHP" artisan up
+          echo "Deployed: $("$PHP" artisan --version)"
+          "$PHP" artisan mail:check || true
+          SH
+          echo "Deployed commit ${GITHUB_SHA} to $DOMAIN" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Does the website answer?
+        run: |
+          sleep 3
+          echo "DNS of $DOMAIN        : $(getent ahostsv4 "$DOMAIN" | awk '{print $1}' | sort -u | tr '\n' ' ')"
+          echo "Address of the server : $(ssh server 'hostname -i 2>/dev/null; curl -s --max-time 8 https://api.ipify.org 2>/dev/null' 2>/dev/null | tr '\n' ' ')"
+          for url in "http://$DOMAIN/admin/login" "https://$DOMAIN/admin/login"; do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' -L --max-time 25 "$url" 2>curl.err || true)
+            echo "$url answers $code $(head -c 200 curl.err)" | tee -a "$GITHUB_STEP_SUMMARY"
+          done
+          rm -f curl.err
+          # no certificate for the domain yet: cPanel is asked to get one now (AutoSSL), which takes some minutes
+          if [ "$PANEL" = cpanel ] && ! curl -s -o /dev/null --max-time 25 "https://$DOMAIN/"; then
+            ssh server 'uapi --output=json SSL start_autossl_check' 2>/dev/null | grep -o '"status":[0-9]' | head -1 | sed 's/"status":1/cPanel was asked for a certificate (AutoSSL); try https again in some minutes./; s/"status":0/cPanel refused to start AutoSSL; ask the hosting company for a certificate./' | tee -a "$GITHUB_STEP_SUMMARY"
+          fi
+          # does a name nobody made answer with a valid certificate? then new clinics need no subdomain of their own
+          if [ "$PANEL" = cpanel ]; then
+            probe="probe-$RANDOM$RANDOM.$DOMAIN"
+            if curl -s -o /dev/null --max-time 25 "https://$probe/login"; then
+              echo "Any address under $DOMAIN answers with a valid certificate (wildcard)." | tee -a "$GITHUB_STEP_SUMMARY"
+              ssh server "cd '$REMOTE_PATH' && if [ -f .env ] && ! grep -q '^CPANEL_WILDCARD=true' .env; then sed -i '/^CPANEL_WILDCARD=/d' .env; echo 'CPANEL_WILDCARD=true' >> .env; '$REMOTE_PHP' artisan config:cache >/dev/null; echo 'The system now relies on the wildcard: no subdomain is made for a new clinic.'; fi" 2>/dev/null
+            else
+              echo "A new address under $DOMAIN has no valid certificate until cPanel fetches one: $(curl -sS -o /dev/null --max-time 25 "https://$probe/login" 2>&1 | head -c 160)" | tee -a "$GITHUB_STEP_SUMMARY"
+              ssh server "cd '$REMOTE_PATH' && if grep -q '^CPANEL_WILDCARD=true' .env 2>/dev/null; then sed -i '/^CPANEL_WILDCARD=/d' .env; '$REMOTE_PHP' artisan config:cache >/dev/null; fi; uapi SSL start_autossl_check >/dev/null 2>&1" 2>/dev/null || true
+            fi
+          fi
+          # cPanel: the certificates of the addresses of the clinics
+          if [ "$PANEL" = cpanel ]; then
+            ssh server "PHP='$REMOTE_PHP' bash -s" <<'SH' 2>/dev/null
+          echo "--- certificates (cPanel) ---"
+          uapi --output=json SSL installed_hosts | "$PHP" -r '$d = json_decode(stream_get_contents(STDIN), true)["result"]["data"] ?? []; foreach ($d as $h) { $c = $h["certificate"] ?? []; echo "installed: ".implode(",", array_slice($c["domains"] ?? [], 0, 12))."  issuer=".($c["issuer.organizationName"] ?? "?")."  until=".date("Y-m-d", (int) ($c["not_after"] ?? 0))."  self-signed=".(int) ($c["is_self_signed"] ?? 0)."\n"; }'
+          uapi --output=json SSL is_autossl_check_in_progress | "$PHP" -r '$r = json_decode(stream_get_contents(STDIN), true)["result"] ?? []; echo "AutoSSL running now: ".json_encode($r["data"] ?? null)." ".implode(" ", (array) ($r["errors"] ?? []))."\n";'
+          uapi --output=json SSL get_autossl_problems | "$PHP" -r '$r = json_decode(stream_get_contents(STDIN), true)["result"] ?? []; foreach (($r["data"] ?? []) as $p) { echo "AutoSSL problem: ".($p["domain"] ?? "")." (".($p["time"] ?? "")."): ".substr(preg_replace("/\s+/", " ", (string) ($p["problem"] ?? "")), 0, 400)."\n"; } echo "AutoSSL problems listed: ".count($r["data"] ?? [])." ".implode(" ", (array) ($r["errors"] ?? []))."\n";'
+          uapi --output=json SSL get_autossl_excluded_domains | "$PHP" -r '$r = json_decode(stream_get_contents(STDIN), true)["result"] ?? []; echo "AutoSSL excluded: ".json_encode($r["data"] ?? null)."\n";'
+          uapi --output=json DomainInfo list_domains | "$PHP" -r '$d = json_decode(stream_get_contents(STDIN), true)["result"]["data"] ?? []; echo "subdomains: ".implode(",", $d["sub_domains"] ?? [])."\n";'
+          SH
+          fi
+          ssh server "FOLDER='$REMOTE_PATH' bash -s" <<'SH' 2>/dev/null
+          echo "Last error in the log: $(grep -h 'production.ERROR' "$FOLDER"/storage/logs/*.log 2>/dev/null | tail -1 | cut -c1-400)"
+          SH
+
+      - name: Switch on again if something failed half way
+        if: failure() && env.ACTION == 'deploy'
+        run: ssh server "cd '$REMOTE_PATH' && [ -f artisan ] && [ -d vendor ] && [ -f .env ] && '$REMOTE_PHP' artisan up || true"
+
+      - name: Remove the key
+        if: always()
+        run: rm -f ~/.ssh/deploy
