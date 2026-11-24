@@ -40,7 +40,7 @@ class SmsController extends Controller
             'sms_country_code' => ['required', 'regex:/^\+?\d{1,4}$/'],
             'sms_twilio_sid' => ['nullable', 'required_if:sms_gateway,twilio', 'string', 'max:64'],
             'sms_twilio_token' => ['nullable', 'string', 'max:128'],
-            'sms_http_url' => ['nullable', 'required_if:sms_gateway,http', 'url:http,https', 'max:500'],
+            'sms_http_url' => ['nullable', 'required_if:sms_gateway,http', 'regex:/^https?:\/\/[^\s]+$/i', 'max:500'],
             'sms_http_method' => ['nullable', Rule::in(['get', 'post'])],
             'sms_http_body' => ['nullable', 'string', 'max:1000'],
             'sms_http_token' => ['nullable', 'string', 'max:255'],

@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-12 row g-3 m-0 p-0" data-sms-for="http">
                     <div class="col-12"><label class="form-label small" for="sms-url">{{ __('Address of the gateway') }}</label>
-                        <input type="url" class="form-control" id="sms-url" name="sms_http_url" value="{{ $val('sms_http_url') }}" maxlength="500" dir="ltr" placeholder="https://sms.example.af/send?to={to}&amp;text={message}&amp;from={sender}">
+                        <input type="text" inputmode="url" class="form-control" id="sms-url" name="sms_http_url" value="{{ $val('sms_http_url') }}" maxlength="500" dir="ltr" placeholder="https://sms.example.af/send?to={to}&amp;text={message}&amp;from={sender}">
                         <div class="form-text">{{ __('{to}, {message} and {sender} are filled in.') }}</div></div>
                     <div class="col-6 col-md-4"><label class="form-label small" for="sms-method">{{ __('Method') }}</label>
                         <select class="form-select" id="sms-method" name="sms_http_method"><option value="get" @selected($val('sms_http_method', 'get') === 'get')>GET</option><option value="post" @selected($val('sms_http_method') === 'post')>POST (JSON)</option></select></div>
