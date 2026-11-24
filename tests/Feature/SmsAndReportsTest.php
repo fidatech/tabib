@@ -50,7 +50,10 @@ class SmsAndReportsTest extends TestCase
     public function test_bookings_and_reminders_are_texted_once_and_failures_are_kept(): void
     {
         [$doctor, $gul, $mariam] = $this->setUpClinic();
-        Http::fake(['sms.example.af/*' => Http::response('OK', 200)]);
+        $refuse = false;
+        Http::fake(['sms.example.af/*' => function () use (&$refuse) {
+            return $refuse ? Http::response('no credit', 402) : Http::response('OK', 200);
+        }]);
         $this->settings();
         $this->assertNotSame('secret-token', \App\Models\Setting::find('sms_http_token')->value);   // kept encrypted
 
@@ -72,7 +75,7 @@ class SmsAndReportsTest extends TestCase
         $this->assertNotNull(Appointment::where('patient_id', $gul->id)->sole()->reminded_at);
 
         // a gateway that refuses: the message is kept as failed, the desk goes on
-        Http::fake(['sms.example.af/*' => Http::response('no credit', 402)]);
+        $refuse = true;
         $this->post('/settings/sms/test', ['to' => '0700123456'])->assertSessionHas('danger');
         $this->assertSame('failed', SmsMessage::latest('id')->first()->status);
         $this->get('/settings/sms')->assertOk()->assertSee('no credit')->assertSee('Failed');
