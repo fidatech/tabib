@@ -122,7 +122,7 @@ class AppointmentTest extends TestCase
         $this->assertSame(Appointment::COMPLETED, $booked->fresh()->status);
 
         // the patient's page shows the visits; the dashboard counts the day
-        $this->get('/patients/'.$mariam->id)->assertOk()->assertSee('Completed')->assertSee('Headache');
+        $this->get('/patients/'.$mariam->id.'?tab=appointments')->assertOk()->assertSee('Completed')->assertSee('Headache');
         $this->get('/')->assertOk()->assertSee('Appointments today')->assertSee('Seen today');
     }
 

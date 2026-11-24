@@ -291,6 +291,7 @@ jobs:
           if grep -q '^APP_KEY=$' .env; then "$PHP" artisan key:generate --force; fi
           "$PHP" artisan migrate --force
           "$PHP" artisan tenants:migrate
+          "$PHP" artisan icd10:import
           [ -e public/storage ] || "$PHP" artisan storage:link || true
           "$PHP" artisan config:cache
           "$PHP" artisan route:clear

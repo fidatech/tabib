@@ -55,6 +55,12 @@ class Patient extends Model
         return __(':count y', ['count' => $years]).($this->dob_estimated ? ' ~' : '');
     }
 
+    /** The patient said at registration that he has no allergy. */
+    public function knowsNoAllergies(): bool
+    {
+        return in_array(mb_strtolower(trim((string) $this->allergies), 'UTF-8'), ['none', 'none known', 'no', 'nkda', 'nka', '-', 'ندارد', 'نشته', 'هیچ'], true);
+    }
+
     public function auditLabel(): string
     {
         return $this->number.' '.$this->name;

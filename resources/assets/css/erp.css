@@ -1061,3 +1061,31 @@ small, .small { font-size: max(.875em, 12px); }
 .patient-chosen { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px; border: 1px solid var(--primary); border-radius: 10px; background: rgba(var(--primary-rgb), .06); }
 .patient-results { position: absolute; z-index: 20; width: 100%; max-height: 320px; overflow-y: auto; box-shadow: 0 10px 30px rgba(15, 20, 32, .14); }
 .patient-pick [data-patient-find] { position: relative; }
+
+/* ------------------------------------------------------------ the chart of a patient */
+.patient-strip { display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--muted); }
+.patient-strip b { color: var(--heading); }
+.chart-tabs { flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }
+.chart-tabs .nav-link { white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+@media (max-width: 575.98px) { .chart-tabs .nav-link span { display: none; } .chart-tabs .nav-link.active span { display: inline; } }
+.chart-timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+.chart-timeline::before { content: ''; position: absolute; top: 6px; bottom: 6px; inset-inline-start: 17px; width: 2px; background: var(--border); }
+.chart-timeline li { display: flex; gap: 14px; padding: 8px 0; position: relative; }
+.chart-timeline-icon { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--card); border: 2px solid var(--border); color: var(--primary); flex-shrink: 0; z-index: 1; }
+.chart-timeline li.is-error { opacity: .55; }
+.chart-timeline li.is-error .fw-semibold { text-decoration: line-through; }
+.history-entry.is-error .history-summary, .history-entry.is-error td { text-decoration: line-through; color: var(--muted); }
+.history-edit summary, .history-card details > summary { cursor: pointer; list-style: none; }
+.history-edit summary::-webkit-details-marker, .history-card details > summary::-webkit-details-marker { display: none; }
+.history-edit summary { color: var(--primary); }
+.history-changes { margin: 6px 0 0; padding-inline-start: 18px; color: var(--muted); }
+.vital-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+.vital-tiles div { background: var(--bg); border-radius: 10px; padding: 8px 10px; }
+.vital-tiles span { display: block; font-size: 12px; color: var(--muted); }
+.vital-tiles b { font-size: 18px; color: var(--heading); }
+.vital-trend { color: var(--primary); }
+.vital-trend .fw-semibold { color: var(--heading); }
+.vital-trend-last { font-size: 20px; font-weight: 800; color: var(--heading); }
+.vital-spark { width: 100%; height: 60px; display: block; margin: 6px 0; }
+.icd10-pick { position: relative; }
+.icd10-results { position: absolute; z-index: 30; width: 100%; max-height: 300px; overflow-y: auto; box-shadow: 0 10px 30px rgba(15, 20, 32, .14); }

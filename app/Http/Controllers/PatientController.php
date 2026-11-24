@@ -64,8 +64,9 @@ class PatientController extends CrudController
             ['name' => 'address', 'label' => 'Address', 'rules' => ['nullable', 'string', 'max:255'], 'col' => 4],
             ['name' => 'emergency_name', 'label' => 'Emergency contact', 'rules' => ['nullable', 'string', 'max:150']],
             ['name' => 'emergency_phone', 'label' => 'Emergency phone', 'rules' => ['nullable', 'string', 'max:40']],
-            ['name' => 'allergies', 'label' => 'Known allergies', 'type' => 'textarea', 'col' => 12, 'rules' => ['nullable', 'string', 'max:500'],
-                'help' => 'Shown in red on every page of the patient. Write "None known" when the patient has none.'],
+            // asked once at registration; afterwards the allergies are kept on the History tab, one by one
+            ...($record ? [] : [['name' => 'allergies', 'label' => 'Known allergies', 'type' => 'textarea', 'col' => 12, 'rules' => ['nullable', 'string', 'max:500'],
+                'help' => 'Separate them with commas. Shown in red on every page of the patient. Write "None known" when the patient has none.']]),
             ['name' => 'notes', 'label' => 'Notes', 'type' => 'textarea', 'col' => 12, 'rules' => ['nullable', 'string', 'max:2000']],
         ];
     }
@@ -110,6 +111,19 @@ class PatientController extends CrudController
         return $data;
     }
 
+    /** The allergies told at registration become entries of the history, marked as told by the patient. */
+    protected function afterSave(Model $record, array $virtual, Request $request, bool $created): void
+    {
+        /** @var Patient $record */
+        if (! $created || blank($record->allergies) || $record->knowsNoAllergies()) {
+            return;
+        }
+        foreach (array_filter(array_map('trim', preg_split('/[,،;\n]+/u', (string) $record->allergies))) as $substance) {
+            \App\Models\History\Allergy::create(['patient_id' => $record->id, 'substance' => mb_substr($substance, 0, 150), 'status' => 'active',
+                'source' => 'patient', 'created_by' => $request->user()->id, 'updated_by' => $request->user()->id]);
+        }
+    }
+
     /** A new patient opens on his own page, where the next step (an appointment) is one click away. */
     public function store(Request $request): RedirectResponse|JsonResponse
     {
@@ -128,21 +142,32 @@ class PatientController extends CrudController
             : null;
     }
 
+    /**
+     * The chart of a patient. Everyone who may see patients sees who he is and his appointments;
+     * the clinical record (summary, timeline, history, vital signs, visits, documents) needs clinical.view.
+     */
     public function show(Request $request, int $id): View
     {
         Gate::authorize('patients.view');
         $patient = Patient::findOrFail($id);
-        audit('viewed', $patient);
+        $clinical = $request->user()->can('clinical.view');
+        $tabs = $clinical ? ['summary', 'timeline', 'history', 'vitals', 'visits', 'documents', 'appointments'] : ['appointments'];
+        $tab = in_array($request->query('tab'), $tabs, true) ? $request->query('tab') : $tabs[0];
+        audit('viewed', $patient, $patient->auditLabel().($clinical ? ' · '.$tab : ''));
 
         $appointments = $patient->appointments()->with(['doctor.user', 'type'])->orderByDesc('starts_at')->get();
         $now = now();
-
-        return view('patients.show', [
-            'patient' => $patient,
+        $data = [
+            'patient' => $patient, 'tab' => $tab, 'tabs' => $tabs, 'clinical' => $clinical,
+            'canWrite' => $request->user()->can('clinical.manage'),
+            'isDoctor' => Doctor::where('user_id', $request->user()->id)->where('is_active', true)->exists(),
+            // the allergies are shown to everyone who sees the patient: the front desk hands out medicine too
+            'allergies' => \App\Models\History\Allergy::where('patient_id', $patient->id)->where('status', 'active')->get(),
             'upcoming' => $appointments->filter(fn (Appointment $a) => $a->isOpen() && $a->starts_at >= $now->copy()->startOfDay())->sortBy('starts_at')->values(),
             'past' => $appointments->reject(fn (Appointment $a) => $a->isOpen() && $a->starts_at >= $now->copy()->startOfDay())->values(),
-            'doctors' => Doctor::active(),
-        ]);
+        ];
+
+        return view('patients.show', $data + ($clinical ? \App\Support\Chart::for($patient, $tab) : []));
     }
 
     /** What the patient box of the appointment form asks as letters are typed: the first matches. */

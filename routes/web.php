@@ -244,7 +244,30 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
         $crud('doctors', \App\Http\Controllers\DoctorController::class, 'doctors');
         $crud('appointment-types', \App\Http\Controllers\AppointmentTypeController::class, 'appointment-types');
 
-        // visits, prescriptions and billing are added here as they are built
+        // the history of a patient: entries of every section, the way of life, vital signs, documents
+        $h = \App\Http\Controllers\HistoryController::class;
+        $sections = array_keys(\App\Support\History::sections());
+        Route::post('patients/{patient}/history/{section}', [$h, 'store'])->name('history.store')->whereNumber('patient')->whereIn('section', $sections);
+        Route::put('patients/{patient}/history/{section}/{id}', [$h, 'update'])->name('history.update')->whereNumber(['patient', 'id'])->whereIn('section', $sections);
+        Route::post('patients/{patient}/history/{section}/{id}/error', [$h, 'error'])->name('history.error')->whereNumber(['patient', 'id'])
+            ->whereIn('section', array_merge($sections, ['vitals', 'documents']));
+        Route::post('patients/{patient}/social', [$h, 'social'])->name('history.social')->whereNumber('patient');
+        Route::post('patients/{patient}/vitals', [$h, 'vitals'])->name('history.vitals')->whereNumber('patient');
+        Route::post('patients/{patient}/documents', [$h, 'upload'])->name('history.upload')->whereNumber('patient');
+        Route::get('patients/{patient}/documents/{id}', [$h, 'document'])->name('history.document')->whereNumber(['patient', 'id']);
+        Route::get('icd10', [$h, 'icd10'])->name('icd10.search');
+
+        // the visit with the doctor: written, diagnosed, signed and locked
+        $e = \App\Http\Controllers\EncounterController::class;
+        Route::post('visits', [$e, 'start'])->name('encounters.start');
+        Route::get('visits/{id}', [$e, 'show'])->name('encounters.show')->whereNumber('id');
+        Route::put('visits/{id}', [$e, 'update'])->name('encounters.update')->whereNumber('id');
+        Route::post('visits/{id}/diagnoses', [$e, 'addDiagnosis'])->name('encounters.diagnoses.store')->whereNumber('id');
+        Route::delete('visits/{id}/diagnoses/{diagnosis}', [$e, 'removeDiagnosis'])->name('encounters.diagnoses.destroy')->whereNumber(['id', 'diagnosis']);
+        Route::post('visits/{id}/sign', [$e, 'sign'])->name('encounters.sign')->whereNumber('id');
+        Route::post('visits/{id}/addenda', [$e, 'addendum'])->name('encounters.addenda.store')->whereNumber('id');
+
+        // prescriptions and billing are added here as they are built
 
         // administration
         $crud('branches', BranchController::class, 'branches');

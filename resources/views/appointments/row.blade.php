@@ -6,6 +6,13 @@
 @php
     $canAct = auth()->user()->can('appointments.manage');
     $showDate = $showDate ?? false;
+    // the doctor who is signed in opens the visit of his patient straight from the row
+    // (asked once in a request, kept on the request)
+    if (! request()->attributes->has('my_doctor')) {
+        request()->attributes->set('my_doctor', auth()->user()->can('clinical.manage') ? \App\Models\Doctor::where('user_id', auth()->id())->where('is_active', true)->value('id') : null);
+    }
+    $myDoctor = request()->attributes->get('my_doctor');
+    $canVisit = $myDoctor && in_array($a->status, ['arrived', 'with_doctor', 'completed'], true) && ($a->doctor_id === $myDoctor || $a->status !== 'completed');
     $buttons = ['confirm' => 'btn-outline-soft', 'arrive' => 'btn-warning', 'start' => 'btn-primary', 'complete' => 'btn-success', 'no_show' => 'btn-outline-soft', 'cancel' => 'btn-outline-danger'];
 @endphp
 <div class="list-group-item appt-row d-flex flex-wrap gap-2 align-items-center">
@@ -26,6 +33,10 @@
         </span>
     </div>
     <span class="badge {{ $a->statusClass() }}">{{ $a->statusLabel() }}</span>
+    @if ($canVisit)
+        <form method="POST" action="{{ route('encounters.start') }}" class="no-print">@csrf<input type="hidden" name="appointment_id" value="{{ $a->id }}">
+            <button type="submit" class="btn btn-sm btn-gradient"><x-icon name="stethoscope" class="me-1" /> {{ $a->status === 'completed' ? __('The visit') : __('Open the visit') }}</button></form>
+    @endif
     @if ($canAct && ($a->actions() || $a->isOpen()))
         <div class="d-flex flex-wrap gap-1 no-print">
             @foreach ($a->actions() as $action)

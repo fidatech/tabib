@@ -34,6 +34,10 @@
                                 <span class="queue-token" dir="ltr">#{{ $a->token }}</span>
                                 <a href="{{ route('patients.show', ['id' => $a->patient_id]) }}" class="fw-semibold">{{ $a->patient?->name }}</a>
                                 @if ($a->reason)<span class="d-block small text-muted">{{ $a->reason }}</span>@endif
+                                @if ($mine === $d->id)
+                                    <form method="POST" action="{{ route('encounters.start') }}" class="mt-2">@csrf<input type="hidden" name="appointment_id" value="{{ $a->id }}">
+                                        <button type="submit" class="btn btn-sm btn-primary"><x-icon name="stethoscope" class="me-1" /> {{ __('Open the visit') }}</button></form>
+                                @endif
                             </div>
                         @empty
                             <div class="text-muted small">{{ __('Nobody') }}</div>
