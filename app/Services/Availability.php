@@ -40,7 +40,7 @@ class Availability
     {
         $key = 'doctor_leave_'.$doctor->id.'_'.$day->toDateString();
         if (! request()->attributes->has($key)) {
-            request()->attributes->set($key, DoctorLeave::where('doctor_id', $doctor->id)->where('starts_on', '<=', $day->toDateString())->where('ends_on', '>=', $day->toDateString())->first());
+            request()->attributes->set($key, DoctorLeave::where('doctor_id', $doctor->id)->whereDate('starts_on', '<=', $day->toDateString())->whereDate('ends_on', '>=', $day->toDateString())->first());
         }
 
         return request()->attributes->get($key);

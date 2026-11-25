@@ -25,7 +25,7 @@ class DoctorScheduleController extends Controller
         return view('doctors.schedule', [
             'doctor' => $doctor,
             'hours' => DoctorHour::where('doctor_id', $doctor->id)->orderBy('starts')->get()->groupBy('weekday'),
-            'leaves' => DoctorLeave::where('doctor_id', $doctor->id)->where('ends_on', '>=', \Illuminate\Support\Carbon::parse(today_iso())->subDays(60)->toDateString())->orderByDesc('starts_on')->get(),
+            'leaves' => DoctorLeave::where('doctor_id', $doctor->id)->whereDate('ends_on', '>=', \Illuminate\Support\Carbon::parse(today_iso())->subDays(60)->toDateString())->orderByDesc('starts_on')->get(),
             'canManage' => request()->user()->can('appointments.manage'),
         ]);
     }
