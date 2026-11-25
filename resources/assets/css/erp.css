@@ -1117,3 +1117,7 @@ small, .small { font-size: max(.875em, 12px); }
 .tooth-filled, .tooth-crown, .tooth-root_canal, .tooth-implant { background: #e8f1fb; border-color: #9fc1e7; color: #1b4f8a; }
 .tooth-missing { background: #eef0f3; color: #5b616b; text-decoration: line-through; }
 .tooth-mobile { background: #fff6e0; border-color: #e8c66b; color: #7a5600; }
+
+/* ------------------------------------------------------------ test requests: boxes big enough to tap */
+.test-pick .form-check { display: flex; align-items: center; gap: 10px; min-height: 34px; padding-inline-start: 0; margin: 0; }
+.test-pick .form-check-input { width: 24px; height: 24px; margin: 0; float: none; flex-shrink: 0; }

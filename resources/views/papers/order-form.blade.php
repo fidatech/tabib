@@ -12,7 +12,7 @@
     <div class="card-body">
         <div class="row g-3">
             @foreach (\App\Models\Order::COMMON[$kind] as $group => $tests)
-                <fieldset class="col-12 col-md-6 col-xl-4">
+                <fieldset class="col-12 col-md-6 col-xl-4 test-pick">
                     <legend class="h6 fw-semibold">{{ __($group) }}</legend>
                     @foreach ($tests as $test)
                         <div class="form-check"><input class="form-check-input" type="checkbox" name="tests[]" value="{{ $test }}" id="t-{{ md5($test) }}" @checked(in_array($test, (array) old('tests', []), true))>
