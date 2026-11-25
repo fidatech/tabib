@@ -65,7 +65,7 @@ class LaunchItemsTest extends TestCase
         $this->post('/visits/'.$visit->id.'/template', ['template_id' => NoteTemplate::where('kind', 'antenatal')->sole()->id]);
         // the clock stands at 2026-11-13: a period that began on 2026-08-01 is 14 weeks 6 days ago; due on 2027-05-08
         $this->put('/visits/'.$visit->id, ['extra' => ['lmp' => '2026-08-01', 'gravida' => '2', 'para' => '1', 'fetal_heart' => '148', 'presentation' => 'cephalic']]);
-        $this->assertSame(['weeks' => 14, 'days' => 6, 'edd' => '2027-05-08'], array_intersect_key(\App\Support\Forms::pregnancy('2026-08-01', $visit->fresh()->started_at), array_flip(['weeks', 'days', 'edd'])));
+        $this->assertSame(['edd' => '2027-05-08', 'weeks' => 14, 'days' => 6], array_intersect_key(\App\Support\Forms::pregnancy('2026-08-01', $visit->fresh()->started_at), array_flip(['weeks', 'days', 'edd'])));
         $this->get('/visits/'.$visit->id)->assertOk()->assertSee('14 weeks 6 days pregnant');
     }
 
