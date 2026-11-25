@@ -84,6 +84,11 @@ class PatientController extends CrudController
         ];
     }
 
+    protected function headerLinks(Request $request): array
+    {
+        return $request->user()->can('patients.manage') ? [['label' => __('Import from Excel'), 'url' => route('patients.import')]] : [];
+    }
+
     protected function rowLinks(Model $record): array
     {
         $links = [['label' => __('Open'), 'url' => route('patients.show', ['id' => $record->getKey()]), 'icon' => 'folder-open']];

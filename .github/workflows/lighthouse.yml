@@ -133,6 +133,7 @@ jobs:
           measure clinic-rx-card http://demo.localhost:8004/prescriptions/2/card "$OWNER"
           measure clinic-papers-tab "http://demo.localhost:8004/patients/1?tab=papers" "$OWNER"
           measure clinic-doctor-hours http://demo.localhost:8004/doctors/1/schedule "$OWNER"
+          measure clinic-import http://demo.localhost:8004/patients/import "$OWNER"
           cat > report.js <<'JS'
           const fs = require('fs');
           for (const file of fs.readdirSync('.').filter((f) => /^out-.*\.json$/.test(f)).sort()) {

@@ -84,6 +84,12 @@ abstract class CrudController extends Controller
     }
 
     /** Extra links for a row: [['label' => .., 'url' => .., 'icon' => ..]] */
+    /** Buttons beside "Add" on the list: [label, url]. */
+    protected function headerLinks(Request $request): array
+    {
+        return [];
+    }
+
     protected function rowLinks(Model $record): array
     {
         return [];
@@ -128,6 +134,7 @@ abstract class CrudController extends Controller
             'columns' => $this->columns(),
             'term' => $term,
             'filters' => $this->filters($request),
+            'headerLinks' => $this->headerLinks($request),
             'canManage' => $request->user()->can($this->permission.'.manage'),
             'links' => fn (Model $record) => $this->rowLinks($record),
             'editable' => fn (Model $record) => $this->canEdit($record),

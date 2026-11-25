@@ -239,6 +239,15 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
         Route::get('patients/search', [\App\Http\Controllers\PatientController::class, 'search'])->name('patients.search');
         $crud('patients', \App\Http\Controllers\PatientController::class, 'patients');
         Route::get('patients/{id}', [\App\Http\Controllers\PatientController::class, 'show'])->name('patients.show')->whereNumber('id');
+        // patients brought in from an Excel or CSV file
+        $pi = \App\Http\Controllers\PatientImportController::class;
+        Route::get('patients/import', [$pi, 'upload'])->name('patients.import');
+        Route::post('patients/import', [$pi, 'read'])->name('patients.import.read');
+        Route::get('patients/import/columns', [$pi, 'map'])->name('patients.import.map');
+        Route::post('patients/import/columns', [$pi, 'setMap'])->name('patients.import.map.store');
+        Route::get('patients/import/check', [$pi, 'check'])->name('patients.import.check');
+        Route::post('patients/import/run', [$pi, 'run'])->name('patients.import.run');
+        Route::post('patients/import/cancel', [$pi, 'cancel'])->name('patients.import.cancel');
         Route::get('patients/{id}/merge', [\App\Http\Controllers\PatientController::class, 'mergeForm'])->name('patients.merge')->whereNumber('id');
         Route::post('patients/{id}/merge', [\App\Http\Controllers\PatientController::class, 'merge'])->name('patients.merge.store')->whereNumber('id');
 
