@@ -3200,5 +3200,9 @@
     "Write at least the complaint, the assessment or a diagnosis before signing.": "له لاسلیک مخکې لږ تر لږه شکایت، ارزونه یا یو تشخیص ولیکئ.",
     "Write the health ministry licence number": "د روغتیا وزارت د جواز شمېره ولیکئ",
     "Your plan allows :count doctors. Ask Fida Technologies to add more.": "ستاسو پلان :count ډاکټرانو ته اجازه ورکوي. د زیاتولو لپاره له فدا ټکنالوژۍ وغواړئ.",
-    "entries in the audit log": "توکي د پېښو په کتاب کې"
+    "entries in the audit log": "توکي د پېښو په کتاب کې",
+    ":name cannot be prescribed: it was taken off the list.": ":name نه تجویز کېږي: له لېست څخه لرې شوی.",
+    "Taken off the platform list": "د پلاتفورم له لېست لرې شوي",
+    "No: taken off the platform list": "نه: د پلاتفورم له لېست لرې شوی",
+    "The platform list is kept by Fida Technologies. Write to support to add a brand.": "د پلاتفورم لېست فدا ټکنالوژي ساتي. د برند د زیاتولو لپاره ملاتړ ته ولیکئ."
 }

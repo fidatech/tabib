@@ -28,6 +28,7 @@
                             ['Support tickets', 'headset', 'admin.tickets.index', 'admin.tickets.*', 'tickets', $openTickets],
                             ['Announcements', 'bullhorn', 'admin.announcements.index', 'admin.announcements.*', 'announcements'],
                         ],
+                        'Clinical lists' => [['Medicines', 'pills', 'admin.drugs.index', 'admin.drugs.*', 'drugs']],
                         'Billing' => [
                             ['Invoices', 'receipt', 'admin.invoices.index', 'admin.invoices.*', 'billing.view'],
                             ['Subscriptions', 'list-check', 'admin.subscriptions.index', 'admin.subscriptions.*', 'billing.view'],

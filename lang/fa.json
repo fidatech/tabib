@@ -3200,5 +3200,9 @@
     "Write at least the complaint, the assessment or a diagnosis before signing.": "قبل از امضا حداقل شکایت، ارزیابی یا یک تشخیص بنویسید.",
     "Write the health ministry licence number": "شماره جواز وزارت صحت را بنویسید",
     "Your plan allows :count doctors. Ask Fida Technologies to add more.": "پلان شما :count داکتر را اجازه می‌دهد. برای افزایش از فدا تکنالوژی بخواهید.",
-    "entries in the audit log": "مورد در دفتر رویدادها"
+    "entries in the audit log": "مورد در دفتر رویدادها",
+    ":name cannot be prescribed: it was taken off the list.": ":name قابل تجویز نیست: از لیست برداشته شده است.",
+    "Taken off the platform list": "برداشته‌شده از لیست پلتفورم",
+    "No: taken off the platform list": "خیر: از لیست پلتفورم برداشته شده",
+    "The platform list is kept by Fida Technologies. Write to support to add a brand.": "لیست پلتفورم توسط فدا تکنالوژی نگهداری می‌شود. برای افزودن برند به پشتیبانی بنویسید."
 }

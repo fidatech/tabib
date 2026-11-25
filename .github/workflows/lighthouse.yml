@@ -44,6 +44,7 @@ jobs:
           php artisan key:generate --force
           php artisan migrate --force
           php artisan icd10:import
+          php artisan medicines:import
           php artisan app:create-admin --name="System Admin" --email=admin@example.test --password=lighthouse-pass-1
           php artisan tenants:create demo --name="Demo Clinic" --owner-name="Owner One" --owner-email=owner@example.test --owner-password=lighthouse-pass-1
           php artisan tinker --execute="app(App\Tenancy\Tenancy::class)->initialize(App\Models\Central\Tenant::where('slug', 'demo')->sole()); \$u = App\Models\User::create(['name' => 'Dr. Demo', 'email' => 'doctor@example.test', 'password' => 'lighthouse-pass-1', 'branch_id' => 1]); \$u->assignRole('Doctor'); \$d = App\Models\Doctor::create(['user_id' => \$u->id, 'specialty' => 'General practitioner']); \$p = App\Models\Patient::create(['number' => 'P-000001', 'name' => 'Gul Ahmad', 'gender' => 'male']); App\Models\Appointment::create(['patient_id' => \$p->id, 'doctor_id' => \$d->id, 'branch_id' => 1, 'starts_at' => now()->setTime(10, 0), 'ends_at' => now()->setTime(10, 15), 'status' => 'arrived', 'token' => 1]); \$o = App\Models\Doctor::create(['user_id' => 1, 'specialty' => 'Family medicine']); App\Models\Encounter::create(['patient_id' => \$p->id, 'doctor_id' => \$o->id, 'branch_id' => 1, 'started_at' => now(), 'complaint' => 'Cough', 'status' => 'draft']); App\Models\Vital::create(['patient_id' => \$p->id, 'taken_at' => now(), 'systolic' => 130, 'diastolic' => 85, 'pulse' => 80]); \$m = App\Models\Medicine::where('code', 'paracetamol-500-mg-tablet')->sole(); foreach ([1, 2] as \$n) { \$rx = App\Models\Prescription::create(['patient_id' => \$p->id, 'doctor_id' => \$o->id, 'branch_id' => 1, 'status' => 'draft', 'created_by' => 1]); \$rx->items()->create(['medicine_id' => \$m->id, 'name' => \$m->name, 'strength' => \$m->strength, 'form' => \$m->form, 'dose_amount' => 1, 'dose_unit' => 'tablet', 'frequency' => 'tds', 'timing' => 'after_food', 'days' => 5, 'quantity' => '15 tablets', 'position' => 1]); } \$rx->forceFill(['status' => 'signed', 'number' => 'RX-000001', 'signed_at' => now()->startOfSecond(), 'signed_by' => 1, 'verify_token' => str_repeat('a', 32)]); \$rx->signature = hash('sha256', \$rx->signedContent()); \$rx->save(); \$svc = App\Models\Service::create(['name' => 'ECG', 'category' => 'procedure', 'price' => 200]); \$inv = App\Services\Cashier::open(\$p, null, 1); App\Services\Cashier::addLine(\$inv, \$svc, 'ECG', 1, 200); App\Services\Cashier::addLine(\$inv, null, 'Consultation', 1, 300); App\Services\Cashier::pay(\$inv, 300, 'cash', null, 1);"
@@ -95,6 +96,7 @@ jobs:
           measure admin-login http://localhost:8004/admin/login ""
           measure clinic-login http://demo.localhost:8004/login ""
           measure admin-panel http://localhost:8004/admin "$ADMIN"
+          measure admin-medicines http://localhost:8004/admin/medicines "$ADMIN"
           measure clinic-dashboard http://demo.localhost:8004/ "$OWNER"
           measure clinic-calendar http://demo.localhost:8004/appointments "$OWNER"
           measure clinic-queue http://demo.localhost:8004/queue "$OWNER"
@@ -124,6 +126,7 @@ jobs:
           measure clinic-sms http://demo.localhost:8004/settings/sms "$OWNER"
           measure clinic-note-templates http://demo.localhost:8004/note-templates "$OWNER"
           measure clinic-merge http://demo.localhost:8004/patients/1/merge "$OWNER"
+          measure clinic-medicines-list http://demo.localhost:8004/medicines "$OWNER"
           cat > report.js <<'JS'
           const fs = require('fs');
           for (const file of fs.readdirSync('.').filter((f) => /^out-.*\.json$/.test(f)).sort()) {

@@ -300,38 +300,61 @@ class Prescribing
     /* ------------------------------------------------------------ the list of medicines */
 
     /**
-     * Bring the clinic's medicines up to the shipped list: new rows are added, the words of the
-     * shipped rows are refreshed; the clinic's own medicines, its limits and what it switched off stay.
+     * Bring the clinic's medicines up to the platform list (kept in the central panel; the shipped
+     * file when the central list is empty): new rows are added, the words of the listed rows are
+     * written again, and a medicine taken off the list is withdrawn. The clinic's own medicines,
+     * its dose limits and what it switched off stay.
      */
     public static function syncMedicines(?string $file = null): int
     {
-        $file ??= database_path('data/medicines.csv');
-        if (! is_file($file)) {
-            return 0;
-        }
-        $handle = fopen($file, 'r');
-        $header = fgetcsv($handle);
-        $known = Medicine::where('is_custom', false)->pluck('id', 'code')->all();
+        $known = Medicine::where('is_custom', false)->get(['id', 'code', 'name', 'strength', 'form', 'route', 'class', 'mg_per_unit', 'controlled', 'brands', 'withdrawn'])->keyBy('code');
         $new = [];
         $now = now();
-        while (($row = fgetcsv($handle)) !== false) {
-            if (count($row) !== count($header)) {
-                continue;
-            }
-            $r = array_combine($header, $row);
+        foreach (self::platformList($file) as $r) {
             $values = ['name' => $r['name'], 'strength' => $r['strength'] ?: null, 'form' => $r['form'], 'route' => $r['route'] ?: null, 'class' => $r['class'] ?: null,
-                'mg_per_unit' => $r['mg_per_unit'] !== '' ? (float) $r['mg_per_unit'] : null, 'controlled' => $r['controlled'] === '1', 'brands' => $r['brands'] ?: null];
-            if (isset($known[$r['code']])) {
-                Medicine::whereKey($known[$r['code']])->update($values);
-            } else {
+                'mg_per_unit' => $r['mg_per_unit'] !== null && $r['mg_per_unit'] !== '' ? (float) $r['mg_per_unit'] : null, 'controlled' => (bool) $r['controlled'],
+                'brands' => $r['brands'] ?: null, 'withdrawn' => ! $r['active']];
+            $row = $known->get($r['code']);
+            if ($row) {
+                $changed = array_filter($values, fn ($v, $k) => $k === 'mg_per_unit' ? (float) $row->{$k} !== (float) $v || ($row->{$k} === null) !== ($v === null) : $row->{$k} != $v, ARRAY_FILTER_USE_BOTH);
+                if ($changed) {
+                    Medicine::whereKey($row->id)->update($changed + ['updated_at' => $now]);
+                }
+            } elseif ($r['active']) {
                 $new[] = $values + ['code' => $r['code'], 'is_custom' => false, 'is_active' => true, 'created_at' => $now, 'updated_at' => $now];
             }
         }
-        fclose($handle);
         foreach (array_chunk($new, 200) as $chunk) {
             Medicine::insert($chunk);
         }
 
         return count($new);
+    }
+
+    /** The rows of the platform list: from the central database, or from the file it is first loaded from. */
+    private static function platformList(?string $file): \Generator
+    {
+        $central = \App\Models\Central\DrugListEntry::query();
+        if ($file === null && $central->exists()) {
+            foreach ($central->orderBy('id')->cursor() as $m) {
+                yield ['code' => $m->code, 'name' => $m->name, 'strength' => $m->strength, 'form' => $m->form, 'route' => $m->route, 'class' => $m->class,
+                    'mg_per_unit' => $m->mg_per_unit, 'controlled' => $m->controlled, 'brands' => $m->brands, 'active' => $m->is_active];
+            }
+
+            return;
+        }
+        $file ??= database_path('data/medicines.csv');
+        if (! is_file($file)) {
+            return;
+        }
+        $handle = fopen($file, 'r');
+        $header = fgetcsv($handle);
+        while (($row = fgetcsv($handle)) !== false) {
+            if (count($row) === count($header)) {
+                $r = array_combine($header, $row);
+                yield ['active' => true, 'controlled' => $r['controlled'] === '1'] + $r;
+            }
+        }
+        fclose($handle);
     }
 }

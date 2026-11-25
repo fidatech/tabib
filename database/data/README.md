@@ -23,9 +23,14 @@ United States (US). Brand names are trademarks of their owners and are listed on
 find the generic medicine. Only brands we were sure of are listed.
 
 **To be reviewed by a pharmacist before use.** Dose limits are not in this file on purpose: each
-clinic writes the limits its own pharmacist or doctors approve (Clinic Setup > Medicines). Every
-clinic gets the list when it is opened and its new rows after an update (`php artisan tenants:migrate`);
-a clinic's own medicines and its changes to limits are never overwritten.
+clinic writes the limits its own pharmacist or doctors approve (Clinic Setup > Medicines).
+
+The file is only the start: `php artisan medicines:import` loads it into the platform list in the
+central database (new codes only; `--refresh` writes the file over the rows). From then on the list
+is kept in the central panel (Clinical lists > Medicines): every change there goes to every clinic
+at once, and a medicine taken off it can no longer be prescribed anywhere. Clinics cannot change
+the listed medicines; they write their dose limits, switch off what they do not use and add their
+own. A clinic also gets the list when it is opened and after an update (`php artisan tenants:migrate`).
 
 Columns: code, name, strength, form, route, class, mg_per_unit, controlled (1/0), brands
 ("PK: A, B | IN: C | TR: D | US: E").

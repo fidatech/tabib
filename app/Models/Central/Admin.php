@@ -18,7 +18,7 @@ class Admin extends Authenticatable
         'owner' => ['*'],
         'sales' => ['dashboard', 'clients.view', 'clients.manage', 'billing.view', 'announcements'],
         'accountant' => ['dashboard', 'clients.view', 'billing.view', 'billing.manage', 'reports'],
-        'support' => ['dashboard', 'clients.view', 'tickets', 'announcements', 'enter', 'backups', 'health'],
+        'support' => ['dashboard', 'clients.view', 'tickets', 'announcements', 'enter', 'backups', 'health', 'drugs'],
     ];
 
     /** May this member of staff do that? The owner may do everything. */

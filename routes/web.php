@@ -117,6 +117,15 @@ Route::middleware('central')->prefix('admin')->name('admin.')->group(function ()
         });
         Route::get('income', [$c.'IncomeController', 'index'])->name('income.index')->middleware('staff:reports');
 
+        // the list of medicines of the platform: kept here, copied into every clinic
+        Route::middleware('staff:drugs')->group(function () use ($c) {
+            Route::get('medicines', [$c.'DrugListController', 'index'])->name('drugs.index');
+            Route::post('medicines', [$c.'DrugListController', 'store'])->name('drugs.store');
+            Route::put('medicines/{id}', [$c.'DrugListController', 'update'])->name('drugs.update')->whereNumber('id');
+            Route::post('medicines/{id}/status', [$c.'DrugListController', 'status'])->name('drugs.status')->whereNumber('id');
+            Route::post('medicines/send', [$c.'DrugListController', 'sync'])->name('drugs.sync');
+        });
+
         // talking to the clients
         Route::middleware('staff:announcements')->group(function () use ($c) {
             Route::get('announcements', [$c.'AnnouncementController', 'index'])->name('announcements.index');

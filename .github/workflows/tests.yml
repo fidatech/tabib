@@ -64,6 +64,8 @@ jobs:
           php artisan migrate --force
           php artisan migrate:fresh --force
           php artisan icd10:import
+          php artisan medicines:import
+          mysql -h 127.0.0.1 -uroot -psecret -e "SELECT count(*) AS medicines FROM tabib.drug_list;"
           mysql -h 127.0.0.1 -uroot -psecret -e "SELECT code, description FROM tabib.icd10_codes WHERE code IN ('I10', 'E11.9', 'J06.9');"
 
       - name: Open a clinic with its own database on MySQL 8

@@ -181,7 +181,7 @@ class PrescriptionController extends Controller
         if (mb_strlen($term) < 2) {
             return response()->json(['results' => []]);
         }
-        $rows = Medicine::where('is_active', true)->search($term)->orderBy('name')->orderBy('form')->limit(20)->get();
+        $rows = Medicine::where('is_active', true)->where('withdrawn', false)->search($term)->orderBy('name')->orderBy('form')->limit(20)->get();
 
         return response()->json(['results' => $rows->map(fn (Medicine $m) => [
             'id' => $m->id, 'name' => $m->name, 'strength' => $m->strength, 'form' => $m->form, 'route' => $m->route, 'label' => $m->label(),
@@ -224,6 +224,9 @@ class PrescriptionController extends Controller
         ]);
         // a medicine from the list keeps the words of the list
         if (! empty($data['medicine_id']) && ($m = Medicine::find($data['medicine_id']))) {
+            if ($m->withdrawn || ! $m->is_active) {
+                throw new UserError(__(':name cannot be prescribed: it was taken off the list.', ['name' => $m->label()]));
+            }
             $data = array_merge($data, ['name' => $m->name, 'strength' => $m->strength, 'form' => $m->form, 'route' => $data['route'] ?? $m->route]);
         }
         $data['quantity'] = ($data['quantity'] ?? null) ?: Prescribing::quantity(isset($data['dose_amount']) ? (float) $data['dose_amount'] : null, $data['dose_unit'] ?? null, $data['frequency'] ?? null, $data['days'] ?? null);

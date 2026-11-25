@@ -35,12 +35,13 @@ class MedicineController extends CrudController
     {
         return Medicine::query()->search((string) $request->query('q', ''))
             ->when($request->query('show') === 'off', fn ($q) => $q->where('is_active', false))
-            ->when($request->query('show') === 'own', fn ($q) => $q->where('is_custom', true));
+            ->when($request->query('show') === 'own', fn ($q) => $q->where('is_custom', true))
+            ->when($request->query('show') === 'withdrawn', fn ($q) => $q->where('withdrawn', true));
     }
 
     protected function filters(Request $request): array
     {
-        return [['name' => 'show', 'label' => __('All medicines'), 'options' => ['own' => __('Added by the clinic'), 'off' => __('Switched off')], 'value' => (string) $request->query('show', '')]];
+        return [['name' => 'show', 'label' => __('All medicines'), 'options' => ['own' => __('Added by the clinic'), 'off' => __('Switched off'), 'withdrawn' => __('Taken off the platform list')], 'value' => (string) $request->query('show', '')]];
     }
 
     protected function fields(?Model $record): array
@@ -54,7 +55,8 @@ class MedicineController extends CrudController
             ['name' => 'strength', 'label' => 'Strength', 'rules' => ['nullable', 'string', 'max:80'], 'readonly' => $fromList, 'help' => 'For example: 500 mg, 250 mg/5 ml'],
             ['name' => 'form', 'label' => 'Form', 'type' => 'select', 'options' => $forms, 'rules' => ['required', Rule::in(Medicine::FORMS)], 'readonly' => $fromList],
             ['name' => 'class', 'label' => 'Class', 'rules' => ['nullable', 'string', 'max:60'], 'readonly' => $fromList, 'help' => 'Matched against allergies: penicillin, cephalosporin, nsaid, sulfonamide ...'],
-            ['name' => 'brands', 'label' => 'Brand names', 'type' => 'textarea', 'col' => 12, 'rules' => ['nullable', 'string', 'max:2000'], 'help' => 'Brands sold here, so staff find the medicine by them.'],
+            ['name' => 'brands', 'label' => 'Brand names', 'type' => 'textarea', 'col' => 12, 'rules' => ['nullable', 'string', 'max:2000'], 'readonly' => $fromList,
+                'help' => $fromList ? 'The platform list is kept by Fida Technologies. Write to support to add a brand.' : 'Brands sold here, so staff find the medicine by them.'],
             ['name' => 'mg_per_unit', 'label' => 'mg in one tablet, capsule or ml', 'type' => 'decimal', 'rules' => ['nullable', 'numeric', 'min:0']],
             ['name' => 'child_max_mg_per_kg_dose', 'label' => 'Highest dose for a child (mg/kg a dose)', 'type' => 'decimal', 'rules' => ['nullable', 'numeric', 'min:0'],
                 'help' => 'Approved by your pharmacist. Empty: no check.'],
@@ -70,7 +72,7 @@ class MedicineController extends CrudController
             'Medicine' => fn (Medicine $m) => $m->label(),
             'Class' => fn (Medicine $m) => $m->class ? __($m->class) : '',
             'Brand names' => fn (Medicine $m) => Str::limit((string) $m->brands, 70),
-            'Can be prescribed' => fn (Medicine $m) => $m->is_active ? __('Yes') : __('No'),
+            'Can be prescribed' => fn (Medicine $m) => $m->withdrawn ? __('No: taken off the platform list') : ($m->is_active ? __('Yes') : __('No')),
         ];
     }
 
