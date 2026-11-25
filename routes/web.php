@@ -277,6 +277,23 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
         Route::get('visits/{id}', [$e, 'show'])->name('encounters.show')->whereNumber('id');
         Route::put('visits/{id}', [$e, 'update'])->name('encounters.update')->whereNumber('id');
         Route::post('visits/{id}/template', [$e, 'template'])->name('encounters.template')->whereNumber('id');
+        Route::post('visits/{id}/reviewed', [$e, 'reviewed'])->name('encounters.reviewed')->whereNumber('id');
+
+        // the papers of the doctor: requests for tests, letters and certificates, the summary, the medicine card
+        $pp = \App\Http\Controllers\PapersController::class;
+        Route::get('orders/create', [$pp, 'createOrder'])->name('orders.create');
+        Route::post('orders', [$pp, 'storeOrder'])->name('orders.store');
+        Route::get('orders/{id}', [$pp, 'showOrder'])->name('orders.show')->whereNumber('id');
+        Route::get('orders/{id}/print', [$pp, 'printOrder'])->name('orders.print')->whereNumber('id');
+        Route::post('orders/{id}/result', [$pp, 'result'])->name('orders.result')->whereNumber('id');
+        Route::post('orders/{id}/cancel', [$pp, 'cancelOrder'])->name('orders.cancel')->whereNumber('id');
+        Route::get('letters/create', [$pp, 'createLetter'])->name('letters.create');
+        Route::post('letters', [$pp, 'storeLetter'])->name('letters.store');
+        Route::get('letters/{id}', [$pp, 'showLetter'])->name('letters.show')->whereNumber('id');
+        Route::post('letters/{id}/cancel', [$pp, 'cancelLetter'])->name('letters.cancel')->whereNumber('id');
+        Route::get('patients/{id}/summary', [$pp, 'summary'])->name('patients.summary')->whereNumber('id');
+        Route::post('prescriptions/{id}/renew', [$pp, 'renew'])->name('prescriptions.renew')->whereNumber('id');
+        Route::get('prescriptions/{id}/card', [$pp, 'card'])->name('prescriptions.card')->whereNumber('id');
         Route::post('visits/{id}/diagnoses', [$e, 'addDiagnosis'])->name('encounters.diagnoses.store')->whereNumber('id');
         Route::delete('visits/{id}/diagnoses/{diagnosis}', [$e, 'removeDiagnosis'])->name('encounters.diagnoses.destroy')->whereNumber(['id', 'diagnosis']);
         Route::post('visits/{id}/sign', [$e, 'sign'])->name('encounters.sign')->whereNumber('id');

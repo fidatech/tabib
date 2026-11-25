@@ -26,6 +26,7 @@ class Chart
             'vitals' => self::vitals($patient),
             'visits' => ['encounters' => Encounter::with(['doctor.user', 'diagnoses'])->where('patient_id', $patient->id)->latest('started_at')->get()],
             'documents' => ['documents' => PatientDocument::with('author')->where('patient_id', $patient->id)->latest('id')->get()],
+            'papers' => ['orders' => \App\Models\Order::where('patient_id', $patient->id)->latest('id')->get(), 'letters' => \App\Models\Letter::where('patient_id', $patient->id)->latest('id')->get()],
             'prescriptions' => ['prescriptions' => \App\Models\Prescription::with(['doctor.user', 'items'])->where('patient_id', $patient->id)->latest('id')->get()],
             default => [],
         };
@@ -113,6 +114,17 @@ class Chart
                 $events->push(['at' => $rx->signed_at, 'kind' => 'prescriptions', 'icon' => 'prescription-bottle-medical', 'title' => __('Prescription :number', ['number' => $rx->number]),
                     'detail' => $rx->items->map->label()->implode(', '), 'url' => route('prescriptions.show', ['id' => $rx->id]), 'error' => $rx->status === 'cancelled',
                     'badge' => $rx->status === 'cancelled' ? __('Cancelled') : null]);
+            }
+        }
+        if ($want('papers')) {
+            foreach (\App\Models\Order::where('patient_id', $patient->id)->get() as $o) {
+                $events->push(['at' => $o->resulted_at ?? $o->created_at, 'kind' => 'papers', 'icon' => $o->kind === 'lab' ? 'flask' : 'x-ray',
+                    'title' => ($o->status === 'resulted' ? __('Result') : __(\App\Models\Order::KINDS[$o->kind])).' '.$o->number, 'detail' => $o->summary().($o->result ? ': '.\Illuminate\Support\Str::limit($o->result, 120) : ''),
+                    'url' => route('orders.show', ['id' => $o->id]), 'error' => $o->status === 'cancelled', 'badge' => $o->status === 'cancelled' ? __('Cancelled') : null]);
+            }
+            foreach (\App\Models\Letter::where('patient_id', $patient->id)->get() as $l) {
+                $events->push(['at' => $l->created_at, 'kind' => 'papers', 'icon' => 'envelope-open-text', 'title' => $l->kindLabel().' '.$l->number,
+                    'detail' => (string) $l->addressed_to, 'url' => route('letters.show', ['id' => $l->id]), 'error' => $l->status === 'cancelled', 'badge' => $l->status === 'cancelled' ? __('Cancelled') : null]);
             }
         }
         if ($want('vitals')) {

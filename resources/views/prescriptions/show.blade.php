@@ -11,7 +11,11 @@
 <x-page-header :title="__('Prescription').' · '.$patient->name" icon="prescription-bottle-medical"
     :crumbs="[[__('Patients'), route('patients.index')], [$patient->name, route('patients.show', ['id' => $patient->id])], [$rx->number ?? __('Draft')]]"
     :subtitle="$rx->doctor?->name().' · '.$patient->ageText().($rx->weight_kg ? ' · '.$rx->weight_kg.' kg' : '')">
+    @if ($rx->status !== 'draft' && auth()->user()->can('prescriptions.manage') && \App\Services\Prescribing::doctorOf(auth()->id()))
+        <form method="POST" action="{{ route('prescriptions.renew', ['id' => $rx->id]) }}">@csrf<button class="btn btn-outline-soft" type="submit"><x-icon name="rotate-right" class="me-1" /> {{ __('Write again') }}</button></form>
+    @endif
     @if ($rx->isSigned())
+        <a class="btn btn-outline-soft" href="{{ route('prescriptions.card', ['id' => $rx->id]) }}" target="_blank" rel="noopener"><x-icon name="id-card" class="me-1" /> {{ __('Medicine card') }}</a>
         <span class="badge bg-success fs-6 align-self-center"><x-icon name="lock" /> {{ $rx->number }}</span>
         @foreach (['en' => 'English', 'fa' => 'دری', 'ps' => 'پښتو'] as $code => $lang)
             <a class="btn btn-outline-soft" href="{{ route('prescriptions.print', ['id' => $rx->id, 'lang' => $code]) }}" target="_blank" rel="noopener" lang="{{ $code }}"><x-icon name="print" class="me-1" /> {{ $lang }}</a>

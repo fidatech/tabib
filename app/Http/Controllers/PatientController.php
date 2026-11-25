@@ -158,7 +158,7 @@ class PatientController extends CrudController
         }
         abort_unless($patient, 404);
         $clinical = $request->user()->can('clinical.view');
-        $tabs = $clinical ? ['summary', 'timeline', 'history', 'vitals', 'visits', 'prescriptions', 'documents', 'appointments'] : ['appointments'];
+        $tabs = $clinical ? ['summary', 'timeline', 'history', 'vitals', 'visits', 'prescriptions', 'papers', 'documents', 'appointments'] : ['appointments'];
         $billing = $request->user()->can('billing.view');
         if ($billing) {
             $tabs[] = 'billing';

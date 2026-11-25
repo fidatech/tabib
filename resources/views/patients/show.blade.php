@@ -4,7 +4,7 @@
     $canBook = auth()->user()->can('appointments.manage');
     $tabNames = [
         'summary' => ['Summary', 'gauge-high'], 'timeline' => ['Timeline', 'timeline'], 'history' => ['History', 'notes-medical'],
-        'vitals' => ['Vital signs', 'heart-pulse'], 'visits' => ['Visits', 'stethoscope'], 'prescriptions' => ['Prescriptions', 'prescription-bottle-medical'], 'documents' => ['Documents', 'paperclip'],
+        'vitals' => ['Vital signs', 'heart-pulse'], 'visits' => ['Visits', 'stethoscope'], 'prescriptions' => ['Prescriptions', 'prescription-bottle-medical'], 'papers' => ['Tests and letters', 'flask'], 'documents' => ['Documents', 'paperclip'],
         'appointments' => ['Appointments', 'calendar-days'], 'billing' => ['Billing', 'file-invoice-dollar'],
     ];
     $facts = array_filter([
@@ -31,6 +31,9 @@
         <form method="POST" action="{{ route('prescriptions.start') }}">@csrf<input type="hidden" name="patient_id" value="{{ $patient->id }}">
             <button type="submit" class="btn btn-outline-soft"><x-icon name="prescription-bottle-medical" class="me-1" /> {{ __('Prescription') }}</button></form>
     @endif
+    @can('clinical.view')
+        <a class="btn btn-outline-soft" href="{{ route('patients.summary', ['id' => $patient->id]) }}" target="_blank" rel="noopener" title="{{ __('Print the summary') }}" aria-label="{{ __('Print the summary') }}"><x-icon name="file-export" /></a>
+    @endcan
     @can('patients.manage')
         <a class="btn btn-outline-soft" href="{{ route('patients.merge', ['id' => $patient->id]) }}" title="{{ __('Merge a duplicate record') }}" aria-label="{{ __('Merge a duplicate record') }}"><x-icon name="code-merge" /></a>
     @endcan

@@ -1,6 +1,6 @@
 {{-- Everything that happened to the patient, newest first, with a filter by kind. --}}
 @php
-    $kinds = ['' => 'Everything', 'visits' => 'Visits', 'prescriptions' => 'Prescriptions', 'history' => 'History', 'vitals' => 'Vital signs', 'documents' => 'Documents', 'appointments' => 'Appointments'];
+    $kinds = ['' => 'Everything', 'visits' => 'Visits', 'prescriptions' => 'Prescriptions', 'papers' => 'Tests and letters', 'history' => 'History', 'vitals' => 'Vital signs', 'documents' => 'Documents', 'appointments' => 'Appointments'];
     $only = (string) request('only', '');
 @endphp
 <div class="d-flex flex-wrap gap-2 mb-3">

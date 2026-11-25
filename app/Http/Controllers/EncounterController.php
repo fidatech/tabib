@@ -57,7 +57,7 @@ class EncounterController extends Controller
     public function show(Request $request, int $id): View
     {
         Gate::authorize('clinical.view');
-        $encounter = Encounter::with(['patient', 'doctor.user', 'diagnoses', 'addenda.author', 'vitals', 'signer', 'appointment'])->findOrFail($id);
+        $encounter = Encounter::with(['patient', 'doctor.user', 'diagnoses', 'addenda.author', 'vitals', 'signer', 'appointment', 'reviewer'])->findOrFail($id);
         audit('viewed', $encounter);
         $patient = $encounter->patient;
 
@@ -88,6 +88,16 @@ class EncounterController extends Controller
         $encounter->update($data);
 
         return redirect()->route('encounters.show', ['id' => $encounter->id])->with('success', __('The note is saved (draft).'));
+    }
+
+    /** The doctor says he read the history of the patient in this visit: who and when is kept, and signed with the note. */
+    public function reviewed(Request $request, int $id): RedirectResponse
+    {
+        $encounter = $this->draft($request, $id);
+        $on = $request->boolean('reviewed');
+        $encounter->update(['history_reviewed_at' => $on ? now()->startOfSecond() : null, 'history_reviewed_by' => $on ? $request->user()->id : null]);
+
+        return redirect()->route('encounters.show', ['id' => $encounter->id]);
     }
 
     /** A template fills the empty parts of the note and brings its form (tooth chart, pregnancy). */

@@ -33,7 +33,7 @@ class Encounter extends Model
 
     protected function casts(): array
     {
-        return ['started_at' => 'datetime', 'signed_at' => 'datetime', 'follow_up_on' => 'date', 'extra' => 'array'];
+        return ['started_at' => 'datetime', 'signed_at' => 'datetime', 'follow_up_on' => 'date', 'extra' => 'array', 'history_reviewed_at' => 'datetime'];
     }
 
     public function patient(): BelongsTo
@@ -49,6 +49,11 @@ class Encounter extends Model
     public function appointment(): BelongsTo
     {
         return $this->belongsTo(Appointment::class);
+    }
+
+    public function reviewer(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'history_reviewed_by');
     }
 
     public function template(): BelongsTo
@@ -90,7 +95,8 @@ class Encounter extends Model
             'follow_up' => $this->follow_up_on?->toDateString(),
             'diagnoses' => $this->diagnoses()->get()->map(fn (EncounterDiagnosis $d) => [(string) $d->icd10, (string) $d->description, (bool) $d->is_primary])->all(),
             'signed_at' => $this->signed_at?->format('Y-m-d H:i:s'), 'signed_by' => (int) $this->signed_by,
-        ] + ($this->extra ? ['form' => [(string) $this->kind, $this->extra]] : []), JSON_UNESCAPED_UNICODE);   // the tooth chart or pregnancy form, when there is one
+        ] + ($this->extra ? ['form' => [(string) $this->kind, $this->extra]] : [])
+          + ($this->history_reviewed_at ? ['reviewed' => [$this->history_reviewed_at->format('Y-m-d H:i:s'), (int) $this->history_reviewed_by]] : []), JSON_UNESCAPED_UNICODE);   // the tooth chart or pregnancy form, when there is one
     }
 
     /** Was the note changed after it was signed (by hand, in the database)? */

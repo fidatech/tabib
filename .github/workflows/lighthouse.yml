@@ -127,6 +127,11 @@ jobs:
           measure clinic-note-templates http://demo.localhost:8004/note-templates "$OWNER"
           measure clinic-merge http://demo.localhost:8004/patients/1/merge "$OWNER"
           measure clinic-medicines-list http://demo.localhost:8004/medicines "$OWNER"
+          measure clinic-order-form "http://demo.localhost:8004/orders/create?patient=1&kind=lab" "$OWNER"
+          measure clinic-letter-form "http://demo.localhost:8004/letters/create?patient=1&kind=sick_leave" "$OWNER"
+          measure clinic-summary http://demo.localhost:8004/patients/1/summary "$OWNER"
+          measure clinic-rx-card http://demo.localhost:8004/prescriptions/2/card "$OWNER"
+          measure clinic-papers-tab "http://demo.localhost:8004/patients/1?tab=papers" "$OWNER"
           cat > report.js <<'JS'
           const fs = require('fs');
           for (const file of fs.readdirSync('.').filter((f) => /^out-.*\.json$/.test(f)).sort()) {

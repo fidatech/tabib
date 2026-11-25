@@ -67,6 +67,21 @@
                     @if ($encounter->follow_up_on)<p class="mb-0"><b>{{ __('Come back on') }}:</b> {{ fmt_date($encounter->follow_up_on) }}</p>@endif
                 @endif
             </div>
+            {{-- the doctor says he read the history: who and when is signed with the note --}}
+            <div class="card-footer small">
+                @if ($canWrite)
+                    <form method="POST" action="{{ route('encounters.reviewed', ['id' => $encounter->id]) }}" class="d-flex align-items-center gap-2">@csrf
+                        <input type="hidden" name="reviewed" value="{{ $encounter->history_reviewed_at ? '0' : '1' }}">
+                        <button type="submit" class="btn btn-sm {{ $encounter->history_reviewed_at ? 'btn-success' : 'btn-outline-primary' }}"><x-icon name="clipboard-check" class="me-1" />
+                            {{ $encounter->history_reviewed_at ? __('History reviewed') : __('I reviewed the history') }}</button>
+                        @if ($encounter->history_reviewed_at)<span class="text-muted">{{ __(':name, :time', ['name' => $encounter->reviewer?->name, 'time' => $encounter->history_reviewed_at->format('H:i')]) }}</span>@endif
+                    </form>
+                @elseif ($encounter->history_reviewed_at)
+                    <x-icon name="clipboard-check" class="text-success me-1" /> {{ __('History reviewed by :name on :date.', ['name' => $encounter->reviewer?->name, 'date' => fmt_date($encounter->history_reviewed_at).' '.$encounter->history_reviewed_at->format('H:i')]) }}
+                @else
+                    <span class="text-muted">{{ __('The history was not marked as reviewed.') }}</span>
+                @endif
+            </div>
         </div>
 
         {{-- the diagnoses --}}
@@ -120,6 +135,32 @@
                 @elseif ($encounter->vitals->isEmpty())
                     <p class="text-muted small mb-0">{{ __('None written.') }}</p>
                 @endif
+            </div>
+        </div>
+
+        {{-- requests for tests, letters and certificates of this visit --}}
+        @php
+            $visitOrders = \App\Models\Order::where('encounter_id', $encounter->id)->latest('id')->get();
+            $visitLetters = \App\Models\Letter::where('encounter_id', $encounter->id)->latest('id')->get();
+            $paperDoctor = auth()->user()->can('clinical.manage') && \App\Services\Prescribing::doctorOf(auth()->id());
+        @endphp
+        <div class="card mb-3">
+            <div class="card-header d-flex align-items-center gap-2 flex-wrap"><h2 class="h5 card-title mb-0 flex-grow-1">{{ __('Tests and letters') }}</h2>
+                @if ($paperDoctor)
+                    <a class="btn btn-sm btn-outline-primary" href="{{ route('orders.create', ['patient' => $patient->id, 'visit' => $encounter->id, 'kind' => 'lab']) }}"><x-icon name="flask" class="me-1" /> {{ __('Lab') }}</a>
+                    <a class="btn btn-sm btn-outline-primary" href="{{ route('orders.create', ['patient' => $patient->id, 'visit' => $encounter->id, 'kind' => 'imaging']) }}"><x-icon name="x-ray" class="me-1" /> {{ __('Imaging') }}</a>
+                    <a class="btn btn-sm btn-outline-primary" href="{{ route('letters.create', ['patient' => $patient->id, 'visit' => $encounter->id, 'kind' => 'referral']) }}"><x-icon name="envelope-open-text" class="me-1" /> {{ __('Referral') }}</a>
+                    <a class="btn btn-sm btn-outline-primary" href="{{ route('letters.create', ['patient' => $patient->id, 'visit' => $encounter->id, 'kind' => 'sick_leave']) }}"><x-icon name="id-card" class="me-1" /> {{ __('Certificate') }}</a>
+                @endif
+            </div>
+            <div class="list-group list-group-flush">
+                @foreach ($visitOrders as $o)
+                    <a class="list-group-item list-group-item-action small d-flex gap-2" href="{{ route('orders.show', ['id' => $o->id]) }}"><b dir="ltr">{{ $o->number }}</b><span class="flex-grow-1" dir="ltr">{{ \Illuminate\Support\Str::limit($o->summary(), 80) }}</span><span class="badge {{ $o->statusClass() }}">{{ $o->statusLabel() }}</span></a>
+                @endforeach
+                @foreach ($visitLetters as $l)
+                    <a class="list-group-item list-group-item-action small d-flex gap-2" href="{{ route('letters.show', ['id' => $l->id]) }}" target="_blank" rel="noopener"><b dir="ltr">{{ $l->number }}</b><span class="flex-grow-1">{{ $l->kindLabel() }}</span>@if ($l->status === 'cancelled')<span class="badge bg-secondary">{{ __('Cancelled') }}</span>@endif</a>
+                @endforeach
+                @if ($visitOrders->isEmpty() && $visitLetters->isEmpty())<div class="list-group-item text-muted small">{{ __('None written.') }}</div>@endif
             </div>
         </div>
 
