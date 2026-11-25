@@ -83,6 +83,33 @@
                         value="{{ old('minutes', $appointment ? (int) $appointment->starts_at->diffInMinutes($appointment->ends_at) : '') }}" placeholder="{{ setting('slot_minutes', '15') }}">
                     @error('minutes')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
+                @unless ($appointment)
+                    {{-- a course: physiotherapy, dressings, injections ... --}}
+                    <div class="col-12 col-md-4">
+                        <label class="form-label" for="repeat">{{ __('Repeat') }}</label>
+                        <select class="form-select" id="repeat" name="repeat" data-repeat>
+                            <option value="">{{ __('Only once') }}</option>
+                            <option value="daily" @selected(old('repeat') === 'daily')>{{ __('Every day') }}</option>
+                            <option value="weekly" @selected(old('repeat') === 'weekly')>{{ __('Every week') }}</option>
+                            <option value="every" @selected(old('repeat') === 'every')>{{ __('Every few days') }}</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-md-4" data-repeat-show>
+                        <label class="form-label" for="repeat_every">{{ __('Every how many days') }}</label>
+                        <input type="number" class="form-control" id="repeat_every" name="repeat_every" min="1" max="60" value="{{ old('repeat_every', 2) }}" dir="ltr">
+                    </div>
+                    <div class="col-6 col-md-4" data-repeat-show>
+                        <label class="form-label" for="repeat_count">{{ __('How many appointments') }}</label>
+                        <input type="number" class="form-control @error('repeat_count') is-invalid @enderror" id="repeat_count" name="repeat_count" min="2" max="30" value="{{ old('repeat_count', 6) }}" dir="ltr">
+                    </div>
+                @endunless
+                <div class="col-12">
+                    <div class="form-check">
+                        <input type="hidden" name="outside_hours" value="0">
+                        <input class="form-check-input" type="checkbox" id="outside_hours" name="outside_hours" value="1" @checked(old('outside_hours', $appointment?->outside_hours))>
+                        <label class="form-check-label" for="outside_hours">{{ __('Book outside the hours of the doctor (he agreed)') }}</label>
+                    </div>
+                </div>
             @endunless
 
             <div class="col-12">
@@ -133,6 +160,13 @@
     // the length of the chosen type, as a hint in the minutes box
     var type = document.getElementById('appointment_type_id'), minutes = document.getElementById('minutes');
     if (type && minutes) type.addEventListener('change', function () { var m = type.options[type.selectedIndex].getAttribute('data-minutes'); if (m) minutes.placeholder = m; });
+})();
+(function () {
+    var r = document.querySelector('[data-repeat]'); if (!r) return;
+    function show() {
+        document.querySelectorAll('[data-repeat-show]').forEach(function (el, i) { el.hidden = r.value === '' || (i === 0 && r.value !== 'every'); });
+    }
+    r.addEventListener('change', show); show();
 })();
 </script>
 @endsection

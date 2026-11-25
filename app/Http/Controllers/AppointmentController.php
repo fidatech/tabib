@@ -57,6 +57,18 @@ class AppointmentController extends Controller
             $slots[] = $t->copy();
         }
 
+        // the slots each doctor does not work (outside his hours, or a day off) are shown shaded
+        $off = [];
+        $leaves = [];
+        foreach ($shown as $d) {
+            $leaves[$d->id] = \App\Services\Availability::leave($d, $day);
+            foreach ($slots as $slot) {
+                if (! \App\Services\Availability::works($d, $slot, $slot->copy()->addMinutes($step))) {
+                    $off[$d->id][$slot->format('H:i')] = true;
+                }
+            }
+        }
+
         $cells = [];
         foreach ($appointments as $a) {
             $slot = $open->copy()->addMinutes(intdiv(max(0, (int) $open->diffInMinutes($a->starts_at)), $step) * $step);
@@ -64,7 +76,7 @@ class AppointmentController extends Controller
         }
 
         return view('appointments.index', [
-            'day' => $day, 'doctors' => $doctors, 'shown' => $shown, 'chosen' => $chosen, 'slots' => $slots, 'cells' => $cells, 'step' => $step,
+            'day' => $day, 'doctors' => $doctors, 'shown' => $shown, 'chosen' => $chosen, 'slots' => $slots, 'cells' => $cells, 'step' => $step, 'off' => $off, 'leaves' => $leaves,
             'counts' => [
                 'all' => $appointments->where('status', '!=', Appointment::CANCELLED)->count(),
                 'waiting' => $appointments->where('status', Appointment::ARRIVED)->count(),
@@ -96,7 +108,24 @@ class AppointmentController extends Controller
             return redirect()->route('queue.index')->with('success', __(':patient is in the queue of :doctor with token :token.', ['patient' => $patient->name, 'doctor' => $doctor->name(), 'token' => $a->token]));
         }
 
-        $a = Scheduling::book($patient, $doctor, $type, $this->start($data), $data['minutes'] ?? null, $data['reason'] ?? null);
+        $outside = $request->boolean('outside_hours');
+        $count = (int) ($data['repeat_count'] ?? 1);
+        if (($data['repeat'] ?? '') !== '' && $count > 1) {
+            // a course of appointments: every so many days, the same time
+            $every = match ($data['repeat']) { 'daily' => 1, 'weekly' => 7, default => max(1, (int) ($data['repeat_every'] ?? 2)) };
+            [$booked, $skipped] = Scheduling::bookSeries($patient, $doctor, $type, $this->start($data), $data['minutes'] ?? null, $data['reason'] ?? null, $every, $count, $outside);
+            if (! $booked) {
+                throw new \App\Exceptions\UserError(__('None of the appointments could be booked.').' '.implode(' · ', $skipped));
+            }
+            \App\Services\Sms::booked($booked[0], $request->user()->id);
+            $redirect = redirect()->route('appointments.index', ['date' => $booked[0]->starts_at->toDateString()])
+                ->with('success', __(':count appointments booked for :patient, from :first to :last.', ['count' => count($booked), 'patient' => $patient->name,
+                    'first' => fmt_date($booked[0]->starts_at), 'last' => fmt_date(end($booked)->starts_at)]));
+
+            return $skipped ? $redirect->with('warning', __('Not booked:').' '.implode(' · ', $skipped)) : $redirect;
+        }
+
+        $a = Scheduling::book($patient, $doctor, $type, $this->start($data), $data['minutes'] ?? null, $data['reason'] ?? null, 'desk', $outside);
         \App\Services\Sms::booked($a, $request->user()->id);
 
         return redirect()->route('appointments.index', ['date' => $a->starts_at->toDateString()])
@@ -119,13 +148,29 @@ class AppointmentController extends Controller
         $data = $this->validated($request, false);
         $type = isset($data['appointment_type_id']) ? AppointmentType::find($data['appointment_type_id']) : null;
         $before = $appointment->starts_at->copy();
-        Scheduling::reschedule($appointment, Doctor::findOrFail($data['doctor_id']), $type, $this->start($data), $data['minutes'] ?? null, $data['reason'] ?? null);
+        Scheduling::reschedule($appointment, Doctor::findOrFail($data['doctor_id']), $type, $this->start($data), $data['minutes'] ?? null, $data['reason'] ?? null, $request->boolean('outside_hours'));
         if (! $appointment->fresh()->starts_at->equalTo($before)) {
             // a moved appointment is reminded again, of its new time
             Appointment::whereKey($appointment->id)->update(['reminded_at' => null]);
         }
 
         return redirect()->route('appointments.index', ['date' => $appointment->starts_at->toDateString()])->with('success', __('The appointment was moved.'));
+    }
+
+    /** The appointments of a course that are still to come are cancelled together. */
+    public function cancelSeries(Request $request, int $id): RedirectResponse
+    {
+        Gate::authorize('appointments.manage');
+        $appointment = Appointment::findOrFail($id);
+        abort_unless($appointment->series_id, 404);
+        $reason = $request->validate(['reason' => ['required', 'string', 'max:255']])['reason'];
+        $n = 0;
+        foreach (Appointment::where('series_id', $appointment->series_id)->where('starts_at', '>=', $appointment->starts_at)->whereIn('status', [Appointment::BOOKED, Appointment::CONFIRMED])->get() as $a) {
+            Scheduling::act($a, 'cancel', $reason);
+            $n++;
+        }
+
+        return back()->with('success', __(':count appointments of the course were cancelled.', ['count' => $n]));
     }
 
     /** The buttons of an appointment: confirm, arrived, call in, done, did not come, cancel. */
@@ -203,6 +248,9 @@ class AppointmentController extends Controller
             'time' => [$walkIn ? 'nullable' : 'required', 'date_format:H:i'],
             'minutes' => ['nullable', 'integer', 'min:5', 'max:480'],
             'reason' => ['nullable', 'string', 'max:255'],
+            'repeat' => ['nullable', Rule::in(['', 'daily', 'weekly', 'every'])],
+            'repeat_every' => ['nullable', 'integer', 'min:1', 'max:60'],
+            'repeat_count' => ['nullable', 'integer', 'min:1', 'max:30'],
         ], [], ['patient_id' => __('patient'), 'doctor_id' => __('doctor')]);
     }
 

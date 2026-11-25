@@ -64,7 +64,8 @@
                     <tr>
                         <th class="appt-time" scope="col"><span class="visually-hidden">{{ __('Time') }}</span></th>
                         @foreach ($shown as $d)
-                            <th scope="col"><span class="appt-dot {{ $d->colourClass() }}"></span>{{ $d->name() }}@if ($d->specialty)<small>{{ $d->specialty }}</small>@endif</th>
+                            <th scope="col"><span class="appt-dot {{ $d->colourClass() }}"></span>{{ $d->name() }}@if ($d->specialty)<small>{{ $d->specialty }}</small>@endif
+                                @if ($leaves[$d->id] ?? null)<small class="text-danger fw-semibold">{{ __('Off') }}{{ $leaves[$d->id]->reason ? ': '.$leaves[$d->id]->reason : '' }}</small>@endif</th>
                         @endforeach
                     </tr>
                 </thead>
@@ -74,8 +75,8 @@
                         <tr class="{{ $isNow ? 'is-now' : '' }} {{ $slot->minute === 0 ? 'is-hour' : '' }}">
                             <th class="appt-time" scope="row" dir="ltr">{{ $key }}</th>
                             @foreach ($shown as $d)
-                                @php $here = $cells[$d->id][$key] ?? []; @endphp
-                                <td>
+                                @php $here = $cells[$d->id][$key] ?? []; $isOff = isset($off[$d->id][$key]); @endphp
+                                <td class="{{ $isOff ? 'slot-off' : '' }}">
                                     @foreach ($here as $a)
                                         <a class="appt-block {{ $d->colourClass() }} is-{{ $a->status }}" href="{{ route('patients.show', ['id' => $a->patient_id]) }}"
                                             title="{{ $a->starts_at->format('H:i') }}–{{ $a->ends_at->format('H:i') }} {{ $a->patient?->name }} · {{ $a->statusLabel() }}">
@@ -84,7 +85,7 @@
                                             <span class="appt-block-meta">{{ $a->source === 'walk_in' ? __('Walk-in') : ($a->type?->label() ?? '') }} · {{ $a->statusLabel() }}</span>
                                         </a>
                                     @endforeach
-                                    @if ($canManage && ! $here && ($day->toDateString() > today_iso() || ($isToday && $key >= now()->subMinutes($step)->format('H:i'))))
+                                    @if ($canManage && ! $here && ! $isOff && ($day->toDateString() > today_iso() || ($isToday && $key >= now()->subMinutes($step)->format('H:i'))))
                                         <a class="appt-free" href="{{ route('appointments.create', ['doctor' => $d->id, 'date' => $day->toDateString(), 'time' => $key]) }}" aria-label="{{ __('Book :doctor at :time', ['doctor' => $d->name(), 'time' => $key]) }}"><x-icon name="plus" /></a>
                                     @endif
                                 </td>

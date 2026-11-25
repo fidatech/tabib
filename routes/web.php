@@ -251,6 +251,13 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
         Route::put('appointments/{id}', [$a, 'update'])->name('appointments.update')->whereNumber('id');
         Route::post('appointments/{id}/{action}', [$a, 'act'])->name('appointments.act')->whereNumber('id')
             ->whereIn('action', array_keys(\App\Models\Appointment::ACTIONS));
+        Route::post('appointments/{id}/course/cancel', [$a, 'cancelSeries'])->name('appointments.series.cancel')->whereNumber('id');
+        // the hours and the days off of every doctor
+        $ds = \App\Http\Controllers\DoctorScheduleController::class;
+        Route::get('doctors/{id}/schedule', [$ds, 'show'])->name('doctors.schedule')->whereNumber('id');
+        Route::put('doctors/{id}/schedule', [$ds, 'hours'])->name('doctors.schedule.hours')->whereNumber('id');
+        Route::post('doctors/{id}/leaves', [$ds, 'addLeave'])->name('doctors.leaves.store')->whereNumber('id');
+        Route::delete('doctors/{id}/leaves/{leave}', [$ds, 'removeLeave'])->name('doctors.leaves.destroy')->whereNumber(['id', 'leave']);
         Route::get('queue', [$a, 'queue'])->name('queue.index');
         Route::post('queue/{doctor}/next', [$a, 'callNext'])->name('queue.next')->whereNumber('doctor');
 

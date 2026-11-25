@@ -19,24 +19,61 @@ use Illuminate\Support\Facades\DB;
 class Scheduling
 {
     /** Book a patient with a doctor. $start is the date and time in the clinic's time zone. */
-    public static function book(Patient $patient, Doctor $doctor, ?AppointmentType $type, Carbon $start, ?int $minutes = null, ?string $reason = null, string $source = 'desk'): Appointment
+    public static function book(Patient $patient, Doctor $doctor, ?AppointmentType $type, Carbon $start, ?int $minutes = null, ?string $reason = null, string $source = 'desk',
+        bool $outsideHours = false, ?int $seriesId = null): Appointment
     {
         $minutes = $minutes ?: ($type?->minutes ?: (int) setting('slot_minutes', '15'));
         $end = $start->copy()->addMinutes($minutes);
 
-        return DB::transaction(function () use ($patient, $doctor, $type, $start, $end, $reason, $source) {
+        return DB::transaction(function () use ($patient, $doctor, $type, $start, $end, $reason, $source, $outsideHours, $seriesId) {
             self::lockAndCheck($doctor, $start, $end, null);
+            $outside = ! Availability::works($doctor, $start, $end);
+            if ($outside && ! $outsideHours) {
+                Availability::check($doctor, $start, $end);
+            }
+            if ($outside && Availability::leave($doctor, $start)) {
+                Availability::check($doctor, $start, $end);   // a doctor on leave is never booked
+            }
 
             return Appointment::create([
                 'patient_id' => $patient->id, 'doctor_id' => $doctor->id, 'appointment_type_id' => $type?->id,
                 'branch_id' => current_branch()->id, 'starts_at' => $start, 'ends_at' => $end,
                 'status' => Appointment::BOOKED, 'source' => $source, 'reason' => $reason, 'created_by' => auth()->id(),
+                'series_id' => $seriesId, 'outside_hours' => $outside,
             ]);
         });
     }
 
+    /**
+     * A course of appointments (physiotherapy, dressings ...): the same time every $everyDays days,
+     * $count times. A day the doctor cannot keep is left out and said, the others are booked.
+     *
+     * @return array{0: list<Appointment>, 1: list<string>} booked, and the days left out with why
+     */
+    public static function bookSeries(Patient $patient, Doctor $doctor, ?AppointmentType $type, Carbon $start, ?int $minutes, ?string $reason, int $everyDays, int $count, bool $outsideHours = false): array
+    {
+        $booked = [];
+        $skipped = [];
+        $seriesId = null;
+        for ($i = 0; $i < $count; $i++) {
+            $at = $start->copy()->addDays($i * $everyDays);
+            try {
+                $a = self::book($patient, $doctor, $type, $at, $minutes, $reason, 'desk', $outsideHours, $seriesId);
+                if ($seriesId === null) {
+                    $seriesId = $a->id;
+                    $a->forceFill(['series_id' => $a->id])->saveQuietly();
+                }
+                $booked[] = $a;
+            } catch (UserError $e) {
+                $skipped[] = fmt_date($at).': '.$e->getMessage();
+            }
+        }
+
+        return [$booked, $skipped];
+    }
+
     /** Move an appointment to another time or another doctor. */
-    public static function reschedule(Appointment $appointment, Doctor $doctor, ?AppointmentType $type, Carbon $start, ?int $minutes = null, ?string $reason = null): Appointment
+    public static function reschedule(Appointment $appointment, Doctor $doctor, ?AppointmentType $type, Carbon $start, ?int $minutes = null, ?string $reason = null, bool $outsideHours = false): Appointment
     {
         if (! $appointment->isOpen()) {
             throw new UserError(__('Only a booked or confirmed appointment can be moved.'));
@@ -44,9 +81,13 @@ class Scheduling
         $minutes = $minutes ?: ($type?->minutes ?: (int) setting('slot_minutes', '15'));
         $end = $start->copy()->addMinutes($minutes);
 
-        return DB::transaction(function () use ($appointment, $doctor, $type, $start, $end, $reason) {
+        return DB::transaction(function () use ($appointment, $doctor, $type, $start, $end, $reason, $outsideHours) {
             self::lockAndCheck($doctor, $start, $end, $appointment->id);
-            $appointment->update(['doctor_id' => $doctor->id, 'appointment_type_id' => $type?->id, 'starts_at' => $start, 'ends_at' => $end, 'reason' => $reason]);
+            $outside = ! Availability::works($doctor, $start, $end);
+            if ($outside && (! $outsideHours || Availability::leave($doctor, $start))) {
+                Availability::check($doctor, $start, $end);
+            }
+            $appointment->update(['doctor_id' => $doctor->id, 'appointment_type_id' => $type?->id, 'starts_at' => $start, 'ends_at' => $end, 'reason' => $reason, 'outside_hours' => $outside]);
 
             return $appointment;
         });
@@ -58,6 +99,10 @@ class Scheduling
      */
     public static function walkIn(Patient $patient, Doctor $doctor, ?AppointmentType $type, ?string $reason = null): Appointment
     {
+        if ($leave = Availability::leave($doctor, now())) {
+            throw new UserError(__(':doctor is off today:reason. Send the patient to another doctor.', ['doctor' => $doctor->name(), 'reason' => $leave->reason ? ' ('.$leave->reason.')' : '']));
+        }
+
         return DB::transaction(function () use ($patient, $doctor, $type, $reason) {
             $now = now();
             $minutes = $type?->minutes ?: (int) setting('slot_minutes', '15');

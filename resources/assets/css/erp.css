@@ -1121,3 +1121,6 @@ small, .small { font-size: max(.875em, 12px); }
 /* ------------------------------------------------------------ test requests: boxes big enough to tap */
 .test-pick .form-check { display: flex; align-items: center; gap: 10px; min-height: 34px; padding-inline-start: 0; margin: 0; }
 .test-pick .form-check-input { width: 24px; height: 24px; margin: 0; float: none; flex-shrink: 0; }
+
+/* ------------------------------------------------------------ calendar: the time a doctor does not work */
+.appt-grid td.slot-off { background: repeating-linear-gradient(135deg, var(--hover, #f3f4f6) 0 6px, transparent 6px 12px); }

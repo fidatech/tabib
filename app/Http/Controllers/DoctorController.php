@@ -139,4 +139,11 @@ class DoctorController extends CrudController
 
         return collect(array_keys(Doctor::COLOURS))->first(fn (string $c) => ! in_array($c, $used, true)) ?? 'teal';
     }
+
+    protected function rowLinks(Model $record): array
+    {
+        return request()->user()->can('appointments.manage')
+            ? [['label' => __('Hours and days off'), 'url' => route('doctors.schedule', ['id' => $record->getKey()]), 'icon' => 'business-time']]
+            : [];
+    }
 }

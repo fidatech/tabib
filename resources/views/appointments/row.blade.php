@@ -29,7 +29,7 @@
             <span class="small text-muted">{{ $a->patient?->number }}</span>
         @endif
         <span class="d-block small text-muted text-truncate">
-            {{ implode(' · ', array_filter([$a->type?->label(), $a->source === 'walk_in' ? __('Walk-in') : null, $a->reason, $a->status === 'cancelled' && $a->cancel_reason ? $a->cancel_reason : null])) }}
+            {{ implode(' · ', array_filter([$a->type?->label(), $a->source === 'walk_in' ? __('Walk-in') : null, $a->series_id ? __('Course') : null, $a->outside_hours ? __('Outside the hours') : null, $a->reason, $a->status === 'cancelled' && $a->cancel_reason ? $a->cancel_reason : null])) }}
         </span>
     </div>
     <span class="badge {{ $a->statusClass() }}">{{ $a->statusLabel() }}</span>
@@ -50,6 +50,11 @@
             @endforeach
             @if ($a->isOpen())
                 <a class="btn btn-sm btn-light" href="{{ route('appointments.edit', ['id' => $a->id]) }}" title="{{ __('Move') }}" aria-label="{{ __('Move') }}"><x-icon name="pen" /></a>
+                @if ($a->series_id)
+                    <form method="POST" action="{{ route('appointments.series.cancel', ['id' => $a->id]) }}" data-confirm="{{ __('Cancel this appointment and the rest of the course?') }}" data-confirm-ok="{{ __('Cancel the rest') }}">@csrf
+                        <input type="hidden" name="reason" value="{{ __('The course was stopped') }}">
+                        <button type="submit" class="btn btn-sm btn-outline-danger" title="{{ __('Cancel the rest of the course') }}" aria-label="{{ __('Cancel the rest of the course') }}"><x-icon name="calendar-xmark" /></button></form>
+                @endif
             @endif
         </div>
     @endif
