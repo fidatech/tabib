@@ -28,6 +28,8 @@ class Tenant extends Model
             'main_branch_price' => 'decimal:2',
             'branch_price' => 'decimal:2',
             'max_branches' => 'integer',
+            'max_doctors' => 'integer',
+            'max_sms_month' => 'integer',
             'licence_expires_on' => 'date',
         ];
     }

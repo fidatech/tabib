@@ -7,6 +7,14 @@
     $logo = setting('company_logo') ? route('settings.logo').'?v='.md5(setting('company_logo')) : null;
     $contact = array_filter([setting('company_address'), setting('company_phone')]);
     $branch = current_branch();
+    // small drawings: sunrise, sun, sunset, moon, and a plate for "with food"
+    $icons = [
+        '<svg viewBox="0 0 24 24" width="18" height="18"><path d="M3 18h18M7 18a5 5 0 0 1 10 0M12 6v3M5 10l2 2M19 10l-2 2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+        '<svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+        '<svg viewBox="0 0 24 24" width="18" height="18"><path d="M3 16h18M7 16a5 5 0 0 1 10 0M12 4v3M5 8l2 2M19 8l-2 2M8 20h8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+        '<svg viewBox="0 0 24 24" width="18" height="18"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" fill="currentColor"/></svg>',
+        'food' => '<span class="slot food"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="13" r="7" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="13" r="3" fill="currentColor"/><path d="M3 4v5M21 4v16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>',
+    ];
 @endphp
 <!DOCTYPE html>
 <html lang="{{ $lang }}" dir="{{ $rtl ? 'rtl' : 'ltr' }}">
@@ -39,6 +47,11 @@ ol{margin:0;padding-inline-start:20px}
 li{margin:0 0 9px;break-inside:avoid}
 li .name{font-weight:700}
 li .qty{color:#4b5563;font-size:12px}
+.slots{display:flex;gap:4px;margin:3px 0 2px;direction:ltr}
+.slot{display:inline-flex;align-items:center;gap:2px;min-width:44px;padding:2px 5px;border:1px solid #d1d5db;border-radius:6px;color:#9ca3af}
+.slot.on{border-color:#0a5f61;color:#0a5f61;background:#e6f4f4}
+.slot b{font-size:13px;color:#111827}
+.slot.food{min-width:0;color:#0a5f61}
 .allergy{margin:6px 0;padding:6px 10px;border:1px solid #b91c1c;border-radius:6px;color:#b91c1c;font-weight:600}
 .note{margin-top:8px;font-size:12px}
 .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding-top:10px;border-top:1px solid #d1d5db}
@@ -87,6 +100,15 @@ li .qty{color:#4b5563;font-size:12px}
             <li>
                 <div class="name" dir="ltr">{{ trim($item->name.' '.$item->strength.' '.$item->form) }}</div>
                 <div>{{ $item->directions($lang) }}</div>
+                @if (isset($P::SLOTS[$item->frequency]))
+                    {{-- a picture of the day for patients who cannot read: the dose in each part of the day it is taken --}}
+                    <div class="slots" aria-hidden="true">
+                        @foreach ($P::SLOTS[$item->frequency] as $i => $on)
+                            <span class="slot {{ $on ? 'on' : '' }}">{!! $icons[$i] !!}<b>{{ $on ? $P::digits(rtrim(rtrim(number_format((float) $item->dose_amount, 2, '.', ''), '0'), '.') ?: '•', $lang) : '' }}</b></span>
+                        @endforeach
+                        @if ($item->timing && $item->timing !== 'empty_stomach'){!! $icons['food'] !!}@endif
+                    </div>
+                @endif
                 @if ($item->quantity)<div class="qty">{{ $t('Quantity', 'مقدار', 'مقدار') }}: <span dir="ltr">{{ $item->quantity }}</span></div>@endif
             </li>
         @endforeach

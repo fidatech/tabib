@@ -17,6 +17,7 @@ class TenantSetup
     {
         Permissions::sync();
         \App\Services\Prescribing::syncMedicines();
+        \App\Models\NoteTemplate::seedDefaults();
     }
 
     public function run(Tenant $tenant, array $data): void

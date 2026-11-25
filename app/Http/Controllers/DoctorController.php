@@ -104,6 +104,11 @@ class DoctorController extends CrudController
         if (! $user && ! $request->filled('password')) {
             throw new UserError(__('Write a password for the new doctor.'));
         }
+        // the plan of the clinic says how many doctors may work in it
+        $limit = tenant()?->max_doctors;
+        if ($limit !== null && ! empty($data['is_active']) && ! ($record && $record->is_active) && Doctor::where('is_active', true)->count() >= $limit) {
+            throw new UserError(__('Your plan allows :count doctors. Ask Fida Technologies to add more.', ['count' => $limit]));
+        }
 
         $user ??= new User(['branch_id' => current_branch()->id, 'is_active' => true, 'calendar' => 'shamsi']);
         $user->fill(['name' => $request->input('name'), 'email' => $email, 'phone' => $request->input('phone')]);

@@ -33,7 +33,7 @@ class Encounter extends Model
 
     protected function casts(): array
     {
-        return ['started_at' => 'datetime', 'signed_at' => 'datetime', 'follow_up_on' => 'date'];
+        return ['started_at' => 'datetime', 'signed_at' => 'datetime', 'follow_up_on' => 'date', 'extra' => 'array'];
     }
 
     public function patient(): BelongsTo
@@ -49,6 +49,11 @@ class Encounter extends Model
     public function appointment(): BelongsTo
     {
         return $this->belongsTo(Appointment::class);
+    }
+
+    public function template(): BelongsTo
+    {
+        return $this->belongsTo(NoteTemplate::class);
     }
 
     public function signer(): BelongsTo
@@ -85,7 +90,7 @@ class Encounter extends Model
             'follow_up' => $this->follow_up_on?->toDateString(),
             'diagnoses' => $this->diagnoses()->get()->map(fn (EncounterDiagnosis $d) => [(string) $d->icd10, (string) $d->description, (bool) $d->is_primary])->all(),
             'signed_at' => $this->signed_at?->format('Y-m-d H:i:s'), 'signed_by' => (int) $this->signed_by,
-        ], JSON_UNESCAPED_UNICODE);
+        ] + ($this->extra ? ['form' => [(string) $this->kind, $this->extra]] : []), JSON_UNESCAPED_UNICODE);   // the tooth chart or pregnancy form, when there is one
     }
 
     /** Was the note changed after it was signed (by hand, in the database)? */

@@ -230,6 +230,8 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
         Route::get('patients/search', [\App\Http\Controllers\PatientController::class, 'search'])->name('patients.search');
         $crud('patients', \App\Http\Controllers\PatientController::class, 'patients');
         Route::get('patients/{id}', [\App\Http\Controllers\PatientController::class, 'show'])->name('patients.show')->whereNumber('id');
+        Route::get('patients/{id}/merge', [\App\Http\Controllers\PatientController::class, 'mergeForm'])->name('patients.merge')->whereNumber('id');
+        Route::post('patients/{id}/merge', [\App\Http\Controllers\PatientController::class, 'merge'])->name('patients.merge.store')->whereNumber('id');
 
         // appointments: the calendar of the day, booking, the buttons of a visit, walk-ins and the queue
         $a = \App\Http\Controllers\AppointmentController::class;
@@ -265,6 +267,7 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
         Route::post('visits', [$e, 'start'])->name('encounters.start');
         Route::get('visits/{id}', [$e, 'show'])->name('encounters.show')->whereNumber('id');
         Route::put('visits/{id}', [$e, 'update'])->name('encounters.update')->whereNumber('id');
+        Route::post('visits/{id}/template', [$e, 'template'])->name('encounters.template')->whereNumber('id');
         Route::post('visits/{id}/diagnoses', [$e, 'addDiagnosis'])->name('encounters.diagnoses.store')->whereNumber('id');
         Route::delete('visits/{id}/diagnoses/{diagnosis}', [$e, 'removeDiagnosis'])->name('encounters.diagnoses.destroy')->whereNumber(['id', 'diagnosis']);
         Route::post('visits/{id}/sign', [$e, 'sign'])->name('encounters.sign')->whereNumber('id');
@@ -302,6 +305,7 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
         Route::get('receipts/{payment}', [$i, 'receipt'])->name('payments.print')->whereNumber('payment');
         Route::get('cash', [$i, 'daily'])->name('billing.daily');
         $crud('price-list', \App\Http\Controllers\PriceListController::class, 'services');
+        $crud('note-templates', \App\Http\Controllers\NoteTemplateController::class, 'note-templates');
 
         // reports, and the text messages to patients
         Route::get('reports', [\App\Http\Controllers\ReportController::class, 'index'])->name('reports.index');

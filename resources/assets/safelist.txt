@@ -73,3 +73,11 @@ is-success is-danger is-primary is-warning
 
 # the status of an appointment is written on its block of the calendar as "is-" + status
 is-booked is-confirmed is-arrived is-with_doctor is-completed is-no_show is-cancelled
+tooth-caries
+tooth-filled
+tooth-missing
+tooth-crown
+tooth-root_canal
+tooth-extract
+tooth-implant
+tooth-mobile

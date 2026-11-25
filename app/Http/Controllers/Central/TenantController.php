@@ -106,6 +106,8 @@ class TenantController extends Controller
             'main_branch_price' => ['nullable', 'numeric', 'min:0'],
             'branch_price' => ['nullable', 'numeric', 'min:0'],
             'max_branches' => ['nullable', 'integer', 'min:0', 'max:1000'],
+            'max_doctors' => ['nullable', 'integer', 'min:1', 'max:1000'],
+            'max_sms_month' => ['nullable', 'integer', 'min:0', 'max:10000000'],
             'licence_expires_on' => ['nullable', 'date'],
             'notes' => ['nullable', 'string', 'max:2000'],
         ];

@@ -37,6 +37,7 @@ return [
     ['label' => 'Clinic Setup', 'icon' => 'house-medical', 'children' => [
         ['label' => 'Doctors', 'route' => 'doctors.index', 'active' => 'doctors.*', 'can' => 'users.view'],
         ['label' => 'Appointment types', 'route' => 'appointment-types.index', 'active' => 'appointment-types.*', 'can' => 'settings.view'],
+        ['label' => 'Note templates', 'route' => 'note-templates.index', 'active' => 'note-templates.*', 'can' => 'clinical.view'],
         ['label' => 'Medicines', 'route' => 'medicines.index', 'active' => 'medicines.*', 'can' => 'prescriptions.view'],
         ['label' => 'Price list', 'route' => 'services.index', 'active' => 'services.*', 'can' => 'billing.view'],
     ]],

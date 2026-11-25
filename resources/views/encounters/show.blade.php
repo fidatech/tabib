@@ -22,11 +22,25 @@
     <div class="col-12 col-xl-8">
         {{-- the note --}}
         <div class="card mb-3">
-            <div class="card-header"><h2 class="h5 card-title mb-0">{{ __('Note of the visit') }}</h2></div>
+            <div class="card-header d-flex align-items-center gap-2 flex-wrap"><h2 class="h5 card-title mb-0 flex-grow-1">{{ __('Note of the visit') }}</h2>
+                @if ($canWrite && $templates->isNotEmpty())
+                    <form method="POST" action="{{ route('encounters.template', ['id' => $encounter->id]) }}" class="d-flex gap-2 no-print">@csrf
+                        <label class="visually-hidden" for="n-template">{{ __('Template') }}</label>
+                        <select class="form-select form-select-sm" id="n-template" name="template_id">@foreach ($templates as $t)<option value="{{ $t->id }}" @selected($encounter->template_id === $t->id)>{{ $t->name }}</option>@endforeach</select>
+                        <button class="btn btn-sm btn-outline-primary text-nowrap" type="submit">{{ __('Use the template') }}</button>
+                    </form>
+                @elseif ($encounter->template)
+                    <span class="small text-muted">{{ $encounter->template->name }}</span>
+                @endif
+            </div>
             <div class="card-body">
                 @if ($canWrite)
                     <form method="POST" action="{{ route('encounters.update', ['id' => $encounter->id]) }}" id="noteForm">
                         @csrf @method('PUT')
+                        @if (in_array($encounter->kind, ['dental', 'antenatal'], true))
+                            <h3 class="h6 fw-semibold">{{ $encounter->kind === 'dental' ? __('Tooth chart') : __('Pregnancy') }}</h3>
+                            @include('encounters.forms.'.$encounter->kind, ['edit' => true])
+                        @endif
                         @foreach (\App\Models\Encounter::PARTS as $part => $label)
                             <div class="mb-3">
                                 <label class="form-label fw-semibold" for="n-{{ $part }}">{{ __($label) }}</label>
@@ -40,6 +54,10 @@
                         </div>
                     </form>
                 @else
+                    @if (in_array($encounter->kind, ['dental', 'antenatal'], true) && $encounter->extra)
+                        <h3 class="h6 text-muted mb-1">{{ $encounter->kind === 'dental' ? __('Tooth chart') : __('Pregnancy') }}</h3>
+                        @include('encounters.forms.'.$encounter->kind, ['edit' => false])
+                    @endif
                     @foreach (\App\Models\Encounter::PARTS as $part => $label)
                         @if (filled($encounter->{$part}))
                             <h3 class="h6 text-muted mb-1">{{ __($label) }}</h3>

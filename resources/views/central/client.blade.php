@@ -33,6 +33,14 @@
                     <div><dt>{{ __('Client since') }}</dt><dd dir="ltr">{{ $tenant->created_at?->format('Y-m-d') }}</dd></div>
                     <div><dt>{{ __('Last activity') }}</dt><dd dir="ltr">{{ $inside && $inside['last'] ? \Illuminate\Support\Carbon::parse($inside['last'])->diffForHumans() : '—' }}</dd></div>
                     <div><dt>{{ __('Size of the database') }}</dt><dd dir="ltr">{{ $inside ? human_size($inside['size']) : '—' }}</dd></div>
+                    @if ($inside)
+                        @php $u = $inside['usage']; $of = fn ($n, $max) => $max === null ? number_format($n) : number_format($n).' / '.number_format($max); @endphp
+                        <div><dt>{{ __('Patients') }}</dt><dd dir="ltr">{{ number_format($u['patients']) }}</dd></div>
+                        <div><dt>{{ __('Visits this month') }}</dt><dd dir="ltr">{{ number_format($u['visits']) }}</dd></div>
+                        <div><dt>{{ __('Doctors') }}</dt><dd dir="ltr" class="{{ $tenant->max_doctors !== null && $u['doctors'] >= $tenant->max_doctors ? 'text-danger fw-semibold' : '' }}">{{ $of($u['doctors'], $tenant->max_doctors) }}</dd></div>
+                        <div><dt>{{ __('Text messages this month') }}</dt><dd dir="ltr" class="{{ $tenant->max_sms_month !== null && $u['sms'] >= $tenant->max_sms_month ? 'text-danger fw-semibold' : '' }}">{{ $of($u['sms'], $tenant->max_sms_month) }}</dd></div>
+                        <div><dt>{{ __('Files') }}</dt><dd dir="ltr">{{ human_size($u['files']) }}</dd></div>
+                    @endif
                 </dl>
             </div>
         </div>

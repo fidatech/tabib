@@ -70,6 +70,7 @@ class EncounterController extends Controller
             'problems' => Problem::where('patient_id', $patient->id)->where('status', 'active')->orderBy('description')->get(),
             'medications' => \App\Models\History\Medication::where('patient_id', $patient->id)->where('status', 'active')->orderBy('name')->get(),
             'lastVital' => Vital::where('patient_id', $patient->id)->kept()->latest('taken_at')->first(),
+            'templates' => \App\Models\NoteTemplate::where('is_active', true)->orderBy('name')->get(),
             'previous' => Encounter::with(['diagnoses', 'doctor.user'])->where('patient_id', $patient->id)->where('id', '!=', $encounter->id)
                 ->where('status', Encounter::SIGNED)->latest('started_at')->limit(5)->get(),
         ]);
@@ -78,9 +79,31 @@ class EncounterController extends Controller
     public function update(Request $request, int $id): RedirectResponse
     {
         $encounter = $this->draft($request, $id);
-        $encounter->update($request->validate($this->noteRules()));
+        $data = $request->validate($this->noteRules() + \App\Support\Forms::rules($encounter->kind));
+        $extra = $data['extra'] ?? [];
+        unset($data['extra']);
+        if ($encounter->kind) {
+            $data['extra'] = \App\Support\Forms::clean($encounter->kind, (array) $extra);
+        }
+        $encounter->update($data);
 
         return redirect()->route('encounters.show', ['id' => $encounter->id])->with('success', __('The note is saved (draft).'));
+    }
+
+    /** A template fills the empty parts of the note and brings its form (tooth chart, pregnancy). */
+    public function template(Request $request, int $id): RedirectResponse
+    {
+        $encounter = $this->draft($request, $id);
+        $template = \App\Models\NoteTemplate::where('is_active', true)->findOrFail((int) $request->input('template_id'));
+        $fill = ['template_id' => $template->id, 'kind' => $template->kind === 'general' ? $encounter->kind : $template->kind];
+        foreach (array_keys(Encounter::PARTS) as $part) {
+            if (blank($encounter->{$part}) && filled($template->{$part})) {
+                $fill[$part] = $template->{$part};
+            }
+        }
+        $encounter->update($fill);
+
+        return redirect()->route('encounters.show', ['id' => $encounter->id])->with('success', __('The template :name is in the note.', ['name' => $template->name]));
     }
 
     public function addDiagnosis(Request $request, int $id): RedirectResponse

@@ -88,6 +88,13 @@ class Sms
         if (! self::enabled() || $gateway === 'log') {
             return $message;
         }
+        // the plan of the clinic says how many messages it sends a month
+        $limit = tenant()?->max_sms_month;
+        if ($limit !== null && self::sentThisMonth() >= $limit) {
+            $message->update(['status' => 'failed', 'error' => __('The :count text messages of this month are used up.', ['count' => $limit])]);
+
+            return $message;
+        }
         try {
             $id = $gateway === 'twilio' ? self::twilio($to, $body) : self::http($to, $body);
             $message->update(['status' => 'sent', 'provider_id' => $id ? mb_substr($id, 0, 100) : null]);
@@ -96,6 +103,11 @@ class Sms
         }
 
         return $message;
+    }
+
+    public static function sentThisMonth(): int
+    {
+        return SmsMessage::where('status', 'sent')->where('created_at', '>=', now()->startOfMonth())->count();
     }
 
     /** The message for a booking, when the clinic sends one. */

@@ -63,6 +63,12 @@ class Prescribing
         'application' => ['application', 'applications', 'بار مالیدن', 'ځله مښل', false],
     ];
 
+    /** When in the day the doses are taken: morning, noon, evening, bedtime (for the picture on the paper). */
+    public const SLOTS = [
+        'od' => [1, 0, 0, 0], 'bd' => [1, 0, 0, 1], 'tds' => [1, 1, 0, 1], 'qid' => [1, 1, 1, 1], 'q6h' => [1, 1, 1, 1],
+        'q8h' => [1, 1, 0, 1], 'q12h' => [1, 0, 0, 1], 'hs' => [0, 0, 0, 1],
+    ];
+
     private const DAYS = ['for :n days', 'برای :n روز', 'د :n ورځو لپاره'];
 
     /** Allergy words that mean a whole class of medicines. */

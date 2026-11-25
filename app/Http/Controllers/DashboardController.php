@@ -34,6 +34,12 @@ class DashboardController extends Controller
         if ($user->can('settings.view')) {
             $steps[] = ['Write the kinds of appointment and their prices', AppointmentType::exists(), route('appointment-types.create'), 'calendar-check'];
         }
+        if ($user->can('billing.manage')) {
+            $steps[] = ['Fill in the price list (dressings, injections, tests ...)', \App\Models\Service::exists(), route('services.index'), 'tags'];
+        }
+        if ($user->can('settings.manage')) {
+            $steps[] = ['Choose how text reminders are sent', setting('sms_enabled') === '1', route('sms.index'), 'comment-sms'];
+        }
         if ($user->can('users.view')) {
             $steps[] = ['Add the front desk and the nurses', $staff > $doctors + 1, route('users.create'), 'users'];
         }

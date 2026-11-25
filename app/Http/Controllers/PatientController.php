@@ -147,10 +147,16 @@ class PatientController extends CrudController
      * The chart of a patient. Everyone who may see patients sees who he is and his appointments;
      * the clinical record (summary, timeline, history, vital signs, visits, documents) needs clinical.view.
      */
-    public function show(Request $request, int $id): View
+    public function show(Request $request, int $id): View|\Illuminate\Http\RedirectResponse
     {
         Gate::authorize('patients.view');
-        $patient = Patient::findOrFail($id);
+        $patient = Patient::find($id);
+        if (! $patient && ($merged = Patient::onlyTrashed()->whereNotNull('merged_into_id')->find($id))) {
+            // the record of a duplicate leads to the record it was merged into
+            return redirect()->route('patients.show', ['id' => $merged->merged_into_id] + $request->only('tab'))
+                ->with('info', __('Record :number was merged into this one.', ['number' => $merged->number]));
+        }
+        abort_unless($patient, 404);
         $clinical = $request->user()->can('clinical.view');
         $tabs = $clinical ? ['summary', 'timeline', 'history', 'vitals', 'visits', 'prescriptions', 'documents', 'appointments'] : ['appointments'];
         $billing = $request->user()->can('billing.view');
@@ -199,5 +205,45 @@ class PatientController extends CrudController
             'text' => $p->name.($p->father_name ? ' '.__('son/daughter of').' '.$p->father_name : ''),
             'meta' => implode(' · ', array_filter([$p->number, $p->ageText(), $p->phone])),
         ])->all()]);
+    }
+
+    /** Two records of one person: choose the duplicate, see what moves, give the reason. */
+    public function mergeForm(Request $request, int $id): View
+    {
+        Gate::authorize('patients.manage');
+        $patient = Patient::findOrFail($id);
+        $duplicate = $request->query('duplicate') ? Patient::where('id', '!=', $patient->id)->find((int) $request->query('duplicate')) : null;
+        $count = fn (Patient $p) => [
+            __('Visits') => \App\Models\Encounter::where('patient_id', $p->id)->count(),
+            __('Appointments') => \App\Models\Appointment::where('patient_id', $p->id)->count(),
+            __('Prescriptions') => \App\Models\Prescription::where('patient_id', $p->id)->count(),
+            __('Invoices') => \App\Models\Invoice::where('patient_id', $p->id)->count(),
+            __('Documents') => \App\Models\PatientDocument::where('patient_id', $p->id)->count(),
+        ];
+        // records that look like the same person: the same phone, Tazkira, or name and father's name
+        $term = trim((string) $request->query('q', ''));
+        $alike = mb_strlen($term) >= 2 ? Patient::search($term)->where('id', '!=', $patient->id)->limit(10)->get() : Patient::where('id', '!=', $patient->id)->where(fn ($q) => $q
+            ->when($patient->phone, fn ($q) => $q->orWhere('phone', $patient->phone)->orWhere('phone2', $patient->phone))
+            ->when($patient->tazkira, fn ($q) => $q->orWhere('tazkira', $patient->tazkira))
+            ->orWhere(fn ($q) => $q->where('name', $patient->name)->when($patient->father_name, fn ($q) => $q->where('father_name', $patient->father_name))))
+            ->limit(10)->get();
+
+        return view('patients.merge', ['patient' => $patient, 'duplicate' => $duplicate, 'alike' => $alike,
+            'counts' => [$patient->id => $count($patient)] + ($duplicate ? [$duplicate->id => $count($duplicate)] : [])]);
+    }
+
+    public function merge(Request $request, int $id): RedirectResponse
+    {
+        Gate::authorize('patients.manage');
+        $data = $request->validate(['duplicate_id' => ['required', 'integer'], 'reason' => ['required', 'string', 'max:255'], 'password' => ['required', 'string']]);
+        if (! \Illuminate\Support\Facades\Hash::check($data['password'], (string) $request->user()->password)) {
+            throw new \App\Exceptions\UserError(__('The password is not right. Nothing was merged.'));
+        }
+        $keep = Patient::findOrFail($id);
+        $duplicate = Patient::findOrFail($data['duplicate_id']);
+        $moved = \App\Services\PatientMerge::merge($keep, $duplicate, $data['reason'], $request->user()->id);
+
+        return redirect()->route('patients.show', ['id' => $keep->id, 'tab' => $request->user()->can('clinical.view') ? 'timeline' : null])
+            ->with('success', __(':duplicate was merged into this record (:count entries moved).', ['duplicate' => $duplicate->number, 'count' => array_sum($moved)]));
     }
 }

@@ -13,6 +13,8 @@
     ];
     $licence = [
         $field('max_branches', 'Dependent branches allowed', ['col' => 3, 'type' => 'number', 'help' => 'Empty means no limit']),
+        $field('max_doctors', 'Doctors allowed', ['col' => 3, 'type' => 'number', 'help' => 'Empty means no limit']),
+        $field('max_sms_month', 'Text messages a month', ['col' => 3, 'type' => 'number', 'help' => 'Empty means no limit']),
         $field('licence_expires_on', 'Licence until', ['col' => 3, 'type' => 'date', 'value' => old('licence_expires_on', $tenant?->licence_expires_on?->format('Y-m-d'))]),
     ];
     $owner = [

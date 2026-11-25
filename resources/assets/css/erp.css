@@ -1103,3 +1103,17 @@ small, .small { font-size: max(.875em, 12px); }
 /* ------------------------------------------------------------ reports */
 .report-card { color: inherit; text-decoration: none; transition: box-shadow .15s, transform .15s; }
 .report-card:hover { box-shadow: 0 6px 20px rgba(15, 20, 32, .1); transform: translateY(-1px); }
+
+/* ------------------------------------------------------------ tooth chart */
+.tooth-chart { overflow-x: auto; padding-bottom: 4px; margin-bottom: 6px; }
+.tooth-row { display: grid; grid-template-columns: repeat(16, minmax(34px, 1fr)); gap: 3px; min-width: 580px; }
+.tooth-row.upper { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 2px dashed var(--border); }
+.tooth { border: 1px solid var(--border); border-radius: 8px; text-align: center; padding: 3px 2px; background: var(--card-bg, #fff); }
+.tooth.mid { margin-inline-end: 6px; }
+.tooth-no { display: block; font-size: 11.5px; font-weight: 700; color: var(--muted-strong, #4b5563); }
+.tooth-pick { width: 100%; border: 0; background: transparent; font-weight: 700; text-align: center; font-size: 13px; padding: 2px 0; }
+.tooth-mark { display: block; min-height: 20px; font-weight: 800; }
+.tooth-caries, .tooth-extract { background: #fdecec; border-color: #e7a3a3; color: #a61b1b; }
+.tooth-filled, .tooth-crown, .tooth-root_canal, .tooth-implant { background: #e8f1fb; border-color: #9fc1e7; color: #1b4f8a; }
+.tooth-missing { background: #eef0f3; color: #5b616b; text-decoration: line-through; }
+.tooth-mobile { background: #fff6e0; border-color: #e8c66b; color: #7a5600; }

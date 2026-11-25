@@ -31,6 +31,9 @@
         <form method="POST" action="{{ route('prescriptions.start') }}">@csrf<input type="hidden" name="patient_id" value="{{ $patient->id }}">
             <button type="submit" class="btn btn-outline-soft"><x-icon name="prescription-bottle-medical" class="me-1" /> {{ __('Prescription') }}</button></form>
     @endif
+    @can('patients.manage')
+        <a class="btn btn-outline-soft" href="{{ route('patients.merge', ['id' => $patient->id]) }}" title="{{ __('Merge a duplicate record') }}" aria-label="{{ __('Merge a duplicate record') }}"><x-icon name="code-merge" /></a>
+    @endcan
     @can('billing.manage')
         <form method="POST" action="{{ route('invoices.start') }}">@csrf<input type="hidden" name="patient_id" value="{{ $patient->id }}">
             <button type="submit" class="btn btn-outline-soft"><x-icon name="file-invoice-dollar" class="me-1" /> {{ __('New invoice') }}</button></form>

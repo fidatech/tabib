@@ -87,6 +87,14 @@ class ClientController extends Controller
                     // how busy the clinic is: what its people did in the last 30 days (patients and visits come with their modules)
                     'activity' => AuditLog::where('created_at', '>=', now()->subDays(30))->count(),
                     'last' => AuditLog::max('created_at'), 'size' => $size,
+                    // what the clinic uses, against what its plan allows
+                    'usage' => [
+                        'patients' => \App\Models\Patient::count(),
+                        'visits' => \App\Models\Encounter::where('started_at', '>=', now()->startOfMonth())->count(),
+                        'doctors' => \App\Models\Doctor::where('is_active', true)->count(),
+                        'sms' => \App\Services\Sms::sentThisMonth(),
+                        'files' => self::folderSize(storage_path('app/vault/'.tenant()->getKey())),
+                    ],
                     // the people who sign in: the administrator can change the email or the password of one of them
                     'logins' => User::with('roles:id,name')->orderBy('id')->get(['id', 'name', 'email', 'is_active'])
                         ->map(fn (User $u) => ['id' => $u->id, 'name' => $u->name, 'email' => $u->email, 'role' => $u->roles->pluck('name')->implode(', '), 'active' => (bool) $u->is_active])->all(),
@@ -138,5 +146,18 @@ class ClientController extends Controller
         return redirect()->away($root.'/support-enter?'.http_build_query([
             'a' => $admin->id, 'e' => $expires, 'r' => $data['reason'], 's' => Supervisor::seal($tenant->id, $admin->id, $expires, 'support|'.$data['reason']),
         ]));
+    }
+
+    private static function folderSize(string $dir): int
+    {
+        if (! is_dir($dir)) {
+            return 0;
+        }
+        $size = 0;
+        foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS)) as $file) {
+            $size += $file->getSize();
+        }
+
+        return $size;
     }
 }
