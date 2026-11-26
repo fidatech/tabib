@@ -27,6 +27,7 @@ class ReportController extends Controller
         'appointments' => ['Appointments', 'calendar-check', 'Booked, seen, did not come and cancelled, by doctor; new patients', 'appointments.view'],
         'diagnoses' => ['Diagnoses', 'virus', 'The most frequent diagnoses of signed visits (ICD-10)', 'clinical.view'],
         'medicines' => ['Medicines prescribed', 'pills', 'The medicines most written on signed prescriptions', 'clinical.view'],
+        'profit' => ['Profit', 'scale-balanced', 'Money taken less refunds and expenses (doctor commission paid included), month by month', 'billing.view'],
         'owed' => ['Money owed', 'hand-holding-dollar', 'Patients who still owe, and for how long', 'billing.view'],
     ];
 
@@ -140,6 +141,32 @@ class ReportController extends Controller
 
         return ['rows' => $rows, 'prescriptions' => DB::table('prescriptions')->where('branch_id', $branch)->where('status', 'signed')
             ->whereBetween('signed_at', [$from->copy()->startOfDay(), $to->copy()->endOfDay()])->count()];
+    }
+
+    /** Money in and out by month: taken, given back, every kind of expense, and what is left. */
+    private function profit(Carbon $from, Carbon $to, int $branch): array
+    {
+        $months = [];
+        $blank = fn () => ['taken' => '0', 'returned' => '0', 'expenses' => [], 'spent' => '0'];
+        foreach (Payment::where('branch_id', $branch)->whereBetween('received_at', [$from->copy()->startOfDay(), $to->copy()->endOfDay()])->get(['amount', 'received_at']) as $p) {
+            $m = $p->received_at->format('Y-m');
+            $months[$m] ??= $blank();
+            $p->isRefund() ? $months[$m]['returned'] = Num::add($months[$m]['returned'], Num::abs($p->amount)) : $months[$m]['taken'] = Num::add($months[$m]['taken'], $p->amount);
+        }
+        $categories = [];
+        foreach (\App\Models\Expense::counted()->where('branch_id', $branch)->whereBetween('spent_on', [$from->toDateString(), $to->toDateString()])->get(['amount', 'spent_on', 'category']) as $e) {
+            $m = $e->spent_on->format('Y-m');
+            $months[$m] ??= $blank();
+            $months[$m]['expenses'][$e->category] = Num::add($months[$m]['expenses'][$e->category] ?? '0', $e->amount);
+            $months[$m]['spent'] = Num::add($months[$m]['spent'], $e->amount);
+            $categories[$e->category] = Num::add($categories[$e->category] ?? '0', $e->amount);
+        }
+        ksort($months);
+        $totals = ['taken' => Num::sum(array_column($months, 'taken')), 'returned' => Num::sum(array_column($months, 'returned')), 'spent' => Num::sum(array_column($months, 'spent'))];
+        $totals['profit'] = Num::sub(Num::sub($totals['taken'], $totals['returned']), $totals['spent']);
+        arsort($categories);
+
+        return ['months' => $months, 'categories' => $categories, 'totals' => $totals];
     }
 
     /** Owed now (the period is not used): by patient, with the age of the oldest unpaid invoice. */

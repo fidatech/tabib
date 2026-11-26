@@ -346,6 +346,14 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
         Route::get('invoices/{id}/print', [$i, 'print'])->name('invoices.print')->whereNumber('id');
         Route::get('receipts/{payment}', [$i, 'receipt'])->name('payments.print')->whereNumber('payment');
         Route::get('cash', [$i, 'daily'])->name('billing.daily');
+        // what the clinic spends, and the commission of the doctors
+        $ex = \App\Http\Controllers\ExpenseController::class;
+        Route::get('expenses', [$ex, 'index'])->name('expenses.index');
+        Route::post('expenses', [$ex, 'store'])->name('expenses.store');
+        Route::post('expenses/{id}/void', [$ex, 'void'])->name('expenses.void')->whereNumber('id');
+        Route::get('commission', [$ex, 'commission'])->name('commission.index');
+        Route::get('commission/{doctor}', [$ex, 'statement'])->name('commission.statement')->whereNumber('doctor');
+        Route::post('commission/{doctor}/pay', [$ex, 'pay'])->name('commission.pay')->whereNumber('doctor');
         $crud('price-list', \App\Http\Controllers\PriceListController::class, 'services');
         $crud('note-templates', \App\Http\Controllers\NoteTemplateController::class, 'note-templates');
 

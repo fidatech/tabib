@@ -134,6 +134,10 @@ jobs:
           measure clinic-papers-tab "http://demo.localhost:8004/patients/1?tab=papers" "$OWNER"
           measure clinic-doctor-hours http://demo.localhost:8004/doctors/1/schedule "$OWNER"
           measure clinic-import http://demo.localhost:8004/patients/import "$OWNER"
+          measure clinic-expenses http://demo.localhost:8004/expenses "$OWNER"
+          measure clinic-commission http://demo.localhost:8004/commission "$OWNER"
+          measure clinic-statement http://demo.localhost:8004/commission/1 "$OWNER"
+          measure clinic-report-profit http://demo.localhost:8004/reports/profit "$OWNER"
           cat > report.js <<'JS'
           const fs = require('fs');
           for (const file of fs.readdirSync('.').filter((f) => /^out-.*\.json$/.test(f)).sort()) {

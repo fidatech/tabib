@@ -72,6 +72,11 @@ class DoctorController extends CrudController
             ['name' => 'room', 'label' => 'Room', 'rules' => ['nullable', 'string', 'max:60']],
             ['name' => 'colour', 'label' => 'Colour on the calendar', 'type' => 'select', 'default' => $this->freeColour(), 'options' => $colours, 'rules' => ['required', Rule::in(array_keys(Doctor::COLOURS))]],
             ['name' => 'is_active', 'label' => 'Sees patients', 'type' => 'checkbox', 'default' => true],
+            ['name' => 'pay_heading', 'label' => 'Commission', 'type' => 'heading', 'readonly' => true, 'icon' => 'hand-holding-dollar'],
+            ['name' => 'commission_type', 'label' => 'Share of the doctor', 'type' => 'select', 'default' => 'none',
+                'options' => array_map(fn ($t) => __($t), \App\Services\Commission::TYPES), 'rules' => ['required', Rule::in(array_keys(\App\Services\Commission::TYPES))]],
+            ['name' => 'commission_value', 'label' => 'Percent, or amount for every patient', 'type' => 'decimal', 'default' => '0', 'rules' => ['required', 'numeric', 'min:0', 'max:99999999'],
+                'help' => 'For a percent: 40 means 40% of the money taken for his patients in a month.'],
         ];
     }
 

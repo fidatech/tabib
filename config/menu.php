@@ -30,6 +30,8 @@ return [
     ['label' => 'Billing', 'icon' => 'file-invoice-dollar', 'children' => [
         ['label' => 'Invoices', 'route' => 'invoices.index', 'active' => 'invoices.*', 'can' => 'billing.view'],
         ['label' => 'Cash of the day', 'route' => 'billing.daily', 'can' => 'billing.view'],
+        ['label' => 'Expenses', 'route' => 'expenses.index', 'active' => 'expenses.*', 'can' => 'billing.view'],
+        ['label' => 'Doctor commission', 'route' => 'commission.index', 'active' => 'commission.*', 'can' => 'billing.view'],
     ]],
 
     ['label' => 'Reports', 'icon' => 'chart-column', 'route' => 'reports.index', 'active' => 'reports.*', 'can' => 'reports.view'],
