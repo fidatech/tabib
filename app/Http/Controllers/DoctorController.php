@@ -74,8 +74,8 @@ class DoctorController extends CrudController
             ['name' => 'is_active', 'label' => 'Sees patients', 'type' => 'checkbox', 'default' => true],
             ['name' => 'pay_heading', 'label' => 'Commission', 'type' => 'heading', 'readonly' => true, 'icon' => 'hand-holding-dollar'],
             ['name' => 'commission_type', 'label' => 'Share of the doctor', 'type' => 'select', 'default' => 'none',
-                'options' => array_map(fn ($t) => __($t), \App\Services\Commission::TYPES), 'rules' => ['required', Rule::in(array_keys(\App\Services\Commission::TYPES))]],
-            ['name' => 'commission_value', 'label' => 'Percent, or amount for every patient', 'type' => 'decimal', 'default' => '0', 'rules' => ['required', 'numeric', 'min:0', 'max:99999999'],
+                'options' => array_map(fn ($t) => __($t), \App\Services\Commission::TYPES), 'rules' => ['nullable', Rule::in(array_keys(\App\Services\Commission::TYPES))]],
+            ['name' => 'commission_value', 'label' => 'Percent, or amount for every patient', 'type' => 'decimal', 'default' => '0', 'rules' => ['nullable', 'numeric', 'min:0', 'max:99999999'],
                 'help' => 'For a percent: 40 means 40% of the money taken for his patients in a month.'],
         ];
     }
@@ -99,6 +99,11 @@ class DoctorController extends CrudController
      */
     protected function beforeSave(array $data, ?Model $record, Request $request): array
     {
+        $data['commission_type'] = ($data['commission_type'] ?? null) ?: ($record->commission_type ?? 'none');
+        $data['commission_value'] = ($data['commission_value'] ?? null) !== null && $data['commission_value'] !== '' ? $data['commission_value'] : ($record->commission_value ?? 0);
+        if ($data['commission_type'] === 'percent' && (float) $data['commission_value'] > 100) {
+            throw new UserError(__('A percent cannot be more than 100.'));
+        }
         /** @var Doctor|null $record */
         $email = strtolower(trim((string) $request->input('email')));
         $user = $record?->user ?? User::where('email', $email)->first();

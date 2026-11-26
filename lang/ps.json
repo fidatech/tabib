@@ -3418,5 +3418,6 @@
     "Money taken less refunds and expenses (doctor commission paid included), month by month": "اخیستل شوې پیسې د بېرته ورکړو او لګښتونو په کمولو (د ډاکټرانو ورکړل شوی کمېشن پکې)، میاشت په میاشت",
     "By month": "د میاشتې له مخې",
     "Expenses by kind": "لګښتونه د ډول له مخې",
-    "The profit counts money when it is taken or paid out; invoices not yet paid are not in it.": "ګټه پیسې هغه وخت حسابوي چې واخیستل شي یا ورکړل شي؛ نه ورکړل شوي بلونه پکې نه دي."
+    "The profit counts money when it is taken or paid out; invoices not yet paid are not in it.": "ګټه پیسې هغه وخت حسابوي چې واخیستل شي یا ورکړل شي؛ نه ورکړل شوي بلونه پکې نه دي.",
+    "A percent cannot be more than 100.": "سلنه له ۱۰۰ زیاته نشي کېدای."
 }

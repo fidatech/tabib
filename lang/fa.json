@@ -3418,5 +3418,6 @@
     "Money taken less refunds and expenses (doctor commission paid included), month by month": "پول دریافت‌شده منهای بازپرداخت‌ها و مصارف (با کمیشن پرداخت‌شده داکتران)، ماه به ماه",
     "By month": "به اساس ماه",
     "Expenses by kind": "مصارف به اساس نوع",
-    "The profit counts money when it is taken or paid out; invoices not yet paid are not in it.": "مفاد پول را وقتی حساب می‌کند که گرفته یا پرداخت شود؛ بل‌های پرداخت‌نشده در آن نیستند."
+    "The profit counts money when it is taken or paid out; invoices not yet paid are not in it.": "مفاد پول را وقتی حساب می‌کند که گرفته یا پرداخت شود؛ بل‌های پرداخت‌نشده در آن نیستند.",
+    "A percent cannot be more than 100.": "درصد نمی‌تواند بیشتر از ۱۰۰ باشد."
 }
