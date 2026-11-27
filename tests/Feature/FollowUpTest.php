@@ -60,7 +60,7 @@ class FollowUpTest extends TestCase
         $this->post('/appointments', ['patient_id' => $visit->patient_id, 'doctor_id' => $visit->doctor_id, 'date' => '2026-11-22', 'time' => '09:00', 'minutes' => '15'])->assertSessionHas('success');
         $this->assertSame(0, Sms::followUps(Carbon::parse('2026-11-19 16:30')));
         $this->assertSame(0, SmsMessage::where('kind', 'followup')->count());
-        $this->get('/check-ups')->assertOk()->assertDontSee('Gul Ahmad');
+        $this->get('/check-ups')->assertOk()->assertSee('No check-up to book.');
         $this->get('/check-ups?show=all')->assertOk()->assertSee('Has an appointment');
         $this->assertSame(1, Appointment::count());
     }
