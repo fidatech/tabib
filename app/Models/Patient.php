@@ -22,7 +22,7 @@ class Patient extends Model
 
     protected function casts(): array
     {
-        return ['date_of_birth' => 'date', 'dob_estimated' => 'boolean', 'no_sms' => 'boolean'];
+        return ['date_of_birth' => 'date', 'dob_estimated' => 'boolean', 'no_sms' => 'boolean', 'registered_online' => 'boolean'];
     }
 
     public function appointments(): HasMany
