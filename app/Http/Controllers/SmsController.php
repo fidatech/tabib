@@ -50,8 +50,11 @@ class SmsController extends Controller
             'sms_on_booking' => ['nullable', 'boolean'],
             'sms_text_reminder' => ['nullable', 'string', 'max:480'],
             'sms_text_booking' => ['nullable', 'string', 'max:480'],
+            'online_booking' => ['nullable', 'boolean'],
+            'online_days_ahead' => ['nullable', 'integer', 'min:1', 'max:60'],
+            'online_min_hours' => ['nullable', 'integer', 'min:0', 'max:72'],
         ]);
-        foreach (['sms_enabled', 'sms_reminders', 'sms_on_booking'] as $flag) {
+        foreach (['sms_enabled', 'sms_reminders', 'sms_on_booking', 'online_booking'] as $flag) {
             $data[$flag] = $request->boolean($flag) ? '1' : '0';
         }
         $data['sms_country_code'] = ltrim($data['sms_country_code'], '+');
@@ -68,6 +71,9 @@ class SmsController extends Controller
         }
         app()->forgetInstance('erp.settings');
         audit('updated', null, 'SMS settings');
+        if ($data['online_booking'] === '1' && ! \App\Services\OnlineBooking::open()) {
+            return redirect()->route('sms.index')->with('warning', __('Saved. Online booking opens only when text messages are sent through a gateway: patients confirm with a code by SMS.'));
+        }
 
         return redirect()->route('sms.index')->with('success', __('Settings saved.'));
     }

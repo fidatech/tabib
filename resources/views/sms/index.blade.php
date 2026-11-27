@@ -68,6 +68,26 @@
                         <textarea class="form-control" id="sms-text-{{ $kind }}" name="sms_text_{{ $kind }}" rows="2" maxlength="480" placeholder="{{ $S::DEFAULT_TEXTS[$lang][$kind] }}">{{ $val('sms_text_'.$kind) }}</textarea></div>
                 @endforeach
                 <div class="col-12 form-text mt-0">{{ __('Empty: the words shown. {patient}, {doctor}, {clinic}, {date}, {time} and {phone} are filled in. Patients marked "no text messages" get none.') }}</div>
+            </fieldset>
+
+            <div class="card-header border-top"><h2 class="h5 card-title mb-0">{{ __('Online booking') }}</h2></div>
+            <fieldset class="card-body row g-3" @disabled(! $canManage)>
+                <div class="col-12 form-check form-switch ms-2">
+                    <input type="hidden" name="online_booking" value="0">
+                    <input class="form-check-input" type="checkbox" role="switch" id="online-booking" name="online_booking" value="1" @checked($on('online_booking'))>
+                    <label class="form-check-label" for="online-booking">{{ __('Patients may book on the page of the clinic, with a code sent to their phone') }}</label>
+                </div>
+                <div class="col-6 col-md-4"><label class="form-label small" for="online-days">{{ __('Days ahead they can book') }}</label>
+                    <input type="number" class="form-control" id="online-days" name="online_days_ahead" value="{{ $val('online_days_ahead', '14') }}" min="1" max="60" dir="ltr"></div>
+                <div class="col-6 col-md-4"><label class="form-label small" for="online-hours">{{ __('Hours of notice at least') }}</label>
+                    <input type="number" class="form-control" id="online-hours" name="online_min_hours" value="{{ $val('online_min_hours', '2') }}" min="0" max="72" dir="ltr"></div>
+                <div class="col-12 small">
+                    @if (\App\Services\OnlineBooking::open())
+                        <x-icon name="circle-check" class="text-success me-1" /> {{ __('Open at') }} <a href="{{ route('book.index') }}" target="_blank" rel="noopener" dir="ltr">{{ route('book.index') }}</a>
+                    @else
+                        <span class="text-muted">{{ __('Closed. It opens when it is switched on and text messages are sent through a gateway. A doctor can be closed to it on his page.') }}</span>
+                    @endif
+                </div>
                 @if ($canManage)<div class="col-12 text-end"><button class="btn btn-primary" type="submit">{{ __('Save') }}</button></div>@endif
             </fieldset>
         </form>

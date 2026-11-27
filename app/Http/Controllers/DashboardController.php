@@ -59,6 +59,10 @@ class DashboardController extends Controller
         if ($user->can('patients.view')) {
             $tiles[] = ['New patients this month', Patient::where('created_at', '>=', $today->copy()->startOfMonth())->count(), 'user-plus', 'info', route('patients.index')];
         }
+        if ($user->can('appointments.manage') && \App\Services\OnlineBooking::open()) {
+            $tiles[] = ['Booked online, to confirm', Appointment::where('source', 'online')->where('status', Appointment::BOOKED)->where('starts_at', '>=', now())->count(), 'globe',
+                'warning', route('appointments.index')];
+        }
         if ($user->can('billing.view')) {
             $taken = \App\Support\Num::sum(\App\Models\Payment::where('branch_id', current_branch()->id)
                 ->whereBetween('received_at', [$today->copy()->startOfDay(), $today->copy()->endOfDay()])->pluck('amount'));

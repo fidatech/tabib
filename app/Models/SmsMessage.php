@@ -9,7 +9,7 @@ class SmsMessage extends Model
 {
     public const STATUSES = ['sent' => ['Sent', 'bg-success'], 'failed' => ['Failed', 'bg-danger'], 'logged' => ['Not sent (no gateway)', 'bg-secondary']];
 
-    public const KINDS = ['reminder' => 'Reminder', 'booking' => 'Booking', 'test' => 'Test'];
+    public const KINDS = ['reminder' => 'Reminder', 'booking' => 'Booking', 'test' => 'Test', 'code' => 'Booking code'];
 
     protected $guarded = [];
 

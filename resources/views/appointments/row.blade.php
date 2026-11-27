@@ -29,7 +29,7 @@
             <span class="small text-muted">{{ $a->patient?->number }}</span>
         @endif
         <span class="d-block small text-muted text-truncate">
-            {{ implode(' · ', array_filter([$a->type?->label(), $a->source === 'walk_in' ? __('Walk-in') : null, $a->series_id ? __('Course') : null, $a->outside_hours ? __('Outside the hours') : null, $a->reason, $a->status === 'cancelled' && $a->cancel_reason ? $a->cancel_reason : null])) }}
+            {{ implode(' · ', array_filter([$a->type?->label(), $a->source === 'walk_in' ? __('Walk-in') : ($a->source === 'online' ? __('Booked online') : null), $a->series_id ? __('Course') : null, $a->outside_hours ? __('Outside the hours') : null, $a->reason, $a->status === 'cancelled' && $a->cancel_reason ? $a->cancel_reason : null])) }}
         </span>
     </div>
     <span class="badge {{ $a->statusClass() }}">{{ $a->statusLabel() }}</span>

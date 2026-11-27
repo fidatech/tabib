@@ -22,7 +22,7 @@ class Doctor extends Model
 
     protected function casts(): array
     {
-        return ['is_active' => 'boolean', 'fee' => 'decimal:2', 'commission_value' => 'decimal:2'];
+        return ['is_active' => 'boolean', 'fee' => 'decimal:2', 'commission_value' => 'decimal:2', 'books_online' => 'boolean'];
     }
 
     public function user(): BelongsTo

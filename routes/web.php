@@ -201,6 +201,15 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
     // the support staff of Fida Technologies come in from the administration panel, with their reason
     Route::get('support-enter', [LoginController::class, 'support'])->name('support.enter');
 
+    // the public page of the clinic where patients book: no sign-in, a code by SMS
+    $bk = \App\Http\Controllers\BookOnlineController::class;
+    Route::get('book', [$bk, 'index'])->name('book.index')->middleware('throttle:120,1,book');
+    Route::post('book', [$bk, 'ask'])->name('book.ask')->middleware('throttle:6,10,book-ask');
+    Route::get('book/{token}/code', [$bk, 'code'])->name('book.code')->where('token', '[a-z0-9]{40}');
+    Route::post('book/{token}/code', [$bk, 'confirm'])->name('book.confirm')->where('token', '[a-z0-9]{40}')->middleware('throttle:20,10,book-code');
+    Route::get('book/{token}', [$bk, 'show'])->name('book.show')->where('token', '[a-z0-9]{40}');
+    Route::post('book/{token}/cancel', [$bk, 'cancel'])->name('book.cancel')->where('token', '[a-z0-9]{40}')->middleware('throttle:10,10,book-cancel');
+
     // the QR code of a printed prescription opens this page: anyone may check it, nobody signs in
     Route::get('rx/{token}', [\App\Http\Controllers\PrescriptionController::class, 'verify'])->name('rx.verify')->where('token', '[a-z0-9]{32}')->middleware('throttle:60,1,rx');
 
