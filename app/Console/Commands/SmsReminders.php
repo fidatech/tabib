@@ -20,7 +20,7 @@ class SmsReminders extends Command
         $total = 0;
         foreach ($tenants as $tenant) {
             try {
-                $sent = $tenancy->run($tenant, fn () => Sms::remind());
+                $sent = $tenancy->run($tenant, fn () => Sms::remind() + Sms::followUps());
                 $total += $sent;
                 if ($sent) {
                     $this->info($tenant->slug.': '.$sent);

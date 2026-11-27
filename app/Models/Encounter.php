@@ -33,7 +33,7 @@ class Encounter extends Model
 
     protected function casts(): array
     {
-        return ['started_at' => 'datetime', 'signed_at' => 'datetime', 'follow_up_on' => 'date', 'extra' => 'array', 'history_reviewed_at' => 'datetime'];
+        return ['started_at' => 'datetime', 'signed_at' => 'datetime', 'follow_up_on' => 'date', 'extra' => 'array', 'history_reviewed_at' => 'datetime', 'follow_up_reminded_at' => 'datetime'];
     }
 
     public function patient(): BelongsTo

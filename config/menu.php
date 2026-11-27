@@ -25,6 +25,7 @@ return [
 
     ['label' => 'Appointments', 'icon' => 'calendar-days', 'route' => 'appointments.index', 'active' => 'appointments.*', 'can' => 'appointments.view'],
     ['label' => 'Queue', 'icon' => 'list-ol', 'route' => 'queue.index', 'can' => 'appointments.view'],
+    ['label' => 'Check-ups', 'icon' => 'calendar-check', 'route' => 'follow-ups.index', 'can' => 'appointments.view'],
     ['label' => 'Patients', 'icon' => 'hospital-user', 'route' => 'patients.index', 'active' => 'patients.*', 'can' => 'patients.view'],
 
     ['label' => 'Billing', 'icon' => 'file-invoice-dollar', 'children' => [

@@ -3462,5 +3462,17 @@
     "Saved. Online booking opens only when text messages are sent through a gateway: patients confirm with a code by SMS.": "وساتل شو. آنلاین وخت نیول یوازې هغه وخت پرانیستل کېږي چې پیغامونه د ګیټوې له لارې ولېږل شي: ناروغان د لنډ پیغام په کوډ تاییدوي.",
     "Patients may book him online": "ناروغان کولای شي د هغه آنلاین وخت ونیسي",
     "Booked online": "آنلاین نیول شوی",
-    "Booked online, to confirm": "آنلاین نیول شوي، د تایید لپاره"
+    "Booked online, to confirm": "آنلاین نیول شوي، د تایید لپاره",
+    "Remind patients of the check-up the doctor asked for (\"come back on\")": "ناروغانو ته د هغې بیا کتنې یادونه چې ډاکټر غوښتې («بیا راشئ»)",
+    "Days before the check-up": "د بیا کتنې نه څو ورځې مخکې",
+    "Words of the check-up reminder": "د بیا کتنې د یادونې متن",
+    "Check-up": "بیا کتنه",
+    "Check-ups": "بیا کتنې",
+    "Patients the doctors asked to come back, two weeks back and ahead": "هغه ناروغان چې ډاکټرانو غوښتي بیا راشي، دوه اونۍ مخکې او وروسته",
+    "Without an appointment": "بې وخته",
+    "Has an appointment": "وخت لري",
+    "Did not come back": "بېرته رانغی",
+    "To book": "د وخت ورکولو لپاره",
+    "Reminded on :date": "په :date یادونه وشوه",
+    "No check-up to book.": "د وخت ورکولو لپاره بیا کتنه نشته."
 }

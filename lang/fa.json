@@ -3462,5 +3462,17 @@
     "Saved. Online booking opens only when text messages are sent through a gateway: patients confirm with a code by SMS.": "ذخیره شد. نوبت‌گیری آنلاین فقط وقتی باز می‌شود که پیام‌ها از طریق گیت‌وی فرستاده شوند: مریضان با کد پیامکی تأیید می‌کنند.",
     "Patients may book him online": "مریضان می‌توانند آنلاین نوبت او را بگیرند",
     "Booked online": "آنلاین گرفته شده",
-    "Booked online, to confirm": "آنلاین گرفته‌شده، برای تأیید"
+    "Booked online, to confirm": "آنلاین گرفته‌شده، برای تأیید",
+    "Remind patients of the check-up the doctor asked for (\"come back on\")": "یادآوری معاینه دوباره‌ای که داکتر خواسته («دوباره بیایید»)",
+    "Days before the check-up": "چند روز پیش از معاینه",
+    "Words of the check-up reminder": "متن یادآوری معاینه دوباره",
+    "Check-up": "معاینه دوباره",
+    "Check-ups": "معاینات دوباره",
+    "Patients the doctors asked to come back, two weeks back and ahead": "مریضانی که داکتران خواسته‌اند دوباره بیایند، دو هفته قبل و بعد",
+    "Without an appointment": "بدون نوبت",
+    "Has an appointment": "نوبت دارد",
+    "Did not come back": "برنگشت",
+    "To book": "برای نوبت‌دهی",
+    "Reminded on :date": "یادآوری در :date",
+    "No check-up to book.": "معاینه دوباره‌ای برای نوبت‌دهی نیست."
 }

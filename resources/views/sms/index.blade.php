@@ -61,9 +61,16 @@
                     <input class="form-check-input" type="checkbox" role="switch" id="sms-booking" name="sms_on_booking" value="1" @checked($on('sms_on_booking'))>
                     <label class="form-check-label" for="sms-booking">{{ __('Send a message when an appointment is booked') }}</label>
                 </div>
+                <div class="col-12 col-md-7 form-check form-switch ms-2">
+                    <input type="hidden" name="sms_followups" value="0">
+                    <input class="form-check-input" type="checkbox" role="switch" id="sms-followups" name="sms_followups" value="1" @checked($on('sms_followups'))>
+                    <label class="form-check-label" for="sms-followups">{{ __('Remind patients of the check-up the doctor asked for ("come back on")') }}</label>
+                </div>
+                <div class="col-12 col-md-4"><label class="form-label small" for="sms-fdays">{{ __('Days before the check-up') }}</label>
+                    <input type="number" class="form-control" id="sms-fdays" name="sms_followup_days" value="{{ $val('sms_followup_days', '2') }}" min="0" max="14" dir="ltr"></div>
                 <div class="col-12 col-md-6"><label class="form-label small" for="sms-lang">{{ __('Language of the messages') }}</label>
                     <select class="form-select" id="sms-lang" name="sms_language">@foreach (['fa' => 'دری', 'ps' => 'پښتو', 'en' => 'English'] as $k => $l)<option value="{{ $k }}" @selected($lang === $k)>{{ $l }}</option>@endforeach</select></div>
-                @foreach (['reminder' => 'Words of the reminder', 'booking' => 'Words of the booking message'] as $kind => $label)
+                @foreach (['reminder' => 'Words of the reminder', 'booking' => 'Words of the booking message', 'followup' => 'Words of the check-up reminder'] as $kind => $label)
                     <div class="col-12"><label class="form-label small" for="sms-text-{{ $kind }}">{{ __($label) }}</label>
                         <textarea class="form-control" id="sms-text-{{ $kind }}" name="sms_text_{{ $kind }}" rows="2" maxlength="480" placeholder="{{ $S::DEFAULT_TEXTS[$lang][$kind] }}">{{ $val('sms_text_'.$kind) }}</textarea></div>
                 @endforeach

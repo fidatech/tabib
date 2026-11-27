@@ -277,6 +277,7 @@ Route::middleware('tenant')->group(function () use ($crud, $paper) {
         Route::post('doctors/{id}/leaves', [$ds, 'addLeave'])->name('doctors.leaves.store')->whereNumber('id');
         Route::delete('doctors/{id}/leaves/{leave}', [$ds, 'removeLeave'])->name('doctors.leaves.destroy')->whereNumber(['id', 'leave']);
         Route::get('queue', [$a, 'queue'])->name('queue.index');
+        Route::get('check-ups', [\App\Http\Controllers\FollowUpController::class, 'index'])->name('follow-ups.index');
         Route::post('queue/{doctor}/next', [$a, 'callNext'])->name('queue.next')->whereNumber('doctor');
 
         // the set-up of the clinic: its doctors and the kinds of appointment it gives

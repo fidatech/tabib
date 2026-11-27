@@ -25,20 +25,77 @@ class Sms
         'en' => [
             'reminder' => 'Dear {patient}, a reminder of your appointment with {doctor} at {clinic} on {date} at {time}. To change it call {phone}.',
             'booking' => 'Dear {patient}, your appointment with {doctor} at {clinic} is on {date} at {time}. Call {phone} to change it.',
+            'followup' => 'Dear {patient}, {doctor} at {clinic} asked you to come back for a check-up on {date}. Call {phone} to choose a time.',
         ],
         'fa' => [
             'reminder' => '{patient} محترم، یادآوری نوبت شما نزد {doctor} در {clinic}، تاریخ {date} ساعت {time}. برای تغییر به {phone} زنگ بزنید.',
             'booking' => '{patient} محترم، نوبت شما نزد {doctor} در {clinic}، تاریخ {date} ساعت {time} است. برای تغییر به {phone} زنگ بزنید.',
+            'followup' => '{patient} محترم، {doctor} در {clinic} از شما خواسته بود به تاریخ {date} برای معاینه دوباره بیایید. برای گرفتن وقت به {phone} زنگ بزنید.',
         ],
         'ps' => [
             'reminder' => 'محترم {patient}، د {clinic} کې له {doctor} سره ستاسو د وخت یادونه: {date} ساعت {time}. د بدلون لپاره {phone} ته زنګ ووهئ.',
             'booking' => 'محترم {patient}، د {clinic} کې له {doctor} سره ستاسو وخت {date} ساعت {time} دی. د بدلون لپاره {phone} ته زنګ ووهئ.',
+            'followup' => 'محترم {patient}، د {clinic} {doctor} درنه غوښتي وو چې د {date} په نېټه د بیا کتنې لپاره راشئ. د وخت نیولو لپاره {phone} ته زنګ ووهئ.',
         ],
     ];
 
     public static function enabled(): bool
     {
         return setting('sms_enabled') === '1';
+    }
+
+    /** The check-up the doctor asked for: the words, with the visit put in (and the booking page, when it is open). */
+    public static function followUpText(\App\Models\Encounter $visit): string
+    {
+        $lang = in_array(setting('sms_language'), ['en', 'fa', 'ps'], true) ? setting('sms_language') : 'fa';
+        $visit->loadMissing(['patient', 'doctor.user']);
+        $clinic = ($lang !== 'en' ? setting('company_name_local') : null) ?: setting('company_name', config('app.name'));
+        $date = $lang === 'en' || calendar() !== 'shamsi' ? $visit->follow_up_on->format('Y-m-d') : fmt_date($visit->follow_up_on);
+        $text = strtr(setting('sms_text_followup') ?: self::DEFAULT_TEXTS[$lang]['followup'], [
+            '{patient}' => $visit->patient?->name ?? '', '{doctor}' => $visit->doctor?->name() ?? '', '{clinic}' => $clinic, '{date}' => $date, '{phone}' => setting('company_phone', ''),
+        ]);
+        if (OnlineBooking::open() && $visit->doctor?->books_online) {
+            $text .= ' '.route('book.index', ['doctor' => $visit->doctor_id]);
+        }
+
+        return $text;
+    }
+
+    /**
+     * Patients the doctor asked to come back: the days before the check-up, at the hour of the
+     * reminders, once per visit; not when the patient already has an appointment around that day.
+     */
+    public static function followUps(?Carbon $now = null): int
+    {
+        $now ??= now();
+        if (! self::enabled() || setting('sms_followups') !== '1' || $now->format('H:i') < (setting('sms_reminder_time') ?: '16:00')) {
+            return 0;
+        }
+        $on = $now->copy()->addDays(max(0, min(14, (int) setting('sms_followup_days', '2'))))->toDateString();
+        $count = 0;
+        \App\Models\Encounter::with(['patient', 'doctor.user'])->where('status', 'signed')->whereNull('follow_up_reminded_at')
+            ->whereDate('follow_up_on', '<=', $on)->whereDate('follow_up_on', '>=', $now->toDateString())->orderBy('follow_up_on')
+            ->each(function (\App\Models\Encounter $visit) use (&$count) {
+                $visit->forceFill(['follow_up_reminded_at' => now()])->saveQuietly();   // once, even if the gateway fails
+                if (self::hasAppointmentNear($visit)) {
+                    return;   // he has an appointment already
+                }
+                $patient = $visit->patient;
+                $to = self::number($patient?->phone);
+                if ($patient && ! $patient->no_sms && $to) {
+                    self::send($to, self::followUpText($visit), 'followup', $patient);
+                    $count++;
+                }
+            });
+
+        return $count;
+    }
+
+    /** An appointment from a few days before to a week after the day of the check-up. */
+    public static function hasAppointmentNear(\App\Models\Encounter $visit): bool
+    {
+        return Appointment::where('patient_id', $visit->patient_id)->whereNotIn('status', [Appointment::CANCELLED, Appointment::NO_SHOW])
+            ->whereBetween('starts_at', [$visit->follow_up_on->copy()->subDays(3)->startOfDay(), $visit->follow_up_on->copy()->addDays(7)->endOfDay()])->exists();
     }
 
     /** The words of a message, with the details of the appointment put in. */

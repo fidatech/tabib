@@ -139,6 +139,7 @@ jobs:
           measure clinic-statement http://demo.localhost:8004/commission/1 "$OWNER"
           measure clinic-report-profit http://demo.localhost:8004/reports/profit "$OWNER"
           measure book-closed http://demo.localhost:8004/book ""
+          measure clinic-check-ups "http://demo.localhost:8004/check-ups?show=all" "$OWNER"
           cat > report.js <<'JS'
           const fs = require('fs');
           for (const file of fs.readdirSync('.').filter((f) => /^out-.*\.json$/.test(f)).sort()) {
