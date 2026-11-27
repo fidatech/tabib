@@ -78,7 +78,7 @@ class OnlineBookingTest extends TestCase
         $this->post('/book/'.$second->token.'/code', ['code' => $this->code]);
         $this->assertSame(1, Patient::count());
         $this->post('/book/'.$second->token.'/cancel')->assertSessionHas('success');
-        $this->assertSame('cancelled', $second->appointment->fresh()->status);
+        $this->assertSame('cancelled', $second->fresh()->appointment->status);
     }
 
     public function test_the_page_tells_nothing_of_other_patients_and_stops_abuse(): void
